@@ -214,26 +214,26 @@ document.querySelectorAll('.qc-dots[data-ic]').forEach((box) => {
   box.innerHTML = h;
 });
 
-// Scrollytelling: cada tarjeta enciende su etapa del gráfico
-const scrolly = document.getElementById('quantScrolly');
-if (scrolly) {
-  const staged = [...scrolly.querySelectorAll('[data-s]')];
-  const steps = [...scrolly.querySelectorAll('.sstep')];
+// Scrollytelling: cada tarjeta enciende su etapa del panel fijo (una instancia por .scrolly)
+document.querySelectorAll('.scrolly').forEach((sc) => {
+  const staged = [...sc.querySelectorAll('[data-s]')];
+  const steps = [...sc.querySelectorAll('.sstep')];
   let stage = -1;
-  function setStage(n) {
-    if (n === stage) return;
-    stage = n;
-    staged.forEach((el) => el.classList.toggle('on', +el.dataset.s <= n));
-    steps.forEach((s) => s.classList.toggle('active', +s.dataset.step === n));
-  }
   const stepObserver = new IntersectionObserver(
     (entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) setStage(+e.target.dataset.step); });
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const n = +e.target.dataset.step;
+        if (n === stage) return;
+        stage = n;
+        staged.forEach((el) => el.classList.toggle('on', +el.dataset.s <= n));
+        steps.forEach((s) => s.classList.toggle('active', +s.dataset.step === n));
+      });
     },
     { rootMargin: '-32% 0px -32% 0px' }
   );
   steps.forEach((s) => stepObserver.observe(s));
-}
+});
 
 function halBtn(bl) {
   if (!bl.hal) return '';

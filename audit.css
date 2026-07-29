@@ -304,6 +304,34 @@
 .qc-dots .ss-dot { width: 34px; height: 34px; border-radius: 10px; }
 .qc-dots .ss-dot svg { width: 17px; height: 17px; }
 @media (max-width: 700px) { .qc-grid { grid-template-columns: 1fr; } }
+
+/* Parallax de remediación: panel de estado fijo */
+.scrolly.rem { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+.plan-board {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-card); padding: 26px 28px;
+}
+.pb-title { display: block; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 18px; }
+.pb-counters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 26px; }
+.pbc { border-radius: 14px; padding: 16px 14px; text-align: center; border: 1px solid rgba(255,255,255,0.14); }
+.pbc strong { display: block; font-size: 2.3rem; font-weight: 800; line-height: 1; color: var(--white); }
+.pbc span { display: block; margin-top: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+.pbc.done { border-color: rgba(107,189,144,0.5); background: rgba(107,189,144,0.1); }
+.pbc.done strong { color: #6bbd90; }
+.pbc.curso { border-color: rgba(91,143,212,0.5); background: rgba(91,143,212,0.12); }
+.pbc.curso strong { color: #8fb2da; }
+.pb-ejes { display: grid; gap: 14px; }
+.pb-eje { display: grid; grid-template-columns: 1fr; gap: 5px; }
+.pb-eje-name { font-size: 0.82rem; font-weight: 700; color: var(--white); }
+.pb-track { height: 14px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.pb-fill { height: 100%; background: #5b8fd4; border-radius: 0 4px 4px 0; }
+.pb-n { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.55); }
+.pb-gob { margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.55; }
+.pb-gob strong { color: var(--white); }
+@media (max-width: 900px) {
+  .pb-counters { gap: 8px; }
+  .pbc { padding: 12px 8px; }
+}
 .quant-concl p { max-width: 660px; margin: 0 auto 12px; color: var(--text-secondary); font-size: 1.06rem; line-height: 1.65; }
 .quant-concl p strong { color: var(--text); }
 .qc-note { margin-top: 16px !important; padding-top: 16px; border-top: 1px solid rgba(26,51,80,0.08); }
