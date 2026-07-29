@@ -171,8 +171,8 @@
 .fig-chip.sm svg { width: 12px; height: 12px; }
 .fig-chip.imp { background: rgba(64,115,184,0.12); color: var(--primary); }
 .fig-chip.cau { background: rgba(231,66,67,0.10); color: var(--secondary); }
-.section-dark .fig-chip.imp, .quant-tile .fig-chip.imp, .qb-row .fig-chip.imp { background: rgba(91,143,212,0.2); color: #8fb2da; }
-.section-dark .fig-chip.cau, .quant-tile .fig-chip.cau, .qb-row .fig-chip.cau { background: rgba(231,66,67,0.18); color: #f08a8b; }
+.section-dark .fig-chip.imp, .quant-tile .fig-chip.imp { background: rgba(91,143,212,0.2); color: #8fb2da; }
+.section-dark .fig-chip.cau, .quant-tile .fig-chip.cau { background: rgba(231,66,67,0.18); color: #f08a8b; }
 
 /* Incidente: doble magnitud por entrega */
 .inc-figs { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
@@ -205,16 +205,30 @@
 .qt-go { margin-top: 14px; font-size: 0.78rem; font-weight: 700; color: #8fb2da; transition: color 0.2s ease, transform 0.2s ease; }
 .quant-tile:hover .qt-go { color: var(--white); transform: translateX(3px); }
 
-/* Barras comparativas (una serie por magnitud, mismo tono) */
-.quant-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: 1000px; margin: 0 auto 26px; }
-.qb-row { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-card); padding: 20px 22px; }
-.qb-title { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
-.qb-line { display: grid; grid-template-columns: 58px 1fr 60px; gap: 12px; align-items: center; margin-bottom: 10px; }
-.qb-line:last-child { margin-bottom: 0; }
-.qb-name { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; }
-.qb-track { height: 18px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
-.qb-fill { height: 100%; background: #5b8fd4; border-radius: 0 4px 4px 0; min-width: 6px; }
-.qb-val { font-size: 0.82rem; font-weight: 800; color: var(--white); text-align: right; font-variant-numeric: tabular-nums; }
+/* Cronología del desplome (gráfico SVG) */
+.quant-chart {
+  max-width: 1000px; margin: 0 auto 26px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--radius-card); padding: 20px 22px 8px;
+}
+.quant-chart svg { width: 100%; height: auto; display: block; }
+.quant-legend { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-bottom: 8px; }
+.ql-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.74rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+}
+.ql-hint { margin-left: auto; font-size: 0.78rem; font-weight: 600; color: #8fb2da; }
+.qpt { cursor: pointer; }
+.qpt:hover circle { stroke: rgba(255,255,255,0.85); }
+.quant-hitos { display: none; list-style: none; margin: 14px 0 10px; padding: 0; }
+.quant-hitos li { font-size: 0.85rem; color: rgba(255,255,255,0.72); padding: 7px 0; border-top: 1px solid rgba(255,255,255,0.08); line-height: 1.45; }
+.quant-hitos li strong { color: var(--white); margin-right: 8px; font-variant-numeric: tabular-nums; }
+@media (max-width: 700px) {
+  .svg-annot { display: none; }
+  .quant-hitos { display: block; }
+  .ql-hint { margin-left: 0; width: 100%; }
+}
 
 .quant-delta {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 22px;
@@ -322,7 +336,6 @@
 @media (max-width: 760px) {
   #halAccordion .mp-row .sev-chip { display: none; }
   .quant-tiles { grid-template-columns: 1fr; }
-  .quant-bars { grid-template-columns: 1fr; }
   .qm-mags { grid-template-columns: 1fr; }
   .pm-meta { grid-template-columns: 1fr; }
   .qm-delta-row { grid-template-columns: 1fr; gap: 2px; }

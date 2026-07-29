@@ -198,7 +198,6 @@ function figIc(label, sm) {
 //  Análisis cuantitativo: tiles clickeables + barras + modal
 // ============================================================
 const quantTiles = document.getElementById('quantTiles');
-const quantBars = document.getElementById('quantBars');
 if (quantTiles && window.BASES) {
   quantTiles.innerHTML = window.BASES.map((b, i) =>
     '<button class="quant-tile' + (b.final ? ' final' : '') + '" type="button" data-i="' + i + '">'
@@ -215,23 +214,13 @@ if (quantTiles && window.BASES) {
     tile.addEventListener('click', () => openQuantModal(window.BASES[+tile.dataset.i]));
   });
 }
-if (quantBars && window.BASES) {
-  const series = [
-    { key: 'imputados', label: 'Imputados tramitados' },
-    { key: 'causas', label: 'Causas' },
-  ];
-  quantBars.innerHTML = series.map((s) => {
-    const max = Math.max(...window.BASES.map((b) => b[s.key]));
-    return '<div class="qb-row"><span class="qb-title">' + figIc(s.label, true) + esc(s.label) + '</span>'
-      + window.BASES.map((b) => {
-        const w = Math.round((b[s.key] / max) * 1000) / 10;
-        return '<div class="qb-line"><span class="qb-name">' + esc(b.fecha.replace(' de ', ' ')) + '</span>'
-          + '<div class="qb-track"><div class="qb-fill' + (b.final ? ' final' : '') + '" style="width:' + w + '%"></div></div>'
-          + '<span class="qb-val">' + fmt(b[s.key]) + '</span></div>';
-      }).join('')
-      + '</div>';
-  }).join('');
-}
+// Puntos de la cronología del desplome → modal de desmembrado
+document.querySelectorAll('.qpt').forEach((g) => {
+  g.addEventListener('click', () => {
+    const b = (window.BASES || [])[+g.dataset.i];
+    if (b) openQuantModal(b);
+  });
+});
 
 function halBtn(bl) {
   if (!bl.hal) return '';
