@@ -268,10 +268,12 @@
         <div class="section-head section-head-light" data-aos="fade-up">
           <span class="kicker">Análisis cuantitativo</span>
           <h2>La base, entrega por entrega</h2>
-          <p class="lead">Comparación entre la entrega inicial, la segunda entrega y la base reconstruida durante la auditoría. Cada base declara sus dos magnitudes — imputados tramitados y causas. <strong>Haz clic en una entrega para desmembrar el número.</strong></p>
+          <p class="lead">Comparación entre la entrega inicial, la segunda entrega y la base reconstruida durante la auditoría. <strong>Desplázate: la historia y los números aparecen a medida que avanzas.</strong> Haz clic en un punto del gráfico para desmembrar esa entrega.</p>
         </div>
-        <!-- Cronología del desplome -->
-        <div class="quant-chart" data-aos="fade-up">
+        <!-- Cronología del desplome (scrollytelling) -->
+        <div class="scrolly" id="quantScrolly">
+        <div class="scrolly-sticky">
+        <div class="quant-chart">
           <div class="quant-legend">
             <span class="ql-item"><span class="fig-chip imp sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Imputados tramitados</span>
             <span class="ql-item"><span class="fig-chip cau sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Causas</span>
@@ -293,69 +295,56 @@
             </g>
             <line x1="60" y1="500" x2="970" y2="500" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
 
-            <!-- Guías de hitos -->
-            <g class="svg-annot" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-dasharray="3 5">
-              <line x1="211" y1="215" x2="211" y2="470"/>
-              <line x1="509" y1="325" x2="509" y2="470"/>
-              <line x1="784" y1="350" x2="784" y2="470"/>
-            </g>
-            <g class="svg-annot" font-family="Raleway, sans-serif" font-size="14" fill="rgba(255,255,255,0.68)">
-              <text x="219" y="402"><tspan font-weight="800" fill="#ffffff">20-05</tspan> · El cliente detecta el error:</text>
-              <text x="219" y="422">13 de 15 causas revisadas ya concluidas</text>
-              <text x="219" y="446"><tspan font-weight="800" fill="#ffffff">22-05</tspan> · Se atribuye a la «migración»</text>
-              <text x="219" y="468"><tspan font-weight="800" fill="#ffffff">23-05</tspan> · Reclamo formal de Walmart</text>
-              <text x="517" y="402"><tspan font-weight="800" fill="#ffffff">14-06</tspan> · «Falla grave de control»</text>
-              <text x="517" y="424"><tspan font-weight="800" fill="#ffffff">15-06</tspan> · Walmart cuenta 4.090</text>
-              <text x="792" y="380"><tspan font-weight="800" fill="#ffffff">07-07</tspan> · 3.ª revisión: ≈3.500</text>
-              <text x="792" y="402"><tspan font-weight="800" fill="#ffffff">08-07</tspan> · Parte la auditoría</text>
-              <text x="944" y="286" text-anchor="end"><tspan font-weight="800" fill="#ffffff">23-07</tspan> · Base final (auditor externo)</text>
-            </g>
-            <!-- Marcadores de referencia (recuentos intermedios) -->
-            <g class="svg-annot" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5">
-              <circle cx="515" cy="274" r="5"/>
-              <circle cx="773" cy="306" r="5"/>
+            <!-- Guías de hitos (se encienden con cada tarjeta) -->
+            <g stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-dasharray="3 5">
+              <line class="qs" data-s="1" x1="211" y1="215" x2="211" y2="470"/>
+              <line class="qs" data-s="2" x1="240" y1="245" x2="240" y2="470"/>
+              <line class="qs" data-s="4" x1="509" y1="322" x2="509" y2="470"/>
+              <line class="qs" data-s="5" x1="778" y1="352" x2="778" y2="470"/>
             </g>
 
-            <!-- Series -->
-            <polyline points="70,57 480,261 960,312" fill="none" stroke="#5b8fd4" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-            <polyline points="70,100 480,293 960,343" fill="none" stroke="#e06a6c" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <!-- Series (se dibujan por tramo) -->
+            <g fill="none" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+              <line class="seg" data-s="3" pathLength="1" x1="70" y1="57" x2="480" y2="261" stroke="#5b8fd4"/>
+              <line class="seg" data-s="3" pathLength="1" x1="70" y1="100" x2="480" y2="293" stroke="#e06a6c"/>
+              <line class="seg" data-s="6" pathLength="1" x1="480" y1="261" x2="960" y2="312" stroke="#5b8fd4"/>
+              <line class="seg" data-s="6" pathLength="1" x1="480" y1="293" x2="960" y2="343" stroke="#e06a6c"/>
+            </g>
 
             <!-- Caídas por tramo -->
-            <g font-family="Raleway, sans-serif" font-size="16" font-weight="800" text-anchor="middle">
+            <g class="qs" data-s="3" font-family="Raleway, sans-serif" font-size="16" font-weight="800" text-anchor="middle">
               <rect x="225" y="114" width="100" height="30" rx="15" fill="rgba(10,14,20,0.5)" stroke="#5b8fd4" stroke-opacity="0.6"/>
               <text x="275" y="135" fill="#ffffff">−46,0%</text>
-              <rect x="670" y="238" width="100" height="30" rx="15" fill="rgba(10,14,20,0.5)" stroke="#5b8fd4" stroke-opacity="0.6"/>
-              <text x="720" y="259" fill="#ffffff">−21,3%</text>
               <rect x="225" y="210" width="100" height="30" rx="15" fill="rgba(10,14,20,0.5)" stroke="#e06a6c" stroke-opacity="0.6"/>
               <text x="275" y="231" fill="#ffffff">−48,2%</text>
+            </g>
+            <g class="qs" data-s="6" font-family="Raleway, sans-serif" font-size="16" font-weight="800" text-anchor="middle">
+              <rect x="670" y="238" width="100" height="30" rx="15" fill="rgba(10,14,20,0.5)" stroke="#5b8fd4" stroke-opacity="0.6"/>
+              <text x="720" y="259" fill="#ffffff">−21,3%</text>
               <rect x="670" y="331" width="100" height="30" rx="15" fill="rgba(10,14,20,0.5)" stroke="#e06a6c" stroke-opacity="0.6"/>
               <text x="720" y="352" fill="#ffffff">−24,1%</text>
             </g>
 
-            <!-- Valores -->
-            <g font-family="Raleway, sans-serif" font-size="17" font-weight="800" fill="#ffffff">
-              <text x="86" y="50">8.003</text>
-              <text x="86" y="126">7.227</text>
-              <text x="480" y="246" text-anchor="middle">4.321</text>
-              <text x="480" y="316" text-anchor="middle">3.741</text>
-              <text x="944" y="306" text-anchor="end">3.401</text>
-              <text x="944" y="364" text-anchor="end">2.839</text>
-            </g>
-
-            <!-- Puntos (clic → desmembrar) -->
-            <g class="qpt" data-i="0">
+            <!-- Puntos y valores (clic → desmembrar) -->
+            <g class="qpt qs" data-i="0" data-s="0" font-family="Raleway, sans-serif" font-size="17" font-weight="800" fill="#ffffff">
               <circle cx="70" cy="57" r="7" fill="#5b8fd4" stroke="#2A313E" stroke-width="2.5"/>
               <circle cx="70" cy="100" r="7" fill="#e06a6c" stroke="#2A313E" stroke-width="2.5"/>
+              <text x="86" y="50">8.003</text>
+              <text x="86" y="126">7.227</text>
               <rect x="52" y="39" width="52" height="80" fill="transparent"><title>8 de mayo · 8.003 imputados / 7.227 causas — clic para desmembrar</title></rect>
             </g>
-            <g class="qpt" data-i="1">
+            <g class="qpt qs" data-i="1" data-s="3" font-family="Raleway, sans-serif" font-size="17" font-weight="800" fill="#ffffff">
               <circle cx="480" cy="261" r="7" fill="#5b8fd4" stroke="#2A313E" stroke-width="2.5"/>
               <circle cx="480" cy="293" r="7" fill="#e06a6c" stroke="#2A313E" stroke-width="2.5"/>
+              <text x="480" y="246" text-anchor="middle">4.321</text>
+              <text x="480" y="316" text-anchor="middle">3.741</text>
               <rect x="462" y="243" width="36" height="70" fill="transparent"><title>12 de junio · 4.321 imputados / 3.741 causas — clic para desmembrar</title></rect>
             </g>
-            <g class="qpt" data-i="2">
+            <g class="qpt qs" data-i="2" data-s="6" font-family="Raleway, sans-serif" font-size="17" font-weight="800" fill="#ffffff">
               <circle cx="960" cy="312" r="7" fill="#5b8fd4" stroke="#2A313E" stroke-width="2.5"/>
               <circle cx="960" cy="343" r="7" fill="#e06a6c" stroke="#2A313E" stroke-width="2.5"/>
+              <text x="944" y="306" text-anchor="end">3.401</text>
+              <text x="944" y="364" text-anchor="end">2.839</text>
               <rect x="942" y="294" width="52" height="70" fill="transparent"><title>23 de julio · 3.401 imputados / 2.839 causas — clic para desmembrar</title></rect>
             </g>
 
@@ -371,24 +360,62 @@
               <text x="960" y="532">23 jul</text>
             </g>
           </svg>
-          <ul class="quant-hitos">
-            <li><strong>20-05</strong> El cliente detecta el error: 13 de 15 causas revisadas ya estaban concluidas</li>
-            <li><strong>22-05</strong> Se atribuye a la «migración», sin validarlo</li>
-            <li><strong>23-05</strong> Reclamo formal de Walmart</li>
-            <li><strong>14-06</strong> El cliente califica la baja: «falla grave de control»</li>
-            <li><strong>15-06</strong> Walmart cuenta 4.090 al deduplicar RIT</li>
-            <li><strong>07-07</strong> Tercera revisión: ≈3.500</li>
-            <li><strong>08-07</strong> Parte la auditoría especial</li>
-            <li><strong>23-07</strong> Base final, con revisión de auditor externo</li>
-          </ul>
         </div>
-        <div class="quant-delta" data-aos="fade-up">
+        <div class="quant-delta qs" data-s="7">
           <span class="qd-tag">De la 1.ª a la 3.ª entrega</span>
           <span class="qd-item">Imputados tramitados <strong>8.003 → 3.401</strong> <em>−57,5%</em></span>
           <span class="qd-item">Causas <strong>7.227 → 2.839</strong> <em>−60,7%</em></span>
         </div>
-        <div class="quant-tiles" id="quantTiles" data-aos="fade-up"></div>
-        <p class="cifra-note" data-aos="fade-up">Entregas del 8 de mayo y 12 de junio, y base reconstruida del 23 de julio — esta última con revisión de un auditor externo independiente y la causa como unidad de registro.</p>
+        </div><!-- /scrolly-sticky -->
+
+        <div class="scrolly-steps">
+          <div class="sstep" data-step="0"><div class="sstep-card">
+            <span class="ss-date">8 de mayo · Primera entrega</span>
+            <h4>Se reporta el universo «vigente»</h4>
+            <p><strong>8.003 imputados tramitados</strong> y <strong>7.227 causas</strong>, construidos desde lo abierto en el sistema de origen — sin contraste con el Poder Judicial y con la revisión de fondo expresamente diferida.</p>
+          </div></div>
+          <div class="sstep" data-step="1"><div class="sstep-card">
+            <span class="ss-date bad">20 de mayo</span>
+            <h4>El cliente detecta el error</h4>
+            <p>El analista de Walmart revisa 15 causas: <strong>13 ya estaban concluidas</strong> en el Poder Judicial. La operación no lo había advertido.</p>
+          </div></div>
+          <div class="sstep" data-step="2"><div class="sstep-card">
+            <span class="ss-date bad">22 y 23 de mayo</span>
+            <h4>La respuesta equivocada</h4>
+            <p>La diferencia se atribuye a la <strong>«migración» de 2019, sin validarlo</strong>. El 23, Walmart presenta su reclamo formal: «ustedes tampoco conocen con certeza el universo de causas que tienen en tramitación».</p>
+          </div></div>
+          <div class="sstep" data-step="3"><div class="sstep-card">
+            <span class="ss-date">12 de junio · Segunda entrega</span>
+            <h4>La base cae casi a la mitad</h4>
+            <p><strong>4.321 imputados y 3.741 causas</strong> — una caída de −46,0% y −48,2%. Desde la advertencia del cliente se comenzó a contrastar la información contra el Poder Judicial.</p>
+          </div></div>
+          <div class="sstep" data-step="4"><div class="sstep-card">
+            <span class="ss-date bad">14 y 15 de junio</span>
+            <h4>«Falla grave de control»</h4>
+            <p>El cliente califica la baja de 3.682 causas como <strong>«inaceptable»</strong>. Su analista, deduplicando RIT repetidos, cuenta <strong>4.090</strong>: la base seguía sin cuadrar.</p>
+          </div></div>
+          <div class="sstep" data-step="5"><div class="sstep-card">
+            <span class="ss-date">7 y 8 de julio</span>
+            <h4>Parte la auditoría especial</h4>
+            <p>Una tercera revisión sitúa la base en <strong>≈3.500</strong>. El 8 de julio se firma el Acta de Inicio: tres semanas, metodología IIA, sponsor el CEO.</p>
+          </div></div>
+          <div class="sstep" data-step="6"><div class="sstep-card">
+            <span class="ss-date ok">23 de julio · Base reconstruida</span>
+            <h4>La base final</h4>
+            <p><strong>3.401 imputados y 2.839 causas vigentes</strong>, con revisión de un auditor externo independiente y la causa como unidad de registro ante el cliente.</p>
+          </div></div>
+          <div class="sstep" data-step="7"><div class="sstep-card">
+            <span class="ss-date bad">De punta a punta</span>
+            <h4>El tamaño real del error</h4>
+            <p><strong>−57,5% de los imputados y −60,7% de las causas</strong> reportadas el 8 de mayo no resistieron la verificación. Desmembra cada entrega:</p>
+            <div class="ss-links">
+              <button type="button" class="ss-link" data-i="0">8 de mayo →</button>
+              <button type="button" class="ss-link" data-i="1">12 de junio →</button>
+              <button type="button" class="ss-link" data-i="2">23 de julio →</button>
+            </div>
+          </div></div>
+        </div>
+        </div><!-- /scrolly -->
       </div>
     </section>
 

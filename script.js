@@ -197,30 +197,34 @@ function figIc(label, sm) {
 // ============================================================
 //  Análisis cuantitativo: tiles clickeables + barras + modal
 // ============================================================
-const quantTiles = document.getElementById('quantTiles');
-if (quantTiles && window.BASES) {
-  quantTiles.innerHTML = window.BASES.map((b, i) =>
-    '<button class="quant-tile' + (b.final ? ' final' : '') + '" type="button" data-i="' + i + '">'
-    + '<span class="qt-date">' + esc(b.fecha) + '</span>'
-    + '<span class="qt-tag">' + esc(b.tag) + '</span>'
-    + '<span class="qt-figs">'
-    + '<span class="qt-fig">' + figIc('imputados') + '<span class="qt-fig-col"><strong>' + fmt(b.imputados) + '</strong><em>imputados tramitados</em></span></span>'
-    + '<span class="qt-fig">' + figIc('causas') + '<span class="qt-fig-col"><strong>' + fmt(b.causas) + '</strong><em>causas</em></span></span>'
-    + '</span>'
-    + '<span class="qt-go">Desmembrar el número →</span>'
-    + '</button>'
-  ).join('');
-  quantTiles.querySelectorAll('.quant-tile').forEach((tile) => {
-    tile.addEventListener('click', () => openQuantModal(window.BASES[+tile.dataset.i]));
-  });
-}
-// Puntos de la cronología del desplome → modal de desmembrado
-document.querySelectorAll('.qpt').forEach((g) => {
-  g.addEventListener('click', () => {
-    const b = (window.BASES || [])[+g.dataset.i];
+// Puntos del gráfico y botones "desmembrar" → modal de desmembrado
+document.querySelectorAll('.qpt, .ss-link').forEach((el) => {
+  el.addEventListener('click', () => {
+    const b = (window.BASES || [])[+el.dataset.i];
     if (b) openQuantModal(b);
   });
 });
+
+// Scrollytelling: cada tarjeta enciende su etapa del gráfico
+const scrolly = document.getElementById('quantScrolly');
+if (scrolly) {
+  const staged = [...scrolly.querySelectorAll('[data-s]')];
+  const steps = [...scrolly.querySelectorAll('.sstep')];
+  let stage = -1;
+  function setStage(n) {
+    if (n === stage) return;
+    stage = n;
+    staged.forEach((el) => el.classList.toggle('on', +el.dataset.s <= n));
+    steps.forEach((s) => s.classList.toggle('active', +s.dataset.step === n));
+  }
+  const stepObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) setStage(+e.target.dataset.step); });
+    },
+    { rootMargin: '-40% 0px -40% 0px' }
+  );
+  steps.forEach((s) => stepObserver.observe(s));
+}
 
 function halBtn(bl) {
   if (!bl.hal) return '';
