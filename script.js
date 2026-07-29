@@ -310,78 +310,86 @@ if (ejesGrid && window.EJES) {
 
 function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
 
-// Las ocho remediaciones como expedientes de archivo: la carpeta emitida se
-// entreabre al pasar el cursor y se abre al hacer clic; las restantes quedan
-// selladas hasta que su documento se emite.
+// Tablero de seguimiento del plan: una tarjeta por remediación con su línea de
+// etapas, estado documental y de remediación, plazo, validador y efectividad.
+// El expediente documental (modal) es secundario y se abre desde la tarjeta.
+const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
+const IC_FOLDER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
   const TOTAL_REMS = Math.max(8, window.REMS.length);
-  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let shelf = '';
+  const cnt = { doc: 0, diseno: 0, impl: 0, valid: 0, cerradas: 0, fecha: 0 };
+  let cards = '';
+
   for (let n = 1; n <= TOTAL_REMS; n++) {
     const r = window.REMS.find((x) => x.n === n);
-    const delay = ((n - 1) % 4) * 70;
-    if (r) {
-      shelf += '<button class="rem-folder ready" type="button" data-n="' + n + '" data-aos="zoom-in-up" data-aos-delay="' + delay + '" aria-haspopup="dialog" aria-label="Abrir Remediación N.° ' + n + ': ' + esc(r.corto || r.tit) + '">'
-        + '<span class="rf-tab">R' + n + '</span>'
-        + '<span class="rf-back"></span>'
-        + '<span class="rf-paper p2" aria-hidden="true"></span>'
-        + '<span class="rf-paper p1" aria-hidden="true"><i></i><i></i><i></i><i></i></span>'
-        + '<span class="rf-front">'
-        + '<span class="rf-stamp">Definitiva</span>'
-        + '<span class="rf-kicker">Remediación N.° ' + n + '</span>'
-        + '<span class="rf-tit">' + esc(r.corto || r.tit) + '</span>'
-        + '<span class="rf-resp">' + esc(r.resp) + '</span>'
-        + '<span class="rf-open">Abrir el expediente →</span>'
-        + '</span>'
-        + '</button>';
-    } else {
-      shelf += '<div class="rem-folder pending" data-aos="zoom-in-up" data-aos-delay="' + delay + '" title="Documento en preparación">'
-        + '<span class="rf-tab">R' + n + '</span>'
-        + '<span class="rf-back"></span>'
-        + '<span class="rf-paper p1" aria-hidden="true"></span>'
-        + '<span class="rf-front">'
-        + '<span class="rf-stamp">En preparación</span>'
-        + '<span class="rf-kicker">Remediación N.° ' + n + '</span>'
-        + '<span class="rf-tit">Documento en preparación</span>'
-        + '<span class="rf-resp">Se archiva aquí al quedar emitido</span>'
-        + '</span>'
-        + '</div>';
-    }
+    const seg = (r && r.seg) || {};
+    const done = seg.etapaDone || 0;
+    const cur = Math.min(seg.etapa || done + 1, ETAPAS_REM.length);
+    const docEstado = r ? (seg.docEstado || 'Documento emitido') : 'Documento en preparación';
+    const remEstado = r ? (seg.remEstado || 'Remediación no iniciada') : 'Remediación no iniciada';
+    const plazo = seg.plazo || 'Sin fecha comprometida';
+    const plazoCls = /atras|vencid/i.test(plazo) ? 'bad' : /en plazo/i.test(plazo) ? 'ok' : 'na';
+
+    if (r) cnt.doc++; else cnt.diseno++;
+    if (done >= 3) cnt.impl++;
+    if (done >= 5) cnt.valid++;
+    if (done >= 6) cnt.cerradas++;
+    if (seg.fechaObjetivo && seg.fechaObjetivo !== 'Por definir') cnt.fecha++;
+
+    const stages = ETAPAS_REM.map((et, i) => {
+      const st = i + 1 <= done ? ' done' : i + 1 === cur ? ' cur' : '';
+      return '<span class="rc-stage' + st + '"><i></i><em>' + et + '</em></span>';
+    }).join('');
+
+    cards += '<article class="rseg-card' + (r ? '' : ' pending') + '" data-aos="fade-up" data-aos-delay="' + ((n - 1) % 2) * 80 + '">'
+      + '<header class="rc-head">'
+      + '<span class="rc-n">R' + n + '</span>'
+      + '<div class="rc-headb">'
+      + '<h3 class="rc-tit">' + (r ? esc(r.corto || r.tit) : 'Remediación N.° ' + n + ' — alcance por definir') + '</h3>'
+      + '<p class="rc-riesgo"><strong>Aborda:</strong> ' + (r ? esc(r.riesgo || '') : 'se define en el documento de la remediación') + '</p>'
+      + '</div>'
+      + '</header>'
+      + '<div class="rc-chips">'
+      + '<span class="rc-chip doc' + (r ? '' : ' prep') + '">' + esc(docEstado) + '</span>'
+      + '<span class="rc-chip rem">' + esc(remEstado) + '</span>'
+      + '<span class="rc-chip plazo ' + plazoCls + '">' + esc(plazo) + '</span>'
+      + '</div>'
+      + '<div class="rc-stages" role="img" aria-label="Etapa actual: ' + esc(ETAPAS_REM[cur - 1]) + ' (' + done + ' de ' + ETAPAS_REM.length + ' etapas completadas)">' + stages + '</div>'
+      + '<dl class="rc-meta">'
+      + '<div><dt>Responsable</dt><dd>' + (r ? esc(r.resp) : 'Por asignar') + '</dd></div>'
+      + '<div><dt>Validador independiente</dt><dd>' + (r ? esc(r.valid) : 'Por designar') + '</dd></div>'
+      + '<div><dt>Fecha objetivo</dt><dd>' + esc(seg.fechaObjetivo || 'Por definir') + '</dd></div>'
+      + '<div><dt>Efectividad</dt><dd>' + esc(seg.efectividad || 'Se define en el documento') + '</dd></div>'
+      + '</dl>'
+      + '<div class="rc-foot">'
+      + (r
+        ? '<button class="rc-open" type="button" data-n="' + n + '" aria-haspopup="dialog">' + IC_FOLDER + 'Ver expediente →</button>'
+        : '<span class="rc-open prep">' + IC_FOLDER + 'Expediente en preparación</span>')
+      + '</div>'
+      + '</article>';
   }
-  planList.innerHTML = shelf;
+  planList.innerHTML = cards;
 
-  planList.querySelectorAll('.rem-folder.ready').forEach((folder) => {
-    folder.addEventListener('click', () => {
-      const r = window.REMS.find((x) => x.n === +folder.dataset.n);
-      if (!r) return;
-      if (noMotion) { openRemModal(r); return; }
-      if (folder.classList.contains('opening')) return;
-      folder.classList.add('opening');
-      setTimeout(() => {
-        openRemModal(r);
-        setTimeout(() => folder.classList.remove('opening'), 400);
-      }, 480);
+  planList.querySelectorAll('button.rc-open').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const r = window.REMS.find((x) => x.n === +btn.dataset.n);
+      if (r) openRemModal(r);
     });
   });
 
-  // Un expediente sellado se sacude: aún no hay documento que abrir.
-  planList.querySelectorAll('.rem-folder.pending').forEach((folder) => {
-    folder.addEventListener('click', () => {
-      folder.classList.remove('shake');
-      void folder.offsetWidth;
-      folder.classList.add('shake');
-    });
-    folder.addEventListener('animationend', () => folder.classList.remove('shake'));
-  });
-
-  const remProgress = document.getElementById('remProgress');
-  if (remProgress) {
-    const done = window.REMS.length;
-    let segs = '';
-    for (let i = 0; i < TOTAL_REMS; i++) segs += '<span class="rp-seg' + (i < done ? ' on' : '') + '"></span>';
-    remProgress.innerHTML = '<span class="rp-segs" aria-hidden="true">' + segs + '</span>'
-      + '<span class="rp-label">' + done + ' de ' + TOTAL_REMS + ' expedientes emitidos</span>';
+  // Resumen ejecutivo del tablero: documentos vs. estado real de la remediación.
+  const remResumen = document.getElementById('remResumen');
+  if (remResumen) {
+    const chip = (val, label, cls) =>
+      '<span class="rr-chip' + (val === 0 ? ' zero' : '') + (cls ? ' ' + cls : '') + '"><strong>' + val + '</strong> ' + label + '</span>';
+    remResumen.innerHTML = '<span class="rr-total">' + TOTAL_REMS + ' remediaciones</span>'
+      + chip(cnt.doc, 'con documento emitido', 'doc')
+      + chip(cnt.diseno, 'en diseño')
+      + chip(cnt.impl, 'implementadas')
+      + chip(cnt.valid, 'validadas')
+      + chip(cnt.cerradas, 'cerradas')
+      + chip(cnt.fecha, 'con fecha comprometida');
   }
 }
 

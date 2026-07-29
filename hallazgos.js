@@ -484,6 +484,18 @@ window.REMS = [
   {
     n: 1,
     corto: 'Conciliación preventiva de las causas vigentes reportadas a Walmart',
+    riesgo: 'HAL-002 · HAL-007 — el estado procesal se informaba a Walmart sin verificarlo contra el Poder Judicial',
+    // Seguimiento: etapas completadas (etapaDone) y etapa en curso (etapa) sobre
+    // la secuencia Diseño → Aprobación → Implementación → Evidencia → Validación → Cierre.
+    seg: {
+      etapaDone: 1,
+      etapa: 2,
+      docEstado: 'Documento emitido',
+      remEstado: 'Remediación no iniciada',
+      fechaObjetivo: 'Por definir',
+      plazo: 'Sin fecha comprometida',
+      efectividad: 'Tres indicadores con meta 100%, medidos desde la implementación',
+    },
     tit: 'Implementar un proceso preventivo de conciliación y actualización de las causas vigentes reportadas a Walmart',
     resumen: 'A más tardar el 25 de cada mes, la Unidad de Registro y Actualización ejecutará una conciliación y actualización obligatoria, previa a cada reporte de causas vigentes a Walmart (primeros 5 días del mes). El informe final contendrá todas —y solamente— las causas asociadas a Walmart con querella presentada que, revisado su expediente, no registren un hito procesal de término. El control lo ejecuta un equipo con funciones, capacidad y mecanismos de continuidad formalmente definidos.',
     pasos: [
