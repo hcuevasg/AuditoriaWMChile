@@ -167,16 +167,157 @@ if (halAccordion && window.HALLAZGOS) {
   });
 }
 
-// --- Tabla del plan ---
-const planTable = document.querySelector('#planTable tbody');
-if (planTable && window.PLAN) {
-  planTable.innerHTML = window.PLAN.map((p) =>
-    '<tr>'
-    + '<td class="plan-id">' + esc(p.id) + '</td>'
-    + '<td>' + esc(p.txt) + (/(inmediat)/i.test(p.plazo) ? ' <span class="plan-flag">' + esc(p.plazo) + '</span>' : '') + '</td>'
-    + '<td class="plan-cubre">' + esc(p.cubre) + '</td>'
-    + '<td class="plan-resp">' + esc(p.resp) + '</td>'
-    + '<td><span class="sev-chip ' + sevClass(p.prio) + '">' + esc(p.prio) + '</span></td>'
-    + '</tr>'
+// ============================================================
+//  Modales genéricos (plan y análisis cuantitativo)
+// ============================================================
+function wireModal(overlay, closeBtn) {
+  if (!overlay) return null;
+  function open() { overlay.hidden = false; requestAnimationFrame(() => overlay.classList.add('open')); document.body.style.overflow = 'hidden'; overlay.querySelector('.modal-box').scrollTop = 0; }
+  function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; setTimeout(() => { overlay.hidden = true; }, 320); }
+  closeBtn?.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !overlay.hidden) close(); });
+  return { open, close };
+}
+const planModal = wireModal(document.getElementById('planModal'), document.getElementById('planModalClose'));
+const quantModal = wireModal(document.getElementById('quantModal'), document.getElementById('quantModalClose'));
+const nf = new Intl.NumberFormat('es-CL');
+function fmt(n) { return nf.format(n); }
+
+// ============================================================
+//  Análisis cuantitativo: tiles clickeables + barras + modal
+// ============================================================
+const quantTiles = document.getElementById('quantTiles');
+const quantBars = document.getElementById('quantBars');
+if (quantTiles && window.BASES) {
+  quantTiles.innerHTML = window.BASES.map((b, i) =>
+    '<button class="quant-tile' + (b.final ? ' final' : '') + '" type="button" data-i="' + i + '">'
+    + '<span class="qt-date">' + esc(b.fecha) + '</span>'
+    + '<span class="qt-tag">' + esc(b.tag) + '</span>'
+    + '<span class="qt-figs">'
+    + '<span class="qt-fig"><strong>' + fmt(b.imputados) + '</strong><em>imputados tramitados</em></span>'
+    + '<span class="qt-fig"><strong>' + fmt(b.causas) + '</strong><em>causas</em></span>'
+    + '</span>'
+    + '<span class="qt-go">Desmembrar el número →</span>'
+    + '</button>'
+  ).join('');
+  quantTiles.querySelectorAll('.quant-tile').forEach((tile) => {
+    tile.addEventListener('click', () => openQuantModal(window.BASES[+tile.dataset.i]));
+  });
+}
+if (quantBars && window.BASES) {
+  const series = [
+    { key: 'imputados', label: 'Imputados tramitados' },
+    { key: 'causas', label: 'Causas' },
+  ];
+  quantBars.innerHTML = series.map((s) => {
+    const max = Math.max(...window.BASES.map((b) => b[s.key]));
+    return '<div class="qb-row"><span class="qb-title">' + esc(s.label) + '</span>'
+      + window.BASES.map((b) => {
+        const w = Math.round((b[s.key] / max) * 1000) / 10;
+        return '<div class="qb-line"><span class="qb-name">' + esc(b.fecha.replace(' de ', ' ')) + '</span>'
+          + '<div class="qb-track"><div class="qb-fill' + (b.final ? ' final' : '') + '" style="width:' + w + '%"></div></div>'
+          + '<span class="qb-val">' + fmt(b[s.key]) + '</span></div>';
+      }).join('')
+      + '</div>';
+  }).join('');
+}
+
+function quantBlockHtml(bl) {
+  if (bl.tipo === 'status') {
+    return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4>'
+      + bl.bars.map((bar) => {
+        const w = Math.round((bar.val / bar.total) * 1000) / 10;
+        return '<div class="qm-bar"><span class="qm-bar-label">' + esc(bar.label) + '</span>'
+          + '<div class="qm-bar-track"><div class="qm-bar-fill" style="width:' + w + '%"></div></div>'
+          + '<span class="qm-bar-val">' + esc(bar.txt) + '</span></div>';
+      }).join('')
+      + '<p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+  }
+  if (bl.tipo === 'delta') {
+    return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4><div class="qm-deltas">'
+      + bl.rows.map((r) =>
+        '<div class="qm-delta-row"><span class="qm-dl">' + esc(r.label) + '</span>'
+        + '<span class="qm-dv">' + esc(r.from) + ' → ' + esc(r.to) + '</span>'
+        + '<span class="qm-dd">' + esc(r.delta) + ' <em>' + esc(r.pct) + '</em></span></div>'
+      ).join('')
+      + '</div><p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+  }
+  // mags
+  return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4><div class="qm-mags">'
+    + bl.items.map((it) => '<div class="qm-mag"><strong>' + esc(it[0]) + '</strong><span>' + esc(it[1]) + '</span></div>').join('')
+    + '</div><p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+}
+
+function openQuantModal(b) {
+  const body = document.getElementById('quantModalBody');
+  if (!body || !quantModal) return;
+  body.innerHTML = '<div class="modal-head">'
+    + '<span class="modal-code' + (b.final ? ' ok' : '') + '">' + esc(b.fecha) + '</span>'
+    + '<span class="modal-country">' + esc(b.tag) + '</span>'
+    + '</div>'
+    + '<h3 id="quantModalTitle">' + fmt(b.imputados) + ' imputados tramitados · ' + fmt(b.causas) + ' causas</h3>'
+    + '<p class="qm-resumen">' + esc(b.resumen) + '</p>'
+    + b.bloques.map(quantBlockHtml).join('');
+  quantModal.open();
+}
+
+// ============================================================
+//  Plan de remediación: ejes + lista clickeable + modal
+// ============================================================
+const ejesGrid = document.getElementById('ejesGrid');
+if (ejesGrid && window.EJES) {
+  ejesGrid.innerHTML = window.EJES.map((e) =>
+    '<article class="eje-card"><span class="eje-num">Eje ' + e.n + '</span><h4>' + esc(e.tit) + '</h4><p>' + esc(e.desc) + '</p></article>'
+  ).join('');
+}
+
+function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
+
+const planList = document.getElementById('planList');
+if (planList && window.PLAN_IMPL) {
+  planList.innerHTML = window.PLAN_IMPL.map((p, i) => {
+    const eje = (window.EJES || []).find((e) => e.n === p.eje);
+    return '<button class="plan-item" type="button" data-i="' + i + '">'
+      + '<span class="plan-item-n">' + p.n + '</span>'
+      + '<span class="plan-item-body">'
+      + '<span class="plan-item-eje">Eje ' + p.eje + ' · ' + esc(eje ? eje.tit : '') + '</span>'
+      + '<span class="plan-item-tit">' + esc(p.tit) + '</span>'
+      + '</span>'
+      + '<span class="estado-chip ' + estadoClass(p.estado) + '">' + esc(p.estado) + '</span>'
+      + '<span class="plan-item-go" aria-hidden="true">→</span>'
+      + '</button>';
+  }).join('');
+  planList.querySelectorAll('.plan-item').forEach((item) => {
+    item.addEventListener('click', () => openPlanModal(window.PLAN_IMPL[+item.dataset.i]));
+  });
+}
+
+function openPlanModal(p) {
+  const body = document.getElementById('planModalBody');
+  if (!body || !planModal) return;
+  const eje = (window.EJES || []).find((e) => e.n === p.eje);
+  body.innerHTML = '<div class="modal-head">'
+    + '<span class="modal-code">Acción ' + p.n + '</span>'
+    + '<span class="modal-country">Eje ' + p.eje + ' · ' + esc(eje ? eje.tit : '') + '</span>'
+    + '<span class="estado-chip ' + estadoClass(p.estado) + '">' + esc(p.estado) + '</span>'
+    + '</div>'
+    + '<h3 id="planModalTitle">' + esc(p.tit) + '</h3>'
+    + '<p class="pm-desc">' + esc(p.desc) + '</p>'
+    + '<div class="modal-extra modal-gap pm-obtiene"><h4>Qué obtiene Walmart</h4><p>' + esc(p.obtiene) + '</p></div>'
+    + '<div class="pm-meta">'
+    + '<div class="pm-meta-item"><h4>Responsable</h4><p>' + esc(p.resp) + '</p></div>'
+    + (p.dep ? '<div class="pm-meta-item dep"><h4>Dependencia externa</h4><p>' + esc(p.dep) + '</p></div>' : '')
+    + '<div class="pm-meta-item"><h4>Entregable de cierre</h4><p>' + esc(p.entregable) + '</p></div>'
+    + '<div class="pm-meta-item"><h4>Indicador · línea base → meta</h4><p>' + esc(p.indicador) + '</p></div>'
+    + '</div>'
+    + '<p class="qm-nota">Ninguna acción se cierra por declaración: el cierre exige evidencia fechada y validación por una instancia distinta de quien ejecuta. Metas propuestas, no aprobadas.</p>';
+  planModal.open();
+}
+
+const planGob = document.getElementById('planGob');
+if (planGob && window.PLAN_GOB) {
+  planGob.innerHTML = window.PLAN_GOB.map((g) =>
+    '<article class="gob-card"><h4>' + esc(g.tit) + '</h4><p>' + esc(g.desc) + '</p></article>'
   ).join('');
 }

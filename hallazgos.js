@@ -209,3 +209,267 @@ window.PLAN = [
   { id: 'L', txt: 'Asignar dueño a la capa de control, seleccionar los elementos que se instrumentan y completar la matriz con los cuatro elementos por proceso', cubre: 'HAL-015', resp: 'Dir. Auditoría Interna (coord.) · áreas responsables', prio: 'Crítica', plazo: 'Pendiente de asignación' },
   { id: 'M', txt: 'Rediseñar el modelo de atención: contraparte única con el nivel de experiencia acordado y destinatario fijo por entregable', cubre: 'HAL-005', resp: 'Gerencia General · Dir. Customer Success', prio: 'Alta', plazo: 'Pendiente de asignación' },
 ];
+
+// ============================================================
+//  Plan de Implementación y Fortalecimiento del Servicio (v5 · 28-07-2026)
+//  Quince acciones sobre cuatro ejes, con trazabilidad a 49 compromisos.
+// ============================================================
+window.EJES = [
+  { n: 1, tit: 'Estrategia de persecución penal', desc: 'Responde a lo que el cliente solicitó expresamente: cierre formal de los memorandos de estrategia, ampliación de la detección y vinculación de bandas, tratamiento de las flagrancias y efecto disuasivo de la persecución.' },
+  { n: 2, tit: 'Confiabilidad de la información', desc: 'Responde a lo que la auditoría acreditó: el estado procesal informado no coincidía con el registro judicial. Comprende el saneamiento ya ejecutado, la conciliación periódica contra la fuente judicial, la integridad del dato en el punto de captura y la continuidad del universo de eventos.' },
+  { n: 3, tit: 'Testigos y audiencias', desc: 'Comprende la citación en tiempo y forma, el reporte de asistencia y la reactivación del control de preparación hoy suspendido.' },
+  { n: 4, tit: 'Controles y gobernanza', desc: 'Comprende la capa de puntos de control acordada, la exigibilidad contractual de los niveles de servicio, la corrección de los indicadores que excluyen la falla que deben señalar, y la gobernanza de la relación con el cliente.' },
+];
+
+window.PLAN_IMPL = [
+  {
+    n: 1, eje: 1, estado: 'En curso',
+    tit: 'Conducir la formalización de la estrategia de persecución penal presentada a Walmart',
+    desc: 'La estrategia está formulada y presentada en tres piezas: los memorandos de febrero y abril de 2026 y el plan táctico de bandas remitido el 2 de julio, más los complementos de reincidencia, flagrancia y criterios de acuerdos reparatorios. Ninguna tiene respuesta formal escrita. ALTO conduce el proceso de revisión: recoge y resuelve las observaciones de Walmart, incorpora los ajustes que correspondan y gestiona su formalización. La suscripción final es bilateral.',
+    obtiene: 'Hoy conviven tres criterios de selección y ninguno rige. Al aprobar, Walmart fija cuál se aplica y sabe qué casos se persiguen. Obtiene seis plazos exigibles por hito: 48 horas para el contacto con la tienda, día siete para la querella, un mes para la Orden de Investigar. Además, el servicio pasa a rendir cuenta por prisiones preventivas y penas efectivas, no por causas abiertas — la cifra que originó esta auditoría.',
+    resp: 'Dirección Legal y Compliance',
+    dep: 'Walmart: la revisión de la estrategia presentada está en su ámbito de decisión desde abril de 2026',
+    entregable: 'Constancia escrita de la formalización de la estrategia, o registro fechado de las observaciones de Walmart y del tratamiento dado a cada una',
+    indicador: 'Versiones de la estrategia con respuesta formal de Walmart: 0 de 2 → 2 de 2',
+  },
+  {
+    n: 2, eje: 1, estado: 'En curso',
+    tit: 'Aplicar los hitos de tramitación de bandas y extender el modelo a la tramitación masiva',
+    desc: 'El plan táctico de bandas fija seis plazos verificables por hito de tramitación. La matriz remitida el 16 de julio desarrolla el flujo en dieciocho hitos, siete de ellos con plazo en días. ALTO pone en marcha esos hitos y monitorea su cumplimiento sobre los casos abiertos; presenta la matriz a Walmart para su formalización; y formula e implementa una matriz equivalente para la tramitación masiva, que despliega por decisión propia y sin requerir acuerdo previo.',
+    obtiene: 'Los plazos del plan táctico cubren solo bandas. La tramitación masiva, que es el mayor volumen, no tiene ninguno. Walmart podrá tomar cualquier caso de banda y saber en qué hito va y si está dentro de plazo. Y tendrá lo mismo para masivo. El seguimiento deja de depender de preguntar caso a caso.',
+    resp: 'Subgerencia de Persecución Penal Especializada',
+    dep: 'Walmart: la formalización de la matriz está en su ámbito de decisión; la extensión a masivo no depende de Walmart',
+    entregable: 'Matriz formalizada con Walmart, matriz equivalente implementada para tramitación masiva y reporte de cumplimiento de los hitos con plazo comprometido',
+    indicador: 'Casos de banda con los hitos de plazo comprometido registrados: pendiente de levantamiento → 90%',
+  },
+  {
+    n: 3, eje: 1, estado: 'Pendiente',
+    tit: 'Implementar el protocolo de relacionamiento con fiscalías',
+    desc: 'ALTO implementa un protocolo formal de relacionamiento con las fiscalías que incorpora alerta de inactividad a los sesenta días, registro de las solicitudes de entrevista y de sus rechazos, y minuta obligatoria de cada reunión sostenida. El protocolo permite reportar la gestión efectivamente realizada, y no solamente las entrevistas concretadas.',
+    obtiene: 'Hoy solo se informan las entrevistas que se concretaron. Walmart no puede saber si el prestador gestionó y la fiscalía no accedió, o si no gestionó. Con el protocolo verá las solicitudes cursadas y también los rechazos. Cada reunión dejará minuta. Y una alerta avisará cuando una causa lleve sesenta días sin movimiento.',
+    resp: 'Subgerencia de Persecución Penal Especializada',
+    dep: null,
+    entregable: 'Protocolo formalizado y primer reporte de gestión con solicitudes cursadas, entrevistas concretadas y rechazos registrados',
+    indicador: 'Entrevistas con fiscal registradas con minuta: pendiente de levantamiento → 100%',
+  },
+  {
+    n: 4, eje: 1, estado: 'Pendiente',
+    tit: 'Establecer con Walmart una mesa de trabajo sobre la cartera judicializada preexistente',
+    desc: 'ALTO propone y conduce una mesa de trabajo con Walmart para acordar y documentar el tratamiento de las causas judicializadas con anterioridad al cambio de modelo de intervención, considerando la entrada en operación de la nueva estrategia y los segmentos priorizados. El tratamiento acordado se formaliza por escrito.',
+    obtiene: 'El 44,6% de las causas informadas es anterior a 2020. Ningún instrumento dice qué hacer con ellas, y el acuerdo verbal que se invocó Walmart lo desconoció por escrito. Con esta acción ambas partes fijan la regla por escrito: si se gestionan, si se cierran o si salen del universo informado. Walmart obtiene un universo reportado que reconoce como propio.',
+    resp: 'Dirección Legal y Compliance',
+    dep: 'Walmart: el tratamiento de la cartera preexistente requiere acuerdo bilateral',
+    entregable: 'Acta de constitución de la mesa de trabajo e instrumento escrito que documente el tratamiento acordado',
+    indicador: 'Regla escrita sobre la cartera preexistente: no existe → formalizada',
+  },
+  {
+    n: 5, eje: 2, estado: 'Ejecutado',
+    tit: 'Disponibilizar a Walmart la base estructurada por causa y el nuevo panel de reportería',
+    desc: 'ALTO reconstruyó y depuró la base de causas vigentes y la estructuró tomando la causa como unidad de registro, en reemplazo del imputado. La base fue remitida a Walmart el 23 de julio de 2026 —2.839 causas vigentes, informando separadamente 3.401 imputados— y el nuevo panel de reportería fue liberado a producción ese mismo día con las definiciones validadas.',
+    obtiene: 'Ya obtenido. Walmart recibió el 23 de julio la base estructurada por causa y el panel de reportería con las definiciones validadas. La cifra deja de mezclar causas con registros de imputado. La actualización periódica la asegura la acción 8.',
+    resp: 'Dirección Legal y Compliance · Dirección de Mejora Continua',
+    dep: null,
+    entregable: 'Base remitida a Walmart y acta de liberación a producción del panel, ambas fechadas al 23 de julio de 2026',
+    indicador: 'Unidad de registro informada a Walmart: imputado → causa',
+  },
+  {
+    n: 6, eje: 2, estado: 'Pendiente',
+    tit: 'Poner en operación el equipo dedicado de registro y actualización procesal',
+    desc: 'ALTO definió el modelo del equipo dedicado —flujo de cuatro etapas y el Poder Judicial como fuente exclusiva— y adoptó la decisión de constituirlo. La acción comprende completar la incorporación de sus integrantes, definir la medida transitoria aplicable hasta su entrada efectiva en operación y emitir el primer reporte de producción.',
+    obtiene: 'Hoy la actualización del estado la hacen personas que además tienen otras tareas. Que esté al día depende de que alguien tenga tiempo. Walmart obtiene un equipo cuya única función es esa, con el Poder Judicial como fuente exclusiva. Es la medida que ataca el origen del problema que motivó esta auditoría.',
+    resp: 'Gerencia General · Dirección Legal y Compliance',
+    dep: null,
+    entregable: 'Equipo constituido, flujo de cuatro etapas documentado, medida transitoria definida y primer reporte de producción emitido',
+    indicador: 'Causas actualizadas por el equipo dedicado: 0 → pendiente de levantamiento al entrar en operación',
+  },
+  {
+    n: 7, eje: 2, estado: 'En curso',
+    tit: 'Implementar controles de integridad del dato desde el origen del evento en WEOP',
+    desc: 'ALTO despliega controles de integridad sobre el dato del evento desde su ingreso: identificador único que preserve la trazabilidad del evento a lo largo de las plataformas, traspaso automático entre ellas, formato horario de veinticuatro horas con validación, campos estructurados obligatorios, reglas automatizadas en reemplazo del marcado manual y marca de paso a control de detención al confirmarse el tribunal. WEOP es plataforma de Walmart: ALTO implementa los controles en el punto en que el evento ingresa a sus propias plataformas.',
+    obtiene: 'Los eventos no tienen un identificador propio. La correspondencia entre el evento, la causa y el reporte se rehace a mano cada día, con el error que eso implica. Walmart podrá tomar un evento de su plataforma y seguirlo hasta la sentencia.',
+    resp: 'Dirección de Tecnología y Sistemas · Dirección de Mejora Continua',
+    dep: 'Walmart: las modificaciones dentro de WEOP y la parametrización de sus salidas requieren su concurrencia',
+    entregable: 'Especificación funcional aprobada y evidencia de despliegue en producción de las seis medidas',
+    indicador: 'Campo que determina el paso a control de detención con valor informado: 60,8% → 95%',
+  },
+  {
+    n: 8, eje: 2, estado: 'Pendiente',
+    tit: 'Institucionalizar la conciliación contra el Poder Judicial y establecer el protocolo de continuidad',
+    desc: 'Dos componentes. (i) Conciliación: ALTO institucionaliza la contrastación periódica del estado procesal de sus registros contra el registro del Poder Judicial, de modo que deje de ser una revisión extraordinaria. (ii) Continuidad: un protocolo que resguarda la captura de eventos, el reporte diario de detenidos —con responsable formalmente designado— y la evidencia audiovisual frente a cambios o migraciones de plataforma.',
+    obtiene: 'El estado que se informa sale del sistema del prestador y no se contrasta contra nada. La única verificación contra el Poder Judicial fue extraordinaria, a raíz de esta auditoría. Pasará a ser periódica y previa a la entrega. Walmart recibirá un estado ya verificado. Y un futuro cambio de plataforma dejará de hacer perder eventos y videos.',
+    resp: 'Dirección de Mejora Continua · Dirección de Tecnología y Sistemas',
+    dep: 'Walmart: la planificación de las migraciones de sus plataformas condiciona el componente de continuidad y fue solicitada sin respuesta a la fecha',
+    entregable: 'Procedimiento de conciliación con periodicidad y responsable definidos, mapeo del reporte diario de detenidos y protocolo de resguardo de evidencia audiovisual',
+    indicador: 'Conciliaciones ejecutadas conforme a la periodicidad definida: 0 → 100%',
+  },
+  {
+    n: 9, eje: 3, estado: 'Pendiente',
+    tit: 'Implementar el modelo integral de gestión de testigos',
+    desc: 'ALTO despliega un modelo trazable de punta a punta: citación automatizada, equipo dedicado a la coordinación, registro de al menos dos testigos por evento —uno interno y uno externo—, kit informativo entregado al testigo, registro obligatorio de cada contacto de preparación, vinculación del testigo con su causa en el sistema de gestión y buzón único de notificaciones con gestión de tickets.',
+    obtiene: 'La citación llega al trabajador a través de tres intermediarios y nadie confirma que llegó. Cuando no comparece, no se sabe en qué eslabón se cortó. Con esta acción cada eslabón confirma recepción y el testigo queda identificado en el sistema. Si un trabajador de Walmart no llega a un juicio, Walmart sabrá por qué.',
+    resp: 'Dirección de Customer Success · Subgerencia de Persecución Penal Especializada',
+    dep: null,
+    entregable: 'Flujo de citación automatizado en operación, protocolo de doble testigo formalizado y campos obligatorios de registro desplegados',
+    indicador: 'Testigos con contacto de preparación registrado en el sistema: pendiente de levantamiento → 90%',
+  },
+  {
+    n: 10, eje: 3, estado: 'En curso',
+    tit: 'Desplegar el nuevo panel de reportería y asistencia de testigos',
+    desc: 'ALTO implementa un nuevo panel de asistencia de testigos que declara expresamente su fecha de corte, incorpora las mejoras ya comprometidas —con responsable y ticket asignados— y permite analizar la inasistencia diferenciando tipo de testigo, tienda y empresa de seguridad.',
+    obtiene: 'El reporte mensual publica juntas tres cifras que no cuadran: 999 citaciones, 343 asistencias y 45,2% de asistencia. Tampoco declara hasta qué día están consideradas las audiencias. Con esta acción las cifras reconcilian o se declara por qué son universos distintos. Y podrá analizarse la inasistencia por tipo de testigo, tienda y empresa de seguridad.',
+    resp: 'Dirección de Mejora Continua',
+    dep: null,
+    entregable: 'Panel desplegado con fecha de corte declarada, tickets comprometidos cerrados y primer diagnóstico de inasistencia emitido',
+    indicador: 'Diagnóstico de inasistencia disponible: no → sí',
+  },
+  {
+    n: 11, eje: 3, estado: 'Pendiente',
+    tit: 'Formalizar el modelo de control de preparación previa de testigos',
+    desc: 'ALTO adopta y documenta la decisión sobre el control de preparación previa: su reactivación con cobertura y responsable definidos, o su sustitución formal por otro mecanismo que cubra el mismo riesgo. La decisión se comunica al equipo con constancia. No se contempla mantener la situación actual de suspensión sin protocolo de reemplazo.',
+    obtiene: 'Existe un control de preparación de testigos con columna propia en la base. Esa columna registra 0%: está suspendido por instrucción y sin reemplazo. Walmart obtiene una decisión escrita. Deja de haber un control que figura y no opera.',
+    resp: 'Subgerencia de Persecución Penal Especializada',
+    dep: null,
+    entregable: 'Acto escrito de reactivación o de sustitución formal, con cobertura definida y constancia de comunicación al equipo',
+    indicador: 'Aplicación del control sobre las audiencias del período: 0% → 100% si se reactiva',
+  },
+  {
+    n: 12, eje: 4, estado: 'Pendiente',
+    tit: 'Implementar y monitorear la matriz de puntos de control del servicio',
+    desc: 'ALTO implementa la matriz de puntos de control del servicio, en la que cada control queda definido con umbral, alerta, responsable y frecuencia. La acción comprende verificar el estado de implementación de los controles comprometidos en las sesiones de revisión de flujos, resolver las condiciones que los habilitan y monitorear su operación efectiva, y no solo su definición.',
+    obtiene: 'De las veintiocho fallas que esta auditoría acreditó, cuatro las detectó la propia operación. Las demás las advirtió Walmart o una revisión extraordinaria. Con esta acción cada proceso incorpora alertas con umbral y responsable obligado a actuar. Walmart deja de ser el mecanismo de detección del servicio que contrata.',
+    resp: 'Dirección de Auditoría Interna (coordinación) · áreas responsables de cada proceso',
+    dep: 'Walmart: una de las condiciones habilitantes es la formalización de la matriz de plazos',
+    entregable: 'Matriz completa con los cuatro elementos por proceso y reporte del estado de implementación de los controles comprometidos',
+    indicador: 'Procesos con punto de control que reúna los cuatro elementos: 0 de 28 → 15 de 28',
+  },
+  {
+    n: 13, eje: 4, estado: 'Pendiente',
+    tit: 'Formalizar los parámetros de medición y exigibilidad de los niveles de servicio',
+    desc: 'Dos ámbitos diferenciados. ALTO implementa internamente la medición de los niveles de servicio que hoy carecen de parámetro y presenta a Walmart la métrica propuesta para cada uno. La fijación del parámetro exigible y su incorporación al instrumento contractual requieren acuerdo bilateral.',
+    obtiene: 'Cuatro de los diez niveles de servicio tienen la multa fijada y el parámetro «a definir». Nunca se definió, así que la sanción figura y no puede aplicarse. El plazo de doce horas que Walmart espera tampoco está pactado en ninguna parte. Con esta acción cada nivel obtiene un umbral medible. Walmart pasa de multas nominales a compromisos exigibles.',
+    resp: 'Dirección Legal y Compliance',
+    dep: 'Walmart: la fijación del parámetro contractual exigible requiere acuerdo bilateral',
+    entregable: 'Anexo o acuerdo escrito que fije plazo y métrica, y acta de validación del plan de fortalecimiento',
+    indicador: 'Niveles de servicio con parámetro definido: 6 de 10 → 10 de 10',
+  },
+  {
+    n: 14, eje: 4, estado: 'Pendiente',
+    tit: 'Estandarizar los indicadores de cobertura de audiencias y de asistencia de testigos',
+    desc: 'ALTO establece un denominador único para el indicador de cobertura de audiencias de control de detención y para el de asistencia de testigos, declara de forma explícita las exclusiones que cada uno aplica y comunica ambas fichas a Walmart, de modo que la lectura del indicador sea unívoca para ambas partes.',
+    obtiene: 'La cobertura de audiencias y la asistencia de testigos se publican sin declarar qué dejan fuera. Uno de los dos mejora cuando el registro se deteriora: los eventos sin dato salen del denominador en vez de contarse como falla. Con esta acción Walmart podrá comparar un mes con otro. Y sabrá si una mejora es real o es un cambio de denominador.',
+    resp: 'Dirección de Mejora Continua · Dirección Legal y Compliance',
+    dep: null,
+    entregable: 'Ficha de cada indicador con denominador único y exclusiones declaradas, comunicada formalmente a Walmart',
+    indicador: 'Indicadores con denominador único y exclusiones declaradas: 0 de 2 → 2 de 2',
+  },
+  {
+    n: 15, eje: 4, estado: 'Pendiente',
+    tit: 'Fortalecer el modelo de gobernanza del servicio',
+    desc: 'ALTO formaliza los componentes de gobernanza que hoy operan sin definición escrita: matriz de contrapartes y destinatarios por entregable, contraparte legal única con el nivel de experiencia acordado, actualización de la información entregada a Walmart sobre la conformación del equipo legal, controles aplicables a los prestadores externos, y protocolos de código de vestimenta y de criminalidad interna con constancia de difusión.',
+    obtiene: 'Hoy Walmart debe dirigirse a distintos interlocutores según la materia. Los diecinueve reportes se distribuyen según una planilla interna, sin regla de destinatario. Obtiene una contraparte única para todos los frentes y un destinatario definido por entregable. Se corrige además la información entregada sobre la composición del equipo legal.',
+    resp: 'Gerencia General · Dirección de Customer Success',
+    dep: null,
+    entregable: 'Matriz de contrapartes formalizada, contraparte única designada, comunicación de actualización a Walmart y protocolos emitidos con constancia de difusión',
+    indicador: 'Entregables a Walmart con destinatario definido formalmente: 0 de 19 → 19 de 19',
+  },
+];
+
+// ============================================================
+//  Análisis cuantitativo — las tres bases entregadas
+//  (Imputados tramitados y causas por entrega; desgloses del informe)
+// ============================================================
+window.BASES = [
+  {
+    id: 'may', fecha: '8 de mayo', tag: 'Primera entrega', imputados: 8003, causas: 7227,
+    resumen: 'Base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. La cifra comunicada al cliente fue 8.004.',
+    bloques: [
+      {
+        tipo: 'status', tit: 'Lo que no correspondía — HAL-002',
+        nota: 'El informe acredita que el 46% del universo reportado no correspondía: causas ya terminadas informadas como vigentes. El 23 de mayo el cliente identificó el defecto con precisión y lo calificó como «falla grave de control».',
+        bars: [
+          { label: 'Causas que no correspondían', val: 3833, total: 7227, txt: '3.833 de 7.227' },
+          { label: 'Imputados que no correspondían', val: 4075, total: 8003, txt: '4.075 de 8.003' },
+        ],
+      },
+      {
+        tipo: 'status', tit: 'Cartera sin regla — HAL-012',
+        nota: 'Registros de causas judicializadas antes del cambio de modelo (pre-2020), sin regla escrita sobre su tratamiento. El acuerdo verbal que se invocó fue desconocido por escrito por el cliente.',
+        bars: [
+          { label: 'Registros anteriores a 2020', val: 3573, total: 8003, txt: '3.573 de 8.003 · 44,6%' },
+        ],
+      },
+      {
+        tipo: 'mags', tit: 'Cuatro magnitudes en el mismo archivo — HAL-001',
+        nota: 'El archivo sostenía cuatro cifras a la vez, sin definición documentada ni declaración de la unidad contada. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre.',
+        items: [
+          ['8.004', 'comunicadas al cliente'],
+          ['8.003', 'filas del archivo'],
+          ['7.227', 'causas identificables'],
+          ['7.140', 'causas por identificador judicial'],
+        ],
+      },
+    ],
+  },
+  {
+    id: 'jun', fecha: '12 de junio', tag: 'Segunda entrega', imputados: 4321, causas: 3741,
+    resumen: 'Segunda entrega, veintiún días después de la advertencia del cliente (23 de mayo), sin que consten cambios en el procedimiento que produjo la primera.',
+    bloques: [
+      {
+        tipo: 'delta', tit: 'La caída frente al 8 de mayo',
+        nota: 'La diferencia entre ambas entregas motivó el reclamo formal del cliente y, en definitiva, el encargo de auditoría.',
+        rows: [
+          { label: 'Imputados tramitados', from: '8.003', to: '4.321', delta: '−3.682', pct: '−46,0%' },
+          { label: 'Causas', from: '7.227', to: '3.741', delta: '−3.486', pct: '−48,2%' },
+        ],
+      },
+      {
+        tipo: 'mags', tit: 'Qué explica la caída',
+        nota: 'La causa técnica del defecto de origen permanece abierta: cuatro hipótesis concurrentes, ninguna concluida (HAL-002). La confusión de unidad (HAL-001) explica solo entre el 5,9% y el 7,6% de la reducción.',
+        items: [
+          ['46%', 'del universo del 8 de mayo no correspondía (HAL-002)'],
+          ['21 días', 'entre la advertencia del cliente y la segunda entrega'],
+          ['0', 'cambios de procedimiento documentados entre entregas'],
+        ],
+      },
+    ],
+  },
+  {
+    id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3401, causas: 2839, final: true,
+    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.839 causas vigentes, informando separadamente 3.401 imputados. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
+    bloques: [
+      {
+        tipo: 'delta', tit: 'La caída frente al 12 de junio',
+        nota: 'Corresponde a la depuración practicada durante el encargo, con verificación del estado procesal.',
+        rows: [
+          { label: 'Imputados tramitados', from: '4.321', to: '3.401', delta: '−920', pct: '−21,3%' },
+          { label: 'Causas', from: '3.741', to: '2.839', delta: '−902', pct: '−24,1%' },
+        ],
+      },
+      {
+        tipo: 'delta', tit: 'Cuánto bajamos entre la 1.ª y la 3.ª entrega',
+        nota: 'Es la magnitud total del descuadre: más de la mitad del universo originalmente reportado no se sostuvo.',
+        rows: [
+          { label: 'Imputados tramitados', from: '8.003', to: '3.401', delta: '−4.602', pct: '−57,5%' },
+          { label: 'Causas', from: '7.227', to: '2.839', delta: '−4.388', pct: '−60,7%' },
+        ],
+      },
+      {
+        tipo: 'mags', tit: 'Qué cambió de fondo',
+        nota: 'Las correcciones constan documentadas y fechadas (acción 5 del plan, ejecutada). Corrigen el resultado; el mecanismo lo atacan las acciones 6 y 8, pendientes.',
+        items: [
+          ['causa', 'pasa a ser la unidad de registro ante el cliente, en vez del imputado'],
+          ['23-07', 'acta de liberación a producción del panel con definiciones validadas'],
+          ['0', 'conciliaciones periódicas institucionalizadas contra el Poder Judicial — pendiente (acción 8)'],
+        ],
+      },
+    ],
+  },
+];
+
+// Gobernanza del plan (§4).
+window.PLAN_GOB = [
+  { tit: 'Dueño único', desc: 'La ejecución integral queda radicada en la Gerencia General, que responde por su avance ante el comité corporativo. La coordinación y el reporte consolidado no se delegan.' },
+  { tit: 'Seguimiento', desc: 'Comité de seguimiento quincenal con los responsables de cada acción y la Dirección de Auditoría Interna como observadora. Revisión mensual ante el comité corporativo.' },
+  { tit: 'Reporte al cliente', desc: 'Informe mensual de avance, con el estado de cada acción, la evidencia de cierre de las completadas y la declaración expresa de las que dependen de una respuesta del cliente.' },
+  { tit: 'Escalamiento', desc: 'Una acción sin avance verificable en dos comités consecutivos escala al comité corporativo. Las acciones con dependencia externa escalan a la Gerencia General para gestión directa con el cliente.' },
+];
