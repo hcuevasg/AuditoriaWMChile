@@ -205,6 +205,15 @@ document.querySelectorAll('.qpt, .ss-link').forEach((el) => {
   });
 });
 
+// Conclusión: filas de 10 íconos (6 no correspondían / 4 reales)
+document.querySelectorAll('.qc-dots[data-ic]').forEach((box) => {
+  const ic = box.dataset.ic === 'imp' ? IC_IMP : IC_CAU;
+  const bad = +box.dataset.bad || 6;
+  let h = '';
+  for (let i = 0; i < 10; i++) h += '<span class="ss-dot' + (i < bad ? '' : ' okc') + '">' + ic + '</span>';
+  box.innerHTML = h;
+});
+
 // Scrollytelling: cada tarjeta enciende su etapa del gráfico
 const scrolly = document.getElementById('quantScrolly');
 if (scrolly) {
