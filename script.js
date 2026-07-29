@@ -311,22 +311,58 @@ if (ejesGrid && window.EJES) {
 function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
 
 const planList = document.getElementById('planList');
-if (planList && window.PLAN_IMPL) {
-  planList.innerHTML = window.PLAN_IMPL.map((p, i) => {
-    const eje = (window.EJES || []).find((e) => e.n === p.eje);
-    return '<button class="plan-item" type="button" data-i="' + i + '">'
-      + '<span class="plan-item-n">' + p.n + '</span>'
-      + '<span class="plan-item-body">'
-      + '<span class="plan-item-eje">Eje ' + p.eje + ' · ' + esc(eje ? eje.tit : '') + '</span>'
-      + '<span class="plan-item-tit">' + esc(p.tit) + '</span>'
-      + '</span>'
-      + '<span class="estado-chip ' + estadoClass(p.estado) + '">' + esc(p.estado) + '</span>'
-      + '<span class="plan-item-go" aria-hidden="true">→</span>'
-      + '</button>';
-  }).join('');
-  planList.querySelectorAll('.plan-item').forEach((item) => {
-    item.addEventListener('click', () => openPlanModal(window.PLAN_IMPL[+item.dataset.i]));
+if (planList && window.REMS) {
+  planList.innerHTML = window.REMS.map((r, i) =>
+    '<button class="plan-item" type="button" data-i="' + i + '">'
+    + '<span class="plan-item-n">' + r.n + '</span>'
+    + '<span class="plan-item-body">'
+    + '<span class="plan-item-eje">Remediación N.° ' + r.n + ' · ' + esc(r.resp) + '</span>'
+    + '<span class="plan-item-tit">' + esc(r.tit) + '</span>'
+    + '</span>'
+    + '<span class="estado-chip encurso">Definitiva</span>'
+    + '<span class="plan-item-go" aria-hidden="true">→</span>'
+    + '</button>'
+  ).join('')
+  + '<div class="plan-item pending"><span class="plan-item-n">…</span><span class="plan-item-body"><span class="plan-item-tit">Remediaciones 2 a 8 — documentos en preparación</span></span><span class="estado-chip pendiente">Próximamente</span></div>';
+  planList.querySelectorAll('button.plan-item').forEach((item) => {
+    item.addEventListener('click', () => openRemModal(window.REMS[+item.dataset.i]));
   });
+}
+
+function openRemModal(r) {
+  const body = document.getElementById('planModalBody');
+  if (!body || !planModal) return;
+  let h = '<div class="modal-head">'
+    + '<span class="modal-code">Remediación N.° ' + r.n + '</span>'
+    + '<span class="modal-country">' + esc(r.period) + '</span>'
+    + '</div>'
+    + '<h3 id="planModalTitle">' + esc(r.tit) + '</h3>'
+    + '<p class="pm-desc">' + esc(r.resumen) + '</p>';
+  h += '<div class="qm-block"><h4>Proceso de conciliación</h4>'
+    + r.pasos.map((p, i) =>
+      '<div class="rm-step"><span class="rm-step-n">' + (i + 1) + '</span><div class="rm-step-b"><strong>' + esc(p.t) + '</strong><p>' + esc(p.d) + '</p>'
+      + (p.formula ? '<p class="rm-formula">' + esc(p.formula) + '</p>' : '') + '</div></div>'
+    ).join('')
+    + '</div>';
+  h += '<div class="qm-block"><h4>Reportería a Walmart</h4><div class="pm-meta rm-rep">'
+    + r.reporteria.map((b) => '<div class="pm-meta-item"><h4>' + esc(b.t) + '</h4><p>' + esc(b.d) + '</p></div>').join('')
+    + '</div></div>';
+  h += '<div class="pm-meta">'
+    + '<div class="pm-meta-item"><h4>Responsable</h4><p>' + esc(r.resp) + '</p></div>'
+    + '<div class="pm-meta-item"><h4>Validador</h4><p>' + esc(r.valid) + '</p></div>'
+    + '<div class="pm-meta-item"><h4>Fecha de implementación</h4><p>' + esc(r.fecha) + '</p></div>'
+    + '<div class="pm-meta-item"><h4>Periodicidad</h4><p>' + esc(r.period) + '</p></div>'
+    + '</div>';
+  h += '<div class="qm-block"><h4>Indicadores de efectividad</h4>'
+    + r.indicadores.map((x) =>
+      '<div class="rm-ind"><div class="rm-ind-b"><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div><span class="rm-meta">Meta ' + esc(x.meta) + '</span></div>'
+    ).join('')
+    + '</div>';
+  h += '<div class="qm-block"><h4>Evidencia</h4><ul class="rm-ev">' + r.evidencia.map((e2) => '<li>' + esc(e2) + '</li>').join('') + '</ul></div>';
+  h += '<div class="modal-extra modal-gap"><h4>Criterio de cierre</h4><p>' + esc(r.cierre) + '</p></div>';
+  h += '<div class="modal-extra modal-sug"><h4>Control permanente</h4><p>' + esc(r.control) + '</p></div>';
+  body.innerHTML = h;
+  planModal.open();
 }
 
 function openPlanModal(p) {

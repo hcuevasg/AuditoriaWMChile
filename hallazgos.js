@@ -475,3 +475,47 @@ window.PLAN_GOB = [
   { tit: 'Reporte al cliente', desc: 'Informe mensual de avance, con el estado de cada acción, la evidencia de cierre de las completadas y la declaración expresa de las que dependen de una respuesta del cliente.' },
   { tit: 'Escalamiento', desc: 'Una acción sin avance verificable en dos comités consecutivos escala al comité corporativo. Las acciones con dependencia externa escalan a la Gerencia General para gestión directa con el cliente.' },
 ];
+
+// ============================================================
+//  Remediaciones definitivas (estructura final; serán ~8).
+//  Cada una replica la plantilla del documento de Remediación 1.
+// ============================================================
+window.REMS = [
+  {
+    n: 1,
+    tit: 'Implementar un proceso preventivo de conciliación y actualización de las causas vigentes reportadas a Walmart',
+    resumen: 'A más tardar el 25 de cada mes, la Unidad de Registro y Actualización ejecutará una conciliación y actualización obligatoria, previa a cada reporte de causas vigentes a Walmart (primeros 5 días del mes). El informe final contendrá todas —y solamente— las causas asociadas a Walmart con querella presentada que, revisado su expediente, no registren un hito procesal de término. El control lo ejecuta un equipo con funciones, capacidad y mecanismos de continuidad formalmente definidos.',
+    pasos: [
+      { t: 'Descarga del universo preliminar', d: 'Desde el panel se descarga la base de causas que, conforme a los sistemas internos de ALTO, cuentan con querella presentada y no tienen resultado o estado de término registrado. Esa base constituye el universo preliminar sujeto a revisión.' },
+      { t: 'Verificación de integridad del universo', d: 'Se verifica que la descarga incluya todas las causas que cumplen las condiciones. Las que debían estar y no aparecen se incorporan al informe y se regularizan en los sistemas internos.', formula: 'Vigentes del período anterior + nuevas causas con querella − causas con hito de término ± ajustes justificados = universo vigente del período actual' },
+      { t: 'Revisión contra el Poder Judicial', d: 'Validada la integridad, se revisa el 100% de las causas contra el PJUD completando dos campos por causa: Espejo PJUD (estado resumido de la carátula) y Estado procesal validado por ALTO (determinado por un profesional especializado sobre el historial del expediente, con un catálogo formalizado de hitos procesales).' },
+      { t: 'Tratamiento de inconsistencias y discrepancias', d: 'Inconsistencia atribuible a ALTO: el expediente acredita el término pero no fue registrado internamente — la causa se actualiza y se excluye del universo antes de emitir. Discrepancia del PJUD: la carátula no coincide con el expediente — se informa la diferencia acreditándola con la actuación o resolución que la funda. Todo queda identificado, clasificado y respaldado. La conciliación es condición obligatoria para emitir el reporte.' },
+    ],
+    reporteria: [
+      { t: 'Panel estático', d: 'Muestra, a la fecha de corte, el número de causas con querella y sin resultado registrado, y el número de imputados en tramitación asociados. Es estático y resumido; desde él se descarga la base que se somete a conciliación.' },
+      { t: 'Informe final en Excel', d: 'La base del panel complementada con la verificación de integridad y la revisión PJUD. Contiene como mínimo: información de los sistemas internos, RUC, Espejo PJUD, Estado procesal validado por ALTO, causas incorporadas por omisión, clasificación de inconsistencias y discrepancias, y su respaldo. Toda diferencia con el panel se explica mediante el registro de inclusiones, exclusiones y ajustes; las inconsistencias atribuibles a ALTO se corrigen en sus sistemas.' },
+    ],
+    resp: 'Unidad de Registro y Actualización',
+    valid: 'Gerencia Legal — independiente de la ejecución',
+    fecha: 'Por definir',
+    period: 'Antes de cada reporte a Walmart y, como mínimo, una vez al mes',
+    indicadores: [
+      { t: 'Inclusión íntegra del universo', f: 'Causas que cumplen las condiciones e incorporadas al informe final ÷ total que cumple las condiciones × 100', meta: '100%' },
+      { t: 'Actualización y exclusión de causas terminadas', f: 'Causas con hito de término actualizadas y excluidas ÷ total con hito de término identificado × 100', meta: '100%' },
+      { t: 'Trazabilidad de la revisión procesal', f: 'Causas con Espejo PJUD, estado validado y respaldo completo ÷ total de causas revisadas × 100', meta: '100%' },
+    ],
+    evidencia: [
+      'Procedimiento de conciliación y catálogo de hitos procesales',
+      'Documento de conformación y funciones del equipo',
+      'Panel correspondiente a la fecha de corte',
+      'Base original descargada desde el panel',
+      'Registro de causas incorporadas, excluidas y ajustadas',
+      'Registro de inconsistencias atribuibles a ALTO y sus correcciones',
+      'Registro de discrepancias del PJUD y sus respaldos',
+      'Informe final en Excel enviado a Walmart',
+      'Acta de validación del cierre',
+    ],
+    cierre: 'Implementada cuando el proceso esté formalizado, el equipo operando y se acredite durante tres ciclos mensuales consecutivos: la verificación de integridad del universo, la revisión del 100% de las causas contra el PJUD, el tratamiento de todas las inconsistencias y discrepancias, la entrega del informe final a Walmart y el cumplimiento íntegro de los tres indicadores. El cierre lo valida el Gerente Legal, independiente de la ejecución.',
+    control: 'Después del cierre, el proceso continúa ejecutándose antes de cada reporte a Walmart. Toda causa omitida, causa terminada no actualizada, revisión sin respaldo o discrepancia no justificada genera una acción correctiva con responsable y plazo definidos.',
+  },
+];
