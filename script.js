@@ -233,6 +233,11 @@ if (quantBars && window.BASES) {
   }).join('');
 }
 
+function halBtn(bl) {
+  if (!bl.hal) return '';
+  return '<button type="button" class="qm-hal" data-hal="' + esc(bl.hal) + '">Ver hallazgo ' + esc(bl.hal) + ' →</button>';
+}
+
 function quantBlockHtml(bl) {
   if (bl.tipo === 'status') {
     return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4>'
@@ -242,7 +247,7 @@ function quantBlockHtml(bl) {
           + '<div class="qm-bar-track"><div class="qm-bar-fill" style="width:' + w + '%"></div></div>'
           + '<span class="qm-bar-val">' + esc(bar.txt) + '</span></div>';
       }).join('')
-      + '<p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+      + '<p class="qm-nota">' + esc(bl.nota) + '</p>' + halBtn(bl) + '</div>';
   }
   if (bl.tipo === 'delta') {
     return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4><div class="qm-deltas">'
@@ -251,12 +256,24 @@ function quantBlockHtml(bl) {
         + '<span class="qm-dv">' + esc(r.from) + ' → ' + esc(r.to) + '</span>'
         + '<span class="qm-dd">' + esc(r.delta) + ' <em>' + esc(r.pct) + '</em></span></div>'
       ).join('')
-      + '</div><p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+      + '</div><p class="qm-nota">' + esc(bl.nota) + '</p>' + halBtn(bl) + '</div>';
   }
   // mags
   return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4><div class="qm-mags">'
     + bl.items.map((it) => '<div class="qm-mag"><strong>' + esc(it[0]) + '</strong><span>' + esc(it[1]) + '</span></div>').join('')
-    + '</div><p class="qm-nota">' + esc(bl.nota) + '</p></div>';
+    + '</div><p class="qm-nota">' + esc(bl.nota) + '</p>' + halBtn(bl) + '</div>';
+}
+
+// Cierra el modal cuantitativo y lleva a la ficha del hallazgo, abriéndola.
+function gotoHallazgo(code) {
+  const item = document.querySelector('.mp-item[data-code="' + code + '"]');
+  if (!item) return;
+  quantModal?.close();
+  setTimeout(() => {
+    if (!item.classList.contains('active')) item.querySelector('.mp-row')?.click();
+    const y = item.getBoundingClientRect().top + window.scrollY - 110;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }, 360);
 }
 
 function openQuantModal(b) {
@@ -273,6 +290,9 @@ function openQuantModal(b) {
     + '</h3>'
     + '<p class="qm-resumen">' + esc(b.resumen) + '</p>'
     + b.bloques.map(quantBlockHtml).join('');
+  body.querySelectorAll('.qm-hal').forEach((btn) =>
+    btn.addEventListener('click', () => gotoHallazgo(btn.dataset.hal))
+  );
   quantModal.open();
 }
 

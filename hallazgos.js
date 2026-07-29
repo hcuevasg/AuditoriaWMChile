@@ -384,23 +384,23 @@ window.BASES = [
     resumen: 'Base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El número real de registros es 8.003; el 8.004 que circuló provino de contar la cabecera del archivo.',
     bloques: [
       {
-        tipo: 'status', tit: 'Lo que no correspondía — HAL-002',
-        nota: 'El informe acredita que el 46% del universo reportado no correspondía: causas ya terminadas informadas como vigentes. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
+        tipo: 'status', tit: 'Lo que no correspondía', hal: 'HAL-002',
+        nota: 'Casi la mitad del universo reportado eran causas ya terminadas que seguían informadas como vigentes, porque el estado procesal no se actualizaba en la plataforma. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
         bars: [
           { label: 'Causas que no correspondían', val: 3833, total: 7227, txt: '3.833 de 7.227' },
           { label: 'Imputados que no correspondían', val: 4075, total: 8003, txt: '4.075 de 8.003' },
         ],
       },
       {
-        tipo: 'status', tit: 'Cartera sin regla — HAL-012',
-        nota: 'Registros de causas judicializadas antes del cambio de modelo (pre-2020), sin regla escrita sobre su tratamiento. El acuerdo verbal que se invocó fue desconocido por escrito por el cliente.',
+        tipo: 'status', tit: 'La cartera antigua, sin regla escrita', hal: 'HAL-012',
+        nota: 'Casi la mitad de los registros eran causas judicializadas antes del cambio de modelo (pre-2020), y ningún instrumento decía qué hacer con ellas: si se gestionaban, se cerraban o salían del universo informado. El acuerdo verbal que se invocó fue desconocido por escrito por el cliente.',
         bars: [
           { label: 'Registros anteriores a 2020', val: 3573, total: 8003, txt: '3.573 de 8.003 · 44,6%' },
         ],
       },
       {
-        tipo: 'mags', tit: 'Cuatro magnitudes en el mismo archivo — HAL-001',
-        nota: 'El archivo sostenía cuatro cifras a la vez, sin definición documentada ni declaración de la unidad contada. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre.',
+        tipo: 'mags', tit: 'Cuatro magnitudes en el mismo archivo', hal: 'HAL-001',
+        nota: 'El mismo archivo sostenía cuatro cifras a la vez, porque nunca se declaró qué unidad se estaba contando: filas de imputado-causa o causas. Esa confusión explica solo una fracción menor de la caída del universo — entre el 5,9% y el 7,6% — y no el descuadre de fondo.',
         items: [
           ['8.003', 'registros reales del archivo'],
           ['8.004', 'cifra que circuló — contaba la cabecera del archivo'],
@@ -423,10 +423,10 @@ window.BASES = [
         ],
       },
       {
-        tipo: 'mags', tit: 'Qué explica la caída',
-        nota: 'La causa técnica del defecto de origen permanece abierta: cuatro hipótesis concurrentes, ninguna concluida (HAL-002). La confusión de unidad (HAL-001) explica solo entre el 5,9% y el 7,6% de la reducción.',
+        tipo: 'mags', tit: 'Qué explica la caída', hal: 'HAL-002',
+        nota: 'La mayor parte de la caída corresponde a causas terminadas que se retiraron del universo al contrastarlo con el Poder Judicial. La causa técnica del defecto de origen permanece abierta: hay cuatro hipótesis concurrentes y ninguna está concluida. La confusión entre imputados y causas explica solo una fracción menor.',
         items: [
-          ['46%', 'del universo del 8 de mayo no correspondía (HAL-002)'],
+          ['46%', 'del universo del 8 de mayo no correspondía: causas terminadas informadas como vigentes'],
           ['21 días', 'entre el reclamo formal del cliente y la segunda entrega'],
           ['PJUD', 'se inició el contraste de la información contra el Poder Judicial'],
           ['4.090', 'recuento de Walmart al deduplicar RIT repetidos (15 de junio)'],

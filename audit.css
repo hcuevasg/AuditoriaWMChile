@@ -242,6 +242,14 @@
 .qm-bar-fill { height: 100%; background: var(--secondary); border-radius: 0 4px 4px 0; min-width: 5px; }
 .qm-bar-val { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 .qm-nota { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; line-height: 1.55; margin-top: 4px; }
+.qm-hal {
+  display: inline-flex; align-items: center; margin-top: 12px; cursor: pointer;
+  font-family: var(--font); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.02em;
+  color: var(--primary); background: rgba(64,115,184,0.08);
+  border: 1px solid rgba(64,115,184,0.25); border-radius: 20px; padding: 6px 14px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.qm-hal:hover { background: var(--primary); color: var(--white); transform: translateY(-1px); }
 .qm-mags { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
 .qm-mag { display: flex; flex-direction: column; background: var(--white); border: 1px solid rgba(26,51,80,0.07); border-radius: 10px; padding: 12px 14px; }
 .qm-mag strong { font-size: 1.25rem; font-weight: 800; color: var(--text); line-height: 1.1; }
