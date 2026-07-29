@@ -221,7 +221,7 @@ if (scrolly) {
     (entries) => {
       entries.forEach((e) => { if (e.isIntersecting) setStage(+e.target.dataset.step); });
     },
-    { rootMargin: '-40% 0px -40% 0px' }
+    { rootMargin: '-32% 0px -32% 0px' }
   );
   steps.forEach((s) => stepObserver.observe(s));
 }
