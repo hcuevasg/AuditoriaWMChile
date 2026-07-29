@@ -372,44 +372,97 @@ if (planList && window.REMS) {
   }
 }
 
-// El expediente de una remediación, en la modal corporativa.
+// El expediente de una remediación: ficha visual por componentes — claves con
+// ícono, proceso como stepper interactivo (un paso a la vez), fórmula como
+// ecuación de cajas, indicadores con la meta grande, evidencia en chips y
+// cierre/control como callouts.
+const IC_USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+const IC_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>';
+const IC_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
+const IC_FLAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>';
+const IC_CHART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>';
+const IC_SHEET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>';
+
+// La fórmula del texto ('a + b − c ± d = e') como ecuación visual de cajas.
+function formulaViz(f) {
+  const tokens = f.split(/\s*([+−±=])\s*/).filter(Boolean);
+  let isResult = false;
+  return '<div class="rx-formula">' + tokens.map((t) => {
+    if (/^[+−±=]$/.test(t)) { if (t === '=') isResult = true; return '<span class="rx-op">' + t + '</span>'; }
+    return '<span class="rx-term' + (isResult ? ' result' : '') + '">' + esc(t) + '</span>';
+  }).join('') + '</div>';
+}
+
+function rxStepPanel(p, i) {
+  return '<strong>Paso ' + (i + 1) + ' · ' + esc(p.t) + '</strong>'
+    + '<p>' + esc(p.d) + '</p>'
+    + (p.formula ? formulaViz(p.formula) : '');
+}
+
 function openRemModal(r) {
   const body = document.getElementById('planModalBody');
   if (!body || !planModal) return;
   const seg = r.seg || {};
   const done = seg.etapaDone || 0;
   const cur = Math.min(seg.etapa || done + 1, ETAPAS_REM.length);
+
   let h = '<div class="modal-head">'
     + '<span class="modal-code">Remediación N.° ' + r.n + '</span>'
-    + '<span class="modal-country">' + esc(r.period) + '</span>'
     + '<span class="estado-chip encurso">' + esc(seg.docEstado || 'Documento emitido') + '</span>'
     + '</div>'
     + '<h3 id="planModalTitle">' + esc(r.tit) + '</h3>'
-    + '<p class="pm-desc">' + esc(r.resumen) + '</p>';
-  h += '<div class="pm-meta">'
-    + '<div class="pm-meta-item"><h4>Responsable</h4><p>' + esc(r.resp) + '</p></div>'
-    + '<div class="pm-meta-item"><h4>Validador independiente</h4><p>' + esc(r.valid) + '</p></div>'
-    + '<div class="pm-meta-item"><h4>Estado de la remediación</h4><p>' + esc(seg.remEstado || 'Remediación no iniciada') + ' — etapa actual: ' + ETAPAS_REM[cur - 1] + ' (' + done + ' de ' + ETAPAS_REM.length + ' completadas)</p></div>'
-    + '<div class="pm-meta-item"><h4>Fecha de implementación</h4><p>' + esc(r.fecha) + '</p></div>'
+    + '<p class="rx-resumen">' + esc(r.resumen) + '</p>';
+
+  h += '<div class="rx-claves">'
+    + '<div class="rx-clave">' + IC_USER + '<div><h4>Responsable</h4><p>' + esc(r.resp) + '</p></div></div>'
+    + '<div class="rx-clave">' + IC_SHIELD + '<div><h4>Validador independiente</h4><p>' + esc(r.valid) + '</p></div></div>'
+    + '<div class="rx-clave">' + IC_CAL + '<div><h4>Periodicidad</h4><p>' + esc(r.period) + '</p></div></div>'
+    + '<div class="rx-clave">' + IC_FLAG + '<div><h4>Estado</h4><p>' + esc(seg.remEstado || 'Remediación no iniciada') + ' · etapa: ' + ETAPAS_REM[cur - 1] + ' (' + done + '/' + ETAPAS_REM.length + ') · fecha: ' + esc((r.fecha || 'por definir').toLowerCase()) + '</p></div></div>'
     + '</div>';
-  h += '<div class="qm-block"><h4>Proceso de conciliación</h4>'
+
+  h += '<div class="rx-block"><h4 class="rx-h">El proceso, paso a paso <em>haz clic en cada paso</em></h4>'
+    + '<div class="rx-steps" role="tablist" aria-label="Pasos del proceso">'
     + r.pasos.map((p, i) =>
-      '<div class="rm-step"><span class="rm-step-n">' + (i + 1) + '</span><div class="rm-step-b"><strong>' + esc(p.t) + '</strong><p>' + esc(p.d) + '</p>'
-      + (p.formula ? '<p class="rm-formula">' + esc(p.formula) + '</p>' : '') + '</div></div>'
+      '<button class="rx-step' + (i === 0 ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (i === 0) + '" data-i="' + i + '">'
+      + '<i>' + (i + 1) + '</i><span>' + esc(p.tc || p.t) + '</span></button>'
     ).join('')
+    + '</div>'
+    + '<div class="rx-panel" id="rxPanel" role="tabpanel">' + rxStepPanel(r.pasos[0], 0) + '</div>'
     + '</div>';
-  h += '<div class="qm-block"><h4>Reportería a Walmart</h4><div class="pm-meta rm-rep">'
-    + r.reporteria.map((b) => '<div class="pm-meta-item"><h4>' + esc(b.t) + '</h4><p>' + esc(b.d) + '</p></div>').join('')
-    + '</div></div>';
-  h += '<div class="qm-block"><h4>Indicadores de efectividad</h4>'
+
+  h += '<div class="rx-block"><h4 class="rx-h">Indicadores de efectividad <em>los tres con meta obligatoria</em></h4><div class="rx-inds">'
     + r.indicadores.map((x) =>
-      '<div class="rm-ind"><div class="rm-ind-b"><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div><span class="rm-meta">Meta ' + esc(x.meta) + '</span></div>'
+      '<div class="rx-ind"><span class="rx-ind-meta">' + esc(x.meta) + '</span><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div>'
     ).join('')
+    + '</div></div>';
+
+  h += '<div class="rx-block"><h4 class="rx-h">Qué recibe Walmart</h4><div class="rx-reps">'
+    + r.reporteria.map((b, i) =>
+      '<div class="rx-rep"><div class="rx-rep-head">' + (i === 0 ? IC_CHART : IC_SHEET) + '<h5>' + esc(b.t) + '</h5></div><p>' + esc(b.d) + '</p></div>'
+    ).join('')
+    + '</div></div>';
+
+  h += '<div class="rx-block"><h4 class="rx-h">Evidencia exigida <em>' + r.evidencia.length + ' respaldos, todos verificables</em></h4><div class="rx-ev">'
+    + r.evidencia.map((e2) => '<span>' + esc(e2) + '</span>').join('')
+    + '</div></div>';
+
+  h += '<div class="rx-foot">'
+    + '<div class="rx-callout cierre"><h4>Cuándo se considera implementada</h4><p>' + esc(r.cierre) + '</p></div>'
+    + '<div class="rx-callout control"><h4>Y después del cierre</h4><p>' + esc(r.control) + '</p></div>'
     + '</div>';
-  h += '<div class="qm-block"><h4>Evidencia</h4><ul class="rm-ev">' + r.evidencia.map((e2) => '<li>' + esc(e2) + '</li>').join('') + '</ul></div>';
-  h += '<div class="modal-extra modal-gap"><h4>Criterio de cierre</h4><p>' + esc(r.cierre) + '</p></div>';
-  h += '<div class="modal-extra modal-sug"><h4>Control permanente</h4><p>' + esc(r.control) + '</p></div>';
+
   body.innerHTML = h;
+
+  // Stepper: un paso a la vez.
+  const panel = body.querySelector('#rxPanel');
+  const stepBtns = [...body.querySelectorAll('.rx-step')];
+  stepBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      stepBtns.forEach((b) => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', String(b === btn)); });
+      panel.innerHTML = rxStepPanel(r.pasos[+btn.dataset.i], +btn.dataset.i);
+    });
+  });
+
   planModal.open();
 }
 
