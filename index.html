@@ -33,6 +33,7 @@
         <a href="#incidente">El Problema</a>
         <a href="#resultados">Resultados</a>
         <a href="#patrones">Patrones</a>
+        <a href="#cuantitativo">Análisis</a>
         <a href="#hallazgos">Hallazgos</a>
         <a href="#plan">Plan</a>
       </nav>
@@ -182,19 +183,6 @@
         </div>
 
         <div class="cifras-blocks">
-          <!-- Análisis cuantitativo -->
-          <div class="cifra-row" data-aos="fade-up">
-            <span class="cifra-label">Análisis cuantitativo — haz clic en una entrega para desmembrar el número</span>
-            <div class="quant-tiles" id="quantTiles"></div>
-            <div class="quant-bars" id="quantBars"></div>
-            <div class="quant-delta">
-              <span class="qd-tag">De la 1.ª a la 3.ª entrega</span>
-              <span class="qd-item">Imputados tramitados <strong>8.003 → 3.401</strong> <em>−57,5%</em></span>
-              <span class="qd-item">Causas <strong>7.227 → 2.839</strong> <em>−60,7%</em></span>
-            </div>
-            <p class="cifra-note">Comparación entre la entrega inicial (8 de mayo), la segunda entrega (12 de junio) y la base reconstruida durante la auditoría (23 de julio). Cada base declara sus dos magnitudes: <strong>imputados tramitados y causas</strong>.</p>
-          </div>
-
           <!-- Severidad y clasificación -->
           <div class="cifra-row" data-aos="fade-up">
             <span class="cifra-label">Los quince hallazgos, por severidad</span>
@@ -271,6 +259,25 @@
         </div>
         <div class="grid grid-2" id="patronesGrid"></div>
         <p class="seq-closer" data-aos="fade-up">Ocho hallazgos sugieren ocho remediaciones; cuatro patrones sugieren <strong>cuatro decisiones de gobierno</strong>. El valor del informe no está en las quince correcciones que propone, sino en las decisiones que las hacen innecesarias.</p>
+      </div>
+    </section>
+
+    <!-- ===================== ANÁLISIS CUANTITATIVO ===================== -->
+    <section class="section section-dark" id="cuantitativo">
+      <div class="container">
+        <div class="section-head section-head-light" data-aos="fade-up">
+          <span class="kicker">Análisis cuantitativo</span>
+          <h2>La base, entrega por entrega</h2>
+          <p class="lead">Comparación entre la entrega inicial, la segunda entrega y la base reconstruida durante la auditoría. Cada base declara sus dos magnitudes — imputados tramitados y causas. <strong>Haz clic en una entrega para desmembrar el número.</strong></p>
+        </div>
+        <div class="quant-tiles" id="quantTiles" data-aos="fade-up"></div>
+        <div class="quant-bars" id="quantBars" data-aos="fade-up"></div>
+        <div class="quant-delta" data-aos="fade-up">
+          <span class="qd-tag">De la 1.ª a la 3.ª entrega</span>
+          <span class="qd-item">Imputados tramitados <strong>8.003 → 3.401</strong> <em>−57,5%</em></span>
+          <span class="qd-item">Causas <strong>7.227 → 2.839</strong> <em>−60,7%</em></span>
+        </div>
+        <p class="cifra-note" data-aos="fade-up">Entregas del 8 de mayo y 12 de junio, y base reconstruida del 23 de julio — esta última con revisión de un auditor externo independiente y la causa como unidad de registro.</p>
       </div>
     </section>
 
