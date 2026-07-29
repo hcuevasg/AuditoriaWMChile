@@ -161,9 +161,23 @@
 .plan-note { color: var(--text-secondary); }
 .plan-note strong { color: var(--secondary); }
 
+/* Chips de entidad: offender (imputados) / expediente (causas) */
+.fig-chip {
+  flex: 0 0 30px; width: 30px; height: 30px; border-radius: 9px;
+  display: inline-grid; place-items: center; vertical-align: middle;
+}
+.fig-chip svg { width: 16px; height: 16px; }
+.fig-chip.sm { flex-basis: 22px; width: 22px; height: 22px; border-radius: 7px; }
+.fig-chip.sm svg { width: 12px; height: 12px; }
+.fig-chip.imp { background: rgba(64,115,184,0.12); color: var(--primary); }
+.fig-chip.cau { background: rgba(231,66,67,0.10); color: var(--secondary); }
+.section-dark .fig-chip.imp, .quant-tile .fig-chip.imp, .qb-row .fig-chip.imp { background: rgba(91,143,212,0.2); color: #8fb2da; }
+.section-dark .fig-chip.cau, .quant-tile .fig-chip.cau, .qb-row .fig-chip.cau { background: rgba(231,66,67,0.18); color: #f08a8b; }
+
 /* Incidente: doble magnitud por entrega */
-.inc-figs { display: flex; gap: 26px; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; }
-.inc-fig { display: flex; flex-direction: column; }
+.inc-figs { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.inc-fig { display: flex; align-items: center; gap: 10px; }
+.inc-fig-col { display: flex; flex-direction: column; }
 .inc-flow .inc-num { font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
 .inc-fig-lbl { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary); margin-top: 4px; }
 
@@ -183,8 +197,9 @@
 .qt-date { font-weight: 800; font-size: 1.02rem; color: var(--white); }
 .qt-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
 .quant-tile.final .qt-tag { color: #6bbd90; }
-.qt-figs { display: flex; gap: 22px; flex-wrap: wrap; }
-.qt-fig { display: flex; flex-direction: column; }
+.qt-figs { display: flex; gap: 20px; flex-wrap: wrap; }
+.qt-fig { display: flex; align-items: center; gap: 9px; }
+.qt-fig-col { display: flex; flex-direction: column; }
 .qt-fig strong { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; color: var(--white); line-height: 1.05; letter-spacing: -0.01em; }
 .qt-fig em { font-style: normal; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 4px; }
 .qt-go { margin-top: 14px; font-size: 0.78rem; font-weight: 700; color: #8fb2da; transition: color 0.2s ease, transform 0.2s ease; }
@@ -193,7 +208,7 @@
 /* Barras comparativas (una serie por magnitud, mismo tono) */
 .quant-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: 1000px; margin: 0 auto 26px; }
 .qb-row { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius-card); padding: 20px 22px; }
-.qb-title { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+.qb-title { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
 .qb-line { display: grid; grid-template-columns: 58px 1fr 60px; gap: 12px; align-items: center; margin-bottom: 10px; }
 .qb-line:last-child { margin-bottom: 0; }
 .qb-name { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.75); white-space: nowrap; }
@@ -217,7 +232,12 @@
 .qm-block { background: var(--bg-secondary); border: 1px solid rgba(26,51,80,0.07); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
 .qm-block h4 { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--primary); margin-bottom: 14px; }
 .qm-bar { display: grid; grid-template-columns: 1fr; gap: 5px; margin-bottom: 14px; }
-.qm-bar-label { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+.qm-bar-label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text); }
+.qm-title { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.qm-t-fig { display: inline-flex; align-items: center; gap: 8px; }
+.qm-t-fig small { font-size: 0.62em; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+.qm-t-sep { color: var(--accent); font-weight: 700; }
+.qm-dl { display: flex; align-items: center; gap: 8px; }
 .qm-bar-track { height: 16px; background: rgba(26,51,80,0.09); border-radius: 4px; overflow: hidden; }
 .qm-bar-fill { height: 100%; background: var(--secondary); border-radius: 0 4px 4px 0; min-width: 5px; }
 .qm-bar-val { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); font-variant-numeric: tabular-nums; }

@@ -12,7 +12,7 @@ window.HALLAZGOS = [
     sev: 'Crítica',
     deriva: 'OBS-002',
     criterio: 'Nivel 2 · Contrato',
-    desc: 'Se reportaron al cliente 8.004 causas como vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El 46% del universo no correspondía: 3.833 causas y 4.075 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después sin que consten cambios en el procedimiento. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
+    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El 46% del universo no correspondía: 3.833 causas y 4.075 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
     acciones: ['B', 'C', 'G'],
   },
   {
@@ -132,7 +132,7 @@ window.HALLAZGOS = [
     sev: 'Media',
     deriva: 'OBS-001',
     criterio: 'Nivel 4 · Buenas prácticas',
-    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene cuatro magnitudes: 8.004 comunicadas, 8.003 filas, 7.140 causas por identificador judicial y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
+    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene cuatro magnitudes: 8.003 filas reales, 8.004 comunicadas —por conteo de la cabecera—, 7.140 causas por identificador judicial y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
     acciones: ['A'],
   },
   {
@@ -381,11 +381,11 @@ window.PLAN_IMPL = [
 window.BASES = [
   {
     id: 'may', fecha: '8 de mayo', tag: 'Primera entrega', imputados: 8003, causas: 7227,
-    resumen: 'Base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. La cifra comunicada al cliente fue 8.004.',
+    resumen: 'Base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El número real de registros es 8.003; el 8.004 que circuló provino de contar la cabecera del archivo.',
     bloques: [
       {
         tipo: 'status', tit: 'Lo que no correspondía — HAL-002',
-        nota: 'El informe acredita que el 46% del universo reportado no correspondía: causas ya terminadas informadas como vigentes. El 23 de mayo el cliente identificó el defecto con precisión y lo calificó como «falla grave de control».',
+        nota: 'El informe acredita que el 46% del universo reportado no correspondía: causas ya terminadas informadas como vigentes. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
         bars: [
           { label: 'Causas que no correspondían', val: 3833, total: 7227, txt: '3.833 de 7.227' },
           { label: 'Imputados que no correspondían', val: 4075, total: 8003, txt: '4.075 de 8.003' },
@@ -402,8 +402,8 @@ window.BASES = [
         tipo: 'mags', tit: 'Cuatro magnitudes en el mismo archivo — HAL-001',
         nota: 'El archivo sostenía cuatro cifras a la vez, sin definición documentada ni declaración de la unidad contada. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre.',
         items: [
-          ['8.004', 'comunicadas al cliente'],
-          ['8.003', 'filas del archivo'],
+          ['8.003', 'registros reales del archivo'],
+          ['8.004', 'cifra que circuló — contaba la cabecera del archivo'],
           ['7.227', 'causas identificables'],
           ['7.140', 'causas por identificador judicial'],
         ],
@@ -412,11 +412,11 @@ window.BASES = [
   },
   {
     id: 'jun', fecha: '12 de junio', tag: 'Segunda entrega', imputados: 4321, causas: 3741,
-    resumen: 'Segunda entrega, veintiún días después de la advertencia del cliente (23 de mayo), sin que consten cambios en el procedimiento que produjo la primera.',
+    resumen: 'Segunda entrega, veintiún días después de la advertencia del cliente (23 de mayo). A partir de esa advertencia se comenzó a contrastar la información contra el Poder Judicial.',
     bloques: [
       {
         tipo: 'delta', tit: 'La caída frente al 8 de mayo',
-        nota: 'La diferencia entre ambas entregas motivó el reclamo formal del cliente y, en definitiva, el encargo de auditoría.',
+        nota: 'El 14 de junio el cliente calificó la baja de 3.682 causas como «inaceptable» y «falla grave de control». El 15 de junio su propio analista, deduplicando RIT repetidos, situó el total en 4.090. La pérdida de confianza derivó en el encargo de auditoría.',
         rows: [
           { label: 'Imputados tramitados', from: '8.003', to: '4.321', delta: '−3.682', pct: '−46,0%' },
           { label: 'Causas', from: '7.227', to: '3.741', delta: '−3.486', pct: '−48,2%' },
@@ -427,19 +427,20 @@ window.BASES = [
         nota: 'La causa técnica del defecto de origen permanece abierta: cuatro hipótesis concurrentes, ninguna concluida (HAL-002). La confusión de unidad (HAL-001) explica solo entre el 5,9% y el 7,6% de la reducción.',
         items: [
           ['46%', 'del universo del 8 de mayo no correspondía (HAL-002)'],
-          ['21 días', 'entre la advertencia del cliente y la segunda entrega'],
-          ['0', 'cambios de procedimiento documentados entre entregas'],
+          ['21 días', 'entre el reclamo formal del cliente y la segunda entrega'],
+          ['PJUD', 'se inició el contraste de la información contra el Poder Judicial'],
+          ['4.090', 'recuento de Walmart al deduplicar RIT repetidos (15 de junio)'],
         ],
       },
     ],
   },
   {
     id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3401, causas: 2839, final: true,
-    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.839 causas vigentes, informando separadamente 3.401 imputados. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
+    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.839 causas vigentes, informando separadamente 3.401 imputados. En la depuración participó además un auditor externo independiente que revisó las bases — parte de la baja proviene de esa revisión. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
     bloques: [
       {
         tipo: 'delta', tit: 'La caída frente al 12 de junio',
-        nota: 'Corresponde a la depuración practicada durante el encargo, con verificación del estado procesal.',
+        nota: 'Corresponde a la depuración practicada durante el encargo, con verificación del estado procesal y revisión de un auditor externo independiente. Una tercera revisión interna (7 de julio) ya había situado la base en torno a 3.500.',
         rows: [
           { label: 'Imputados tramitados', from: '4.321', to: '3.401', delta: '−920', pct: '−21,3%' },
           { label: 'Causas', from: '3.741', to: '2.839', delta: '−902', pct: '−24,1%' },
@@ -458,6 +459,7 @@ window.BASES = [
         nota: 'Las correcciones constan documentadas y fechadas (acción 5 del plan, ejecutada). Corrigen el resultado; el mecanismo lo atacan las acciones 6 y 8, pendientes.',
         items: [
           ['causa', 'pasa a ser la unidad de registro ante el cliente, en vez del imputado'],
+          ['externo', 'un auditor independiente revisó las bases durante la depuración'],
           ['23-07', 'acta de liberación a producción del panel con definiciones validadas'],
           ['0', 'conciliaciones periódicas institucionalizadas contra el Poder Judicial — pendiente (acción 8)'],
         ],

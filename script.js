@@ -184,6 +184,16 @@ const quantModal = wireModal(document.getElementById('quantModal'), document.get
 const nf = new Intl.NumberFormat('es-CL');
 function fmt(n) { return nf.format(n); }
 
+// Íconos de entidad: offender (imputados) y expediente (causas)
+const IC_IMP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+const IC_CAU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+function figIc(label, sm) {
+  const cls = sm ? ' sm' : '';
+  if (/imputado/i.test(label)) return '<span class="fig-chip imp' + cls + '">' + IC_IMP + '</span>';
+  if (/causa/i.test(label)) return '<span class="fig-chip cau' + cls + '">' + IC_CAU + '</span>';
+  return '';
+}
+
 // ============================================================
 //  Análisis cuantitativo: tiles clickeables + barras + modal
 // ============================================================
@@ -195,8 +205,8 @@ if (quantTiles && window.BASES) {
     + '<span class="qt-date">' + esc(b.fecha) + '</span>'
     + '<span class="qt-tag">' + esc(b.tag) + '</span>'
     + '<span class="qt-figs">'
-    + '<span class="qt-fig"><strong>' + fmt(b.imputados) + '</strong><em>imputados tramitados</em></span>'
-    + '<span class="qt-fig"><strong>' + fmt(b.causas) + '</strong><em>causas</em></span>'
+    + '<span class="qt-fig">' + figIc('imputados') + '<span class="qt-fig-col"><strong>' + fmt(b.imputados) + '</strong><em>imputados tramitados</em></span></span>'
+    + '<span class="qt-fig">' + figIc('causas') + '<span class="qt-fig-col"><strong>' + fmt(b.causas) + '</strong><em>causas</em></span></span>'
     + '</span>'
     + '<span class="qt-go">Desmembrar el número →</span>'
     + '</button>'
@@ -212,7 +222,7 @@ if (quantBars && window.BASES) {
   ];
   quantBars.innerHTML = series.map((s) => {
     const max = Math.max(...window.BASES.map((b) => b[s.key]));
-    return '<div class="qb-row"><span class="qb-title">' + esc(s.label) + '</span>'
+    return '<div class="qb-row"><span class="qb-title">' + figIc(s.label, true) + esc(s.label) + '</span>'
       + window.BASES.map((b) => {
         const w = Math.round((b[s.key] / max) * 1000) / 10;
         return '<div class="qb-line"><span class="qb-name">' + esc(b.fecha.replace(' de ', ' ')) + '</span>'
@@ -228,7 +238,7 @@ function quantBlockHtml(bl) {
     return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4>'
       + bl.bars.map((bar) => {
         const w = Math.round((bar.val / bar.total) * 1000) / 10;
-        return '<div class="qm-bar"><span class="qm-bar-label">' + esc(bar.label) + '</span>'
+        return '<div class="qm-bar"><span class="qm-bar-label">' + figIc(bar.label, true) + esc(bar.label) + '</span>'
           + '<div class="qm-bar-track"><div class="qm-bar-fill" style="width:' + w + '%"></div></div>'
           + '<span class="qm-bar-val">' + esc(bar.txt) + '</span></div>';
       }).join('')
@@ -237,7 +247,7 @@ function quantBlockHtml(bl) {
   if (bl.tipo === 'delta') {
     return '<div class="qm-block"><h4>' + esc(bl.tit) + '</h4><div class="qm-deltas">'
       + bl.rows.map((r) =>
-        '<div class="qm-delta-row"><span class="qm-dl">' + esc(r.label) + '</span>'
+        '<div class="qm-delta-row"><span class="qm-dl">' + figIc(r.label, true) + esc(r.label) + '</span>'
         + '<span class="qm-dv">' + esc(r.from) + ' → ' + esc(r.to) + '</span>'
         + '<span class="qm-dd">' + esc(r.delta) + ' <em>' + esc(r.pct) + '</em></span></div>'
       ).join('')
@@ -256,7 +266,11 @@ function openQuantModal(b) {
     + '<span class="modal-code' + (b.final ? ' ok' : '') + '">' + esc(b.fecha) + '</span>'
     + '<span class="modal-country">' + esc(b.tag) + '</span>'
     + '</div>'
-    + '<h3 id="quantModalTitle">' + fmt(b.imputados) + ' imputados tramitados · ' + fmt(b.causas) + ' causas</h3>'
+    + '<h3 id="quantModalTitle" class="qm-title">'
+    + '<span class="qm-t-fig">' + figIc('imputados') + fmt(b.imputados) + ' <small>imputados tramitados</small></span>'
+    + '<span class="qm-t-sep" aria-hidden="true">·</span>'
+    + '<span class="qm-t-fig">' + figIc('causas') + fmt(b.causas) + ' <small>causas</small></span>'
+    + '</h3>'
     + '<p class="qm-resumen">' + esc(b.resumen) + '</p>'
     + b.bloques.map(quantBlockHtml).join('');
   quantModal.open();
