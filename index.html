@@ -31,9 +31,9 @@
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="#incidente">El Problema</a>
+        <a href="#cuantitativo">Análisis</a>
         <a href="#resultados">Resultados</a>
         <a href="#patrones">Patrones</a>
-        <a href="#cuantitativo">Análisis</a>
         <a href="#hallazgos">Hallazgos</a>
         <a href="#plan">Plan</a>
       </nav>
@@ -167,108 +167,13 @@
       </div>
     </section>
 
-    <!-- ===================== RESULTADOS ===================== -->
-    <section class="section section-dark" id="resultados">
-      <div class="container">
-        <div class="section-head section-head-light" data-aos="fade-up">
-          <span class="kicker">Resultados de la auditoría</span>
-          <h2>29 observaciones, 15 hallazgos</h2>
-          <p class="lead">Todas las observaciones del Registro Maestro quedaron con dictamen: veinticinco produjeron hallazgo y cuatro tuvieron tratamiento motivado distinto. Ninguna queda sin resolver.</p>
-        </div>
-        <div class="grid grid-4 stats">
-          <div class="stat" data-aos="zoom-in"><span class="stat-value"><span class="stat-num" data-count="29">0</span></span><span class="stat-label">Observaciones del Registro Maestro</span></div>
-          <div class="stat" data-aos="zoom-in" data-aos-delay="100"><span class="stat-value"><span class="stat-num" data-count="15">0</span></span><span class="stat-label">Hallazgos emitidos</span></div>
-          <div class="stat" data-aos="zoom-in" data-aos-delay="200"><span class="stat-value"><span class="stat-num" data-count="46">0</span><span class="stat-suffix">%</span></span><span class="stat-label">Del universo reportado no correspondía</span></div>
-          <div class="stat" data-aos="zoom-in" data-aos-delay="300"><span class="stat-value"><span class="stat-num" data-count="13">0</span></span><span class="stat-label">Acciones del plan consolidado</span></div>
-        </div>
-
-        <div class="cifras-blocks">
-          <!-- Severidad y clasificación -->
-          <div class="cifra-row" data-aos="fade-up">
-            <span class="cifra-label">Los quince hallazgos, por severidad</span>
-            <div class="trans-grid">
-              <div class="trans-card sev-critica">
-                <span class="trans-pct">2</span>
-                <span class="trans-count">Críticos</span>
-                <h4>HAL-002 · HAL-015</h4>
-                <p>El universo mal reportado al cliente y la inexistencia de una capa de control sobre la ejecución de los procesos.</p>
-              </div>
-              <div class="trans-card sev-alta">
-                <span class="trans-pct">10</span>
-                <span class="trans-count">Altos</span>
-                <h4>Del contrato al testigo</h4>
-                <p>Gobierno del contrato, continuidad del universo de eventos, vigencia de las causas, datos personales, entregables manuales, equipo legal, cartera antigua y criminalidad interna.</p>
-              </div>
-              <div class="trans-card sev-media">
-                <span class="trans-pct">3</span>
-                <span class="trans-count">Medios</span>
-                <h4>Indicadores y tienda</h4>
-                <p>Denominaciones que no corresponden a lo medido, cobertura ACD que recorta su universo y procesos de seguridad en tienda sin estándar.</p>
-              </div>
-            </div>
-            <p class="cifra-note">Por clasificación: <strong>4 incumplimientos contractuales</strong>, <strong>2 deficiencias de diseño</strong> y <strong>9 ausencias de diseño de control</strong>. Las severidades son propuestas de la Dirección de Auditoría y no han sido ratificadas.</p>
-          </div>
-
-          <!-- Resultado general -->
-          <div class="cifra-row" data-aos="fade-up">
-            <span class="cifra-label">Resultado general</span>
-            <blockquote class="resultado-quote">
-              El servicio funciona. Produce querellas, comparece a audiencias, gestiona testigos y entrega reportes. <strong>Lo que no tiene es un mecanismo que le avise cuando algo se desvía.</strong> Por eso el incidente que originó el encargo no lo detectó la operación.
-            </blockquote>
-            <div class="cifra-notes fd-grid">
-              <div class="cnote ok">
-                <span class="cnote-tag">Fortalezas verificadas</span>
-                <p><strong>Capacidad de reacción:</strong> la base se reconstruyó en menos de tres meses y el panel rediseñado se liberó a producción. <strong>Revisión intensiva</strong>, aunque tardía. <strong>Más control del registrado:</strong> 74 elementos declarados frente a 11 documentados. <strong>Cifras correctas donde hay fórmula documentada.</strong></p>
-              </div>
-              <div class="cnote bad">
-                <span class="cnote-tag">Debilidades verificadas</span>
-                <p><strong>La verificación ocurre al entregar, no al ejecutar.</strong> Los datos críticos <strong>no tienen dueño</strong>. Los indicadores <strong>no declaran lo que miden</strong>. Las obligaciones contractuales vigentes <strong>no se verifican</strong>.</p>
-              </div>
-              <div class="cnote warn">
-                <span class="cnote-tag">Limitación principal</span>
-                <p>Catorce de los quince hallazgos <strong>no tienen validador independiente asignado</strong>. Ningún hallazgo debe presentarse al cliente como cerrado mientras esa validación no se produzca.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Urgencias -->
-        <div class="urgent-band" data-aos="zoom-in">
-          <span class="urgent-tag">Dos acciones no admiten espera</span>
-          <div class="urgent-grid">
-            <div class="urgent-item">
-              <h4>HAL-013 · Prescripción</h4>
-              <p>Una acción penal se encontraría prescrita por inactividad desde 2021 y otra causa tiene audiencia sobre prescripción fijada para el 28 de julio de 2026: corresponde comparecer y comunicar la prescripción al Ministerio Público.</p>
-            </div>
-            <div class="urgent-item">
-              <h4>HAL-008 · Credenciales</h4>
-              <p>Se verificaron credenciales vigentes en texto plano dentro de un documento distribuido. Su rotación es inmediata, con independencia del curso del informe.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PATRONES ===================== -->
-    <section class="section section-alt" id="patrones">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="kicker">Análisis transversal</span>
-          <h2>No son quince problemas independientes</h2>
-          <p class="lead">Los hallazgos se agrupan en <strong>cuatro patrones por causa raíz</strong>, y cada patrón se corrige con una sola decisión de gobierno. Atacar el patrón previene además los hallazgos que el registro aún no ha levantado.</p>
-        </div>
-        <div class="grid grid-2" id="patronesGrid"></div>
-        <p class="seq-closer" data-aos="fade-up">Ocho hallazgos sugieren ocho remediaciones; cuatro patrones sugieren <strong>cuatro decisiones de gobierno</strong>. El valor del informe no está en las quince correcciones que propone, sino en las decisiones que las hacen innecesarias.</p>
-      </div>
-    </section>
-
     <!-- ===================== ANÁLISIS CUANTITATIVO ===================== -->
     <section class="section section-dark" id="cuantitativo">
       <div class="container">
         <div class="section-head section-head-light" data-aos="fade-up">
           <span class="kicker">Análisis cuantitativo</span>
           <h2>La base, entrega por entrega</h2>
-          <p class="lead">Comparación entre la entrega inicial, la segunda entrega y la base reconstruida durante la auditoría. <strong>Desplázate: la historia y los números aparecen a medida que avanzas.</strong> Haz clic en un punto del gráfico para desmembrar esa entrega.</p>
+          <p class="lead">Tres cortes de la misma base — la entrega inicial, la segunda entrega y la reconstrucción de la auditoría — y <strong>una caída de más de la mitad</strong> entre la primera y la última.</p>
         </div>
         <!-- Cronología del desplome (scrollytelling) -->
         <div class="scrolly" id="quantScrolly">
@@ -277,7 +182,6 @@
           <div class="quant-legend">
             <span class="ql-item"><span class="fig-chip imp sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Imputados tramitados</span>
             <span class="ql-item"><span class="fig-chip cau sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Causas</span>
-            <span class="ql-hint">Clic en un punto para desmembrar esa entrega</span>
           </div>
           <svg viewBox="0 0 1000 560" role="img" aria-label="Evolución de la base reportada a Walmart entre el 8 de mayo y el 23 de julio de 2026: los imputados tramitados caen de 8.003 a 3.401 y las causas de 7.227 a 2.839, con los hitos del incidente anotados.">
             <!-- Grilla -->
@@ -407,7 +311,7 @@
           <div class="sstep" data-step="7"><div class="sstep-card">
             <span class="ss-date bad">De punta a punta</span>
             <h4>El tamaño real del error</h4>
-            <p><strong>−57,5% de los imputados y −60,7% de las causas</strong> reportadas el 8 de mayo no resistieron la verificación. Desmembra cada entrega:</p>
+            <p><strong>−57,5% de los imputados y −60,7% de las causas</strong> reportadas el 8 de mayo no resistieron la verificación.</p>
             <div class="ss-links">
               <button type="button" class="ss-link" data-i="0">8 de mayo →</button>
               <button type="button" class="ss-link" data-i="1">12 de junio →</button>
@@ -416,6 +320,101 @@
           </div></div>
         </div>
         </div><!-- /scrolly -->
+      </div>
+    </section>
+
+    <!-- ===================== RESULTADOS ===================== -->
+    <section class="section section-dark" id="resultados">
+      <div class="container">
+        <div class="section-head section-head-light" data-aos="fade-up">
+          <span class="kicker">Resultados de la auditoría</span>
+          <h2>29 observaciones, 15 hallazgos</h2>
+          <p class="lead">Todas las observaciones del Registro Maestro quedaron con dictamen: veinticinco produjeron hallazgo y cuatro tuvieron tratamiento motivado distinto. Ninguna queda sin resolver.</p>
+        </div>
+        <div class="grid grid-4 stats">
+          <div class="stat" data-aos="zoom-in"><span class="stat-value"><span class="stat-num" data-count="29">0</span></span><span class="stat-label">Observaciones del Registro Maestro</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="100"><span class="stat-value"><span class="stat-num" data-count="15">0</span></span><span class="stat-label">Hallazgos emitidos</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="200"><span class="stat-value"><span class="stat-num" data-count="46">0</span><span class="stat-suffix">%</span></span><span class="stat-label">Del universo reportado no correspondía</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="300"><span class="stat-value"><span class="stat-num" data-count="13">0</span></span><span class="stat-label">Acciones del plan consolidado</span></div>
+        </div>
+
+        <div class="cifras-blocks">
+          <!-- Severidad y clasificación -->
+          <div class="cifra-row" data-aos="fade-up">
+            <span class="cifra-label">Los quince hallazgos, por severidad</span>
+            <div class="trans-grid">
+              <div class="trans-card sev-critica">
+                <span class="trans-pct">2</span>
+                <span class="trans-count">Críticos</span>
+                <h4>HAL-002 · HAL-015</h4>
+                <p>El universo mal reportado al cliente y la inexistencia de una capa de control sobre la ejecución de los procesos.</p>
+              </div>
+              <div class="trans-card sev-alta">
+                <span class="trans-pct">10</span>
+                <span class="trans-count">Altos</span>
+                <h4>Del contrato al testigo</h4>
+                <p>Gobierno del contrato, continuidad del universo de eventos, vigencia de las causas, datos personales, entregables manuales, equipo legal, cartera antigua y criminalidad interna.</p>
+              </div>
+              <div class="trans-card sev-media">
+                <span class="trans-pct">3</span>
+                <span class="trans-count">Medios</span>
+                <h4>Indicadores y tienda</h4>
+                <p>Denominaciones que no corresponden a lo medido, cobertura ACD que recorta su universo y procesos de seguridad en tienda sin estándar.</p>
+              </div>
+            </div>
+            <p class="cifra-note">Por clasificación: <strong>4 incumplimientos contractuales</strong>, <strong>2 deficiencias de diseño</strong> y <strong>9 ausencias de diseño de control</strong>. Las severidades son propuestas de la Dirección de Auditoría y no han sido ratificadas.</p>
+          </div>
+
+          <!-- Resultado general -->
+          <div class="cifra-row" data-aos="fade-up">
+            <span class="cifra-label">Resultado general</span>
+            <blockquote class="resultado-quote">
+              El servicio funciona. Produce querellas, comparece a audiencias, gestiona testigos y entrega reportes. <strong>Lo que no tiene es un mecanismo que le avise cuando algo se desvía.</strong> Por eso el incidente que originó el encargo no lo detectó la operación.
+            </blockquote>
+            <div class="cifra-notes fd-grid">
+              <div class="cnote ok">
+                <span class="cnote-tag">Fortalezas verificadas</span>
+                <p><strong>Capacidad de reacción:</strong> la base se reconstruyó en menos de tres meses y el panel rediseñado se liberó a producción. <strong>Revisión intensiva</strong>, aunque tardía. <strong>Más control del registrado:</strong> 74 elementos declarados frente a 11 documentados. <strong>Cifras correctas donde hay fórmula documentada.</strong></p>
+              </div>
+              <div class="cnote bad">
+                <span class="cnote-tag">Debilidades verificadas</span>
+                <p><strong>La verificación ocurre al entregar, no al ejecutar.</strong> Los datos críticos <strong>no tienen dueño</strong>. Los indicadores <strong>no declaran lo que miden</strong>. Las obligaciones contractuales vigentes <strong>no se verifican</strong>.</p>
+              </div>
+              <div class="cnote warn">
+                <span class="cnote-tag">Limitación principal</span>
+                <p>Catorce de los quince hallazgos <strong>no tienen validador independiente asignado</strong>. Ningún hallazgo debe presentarse al cliente como cerrado mientras esa validación no se produzca.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Urgencias -->
+        <div class="urgent-band" data-aos="zoom-in">
+          <span class="urgent-tag">Dos acciones no admiten espera</span>
+          <div class="urgent-grid">
+            <div class="urgent-item">
+              <h4>HAL-013 · Prescripción</h4>
+              <p>Una acción penal se encontraría prescrita por inactividad desde 2021 y otra causa tiene audiencia sobre prescripción fijada para el 28 de julio de 2026: corresponde comparecer y comunicar la prescripción al Ministerio Público.</p>
+            </div>
+            <div class="urgent-item">
+              <h4>HAL-008 · Credenciales</h4>
+              <p>Se verificaron credenciales vigentes en texto plano dentro de un documento distribuido. Su rotación es inmediata, con independencia del curso del informe.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PATRONES ===================== -->
+    <section class="section section-alt" id="patrones">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="kicker">Análisis transversal</span>
+          <h2>No son quince problemas independientes</h2>
+          <p class="lead">Los hallazgos se agrupan en <strong>cuatro patrones por causa raíz</strong>, y cada patrón se corrige con una sola decisión de gobierno. Atacar el patrón previene además los hallazgos que el registro aún no ha levantado.</p>
+        </div>
+        <div class="grid grid-2" id="patronesGrid"></div>
+        <p class="seq-closer" data-aos="fade-up">Ocho hallazgos sugieren ocho remediaciones; cuatro patrones sugieren <strong>cuatro decisiones de gobierno</strong>. El valor del informe no está en las quince correcciones que propone, sino en las decisiones que las hacen innecesarias.</p>
       </div>
     </section>
 
