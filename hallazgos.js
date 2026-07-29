@@ -484,7 +484,6 @@ window.REMS = [
   {
     n: 1,
     corto: 'Conciliación preventiva de las causas vigentes reportadas a Walmart',
-    riesgo: 'HAL-002 · HAL-007 — el estado procesal se informaba a Walmart sin verificarlo contra el Poder Judicial',
     // Seguimiento: etapas completadas (etapaDone) y etapa en curso (etapa) sobre
     // la secuencia Diseño → Aprobación → Implementación → Evidencia → Validación → Cierre.
     seg: {

@@ -347,7 +347,6 @@ if (planList && window.REMS) {
       + '<span class="rc-n">R' + n + '</span>'
       + '<div class="rc-headb">'
       + '<h3 class="rc-tit">' + (r ? esc(r.corto || r.tit) : 'Remediación N.° ' + n + ' — alcance por definir') + '</h3>'
-      + '<p class="rc-riesgo"><strong>Aborda:</strong> ' + (r ? esc(r.riesgo || '') : 'se define en el documento de la remediación') + '</p>'
       + '</div>'
       + '</header>'
       + '<div class="rc-chips">'
