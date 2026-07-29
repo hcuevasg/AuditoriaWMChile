@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría Interna Especial · Servicio Walmart Chile — Grupo ALTO</title>
+  <meta name="description" content="Auditoría Interna Especial sobre el Servicio Walmart Chile — Informe Final v5. Quince hallazgos, cuatro patrones de causa raíz y un plan consolidado de trece acciones." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts: Raleway (ALTO brand font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- AOS scroll animations (same library ALTO uses) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="audit.css" />
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#hero" class="brand" aria-label="ALTO">
+        <img class="brand-logo" src="assets/alto-logo.svg" alt="ALTO" />
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#incidente">El Problema</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#patrones">Patrones</a>
+        <a href="#hallazgos">Hallazgos</a>
+        <a href="#plan">Plan</a>
+      </nav>
+      <div class="nav-actions">
+        <button type="button" class="btn header-glosario" id="glosarioBtn" aria-haspopup="dialog" aria-label="Glosario" title="Glosario">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Glosario</span>
+        </button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== PORTADA ===================== -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow" data-aos="fade-down">Control Interno y Gobernanza · Grupo ALTO Chile</p>
+        <h1 class="hero-title" data-aos="fade-up">Auditoría Interna<br />Especial</h1>
+        <p class="hero-legal" data-aos="fade-up" data-aos-delay="80">Servicio <span class="accent">Walmart Chile</span></p>
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="140">De una diferencia material en la base de causas vigentes reportada al cliente, a quince hallazgos, cuatro patrones de causa raíz y un plan consolidado de trece acciones.</p>
+
+        <div class="hero-flags" data-aos="fade-up" data-aos-delay="200">
+          <span class="flags-label">El encargo</span>
+          <div class="flags-row">
+            <span class="hero-meta-chip"><strong>Acta de Inicio</strong> 8 de julio de 2026</span>
+            <span class="hero-meta-chip"><strong>Período auditado</strong> marzo – julio 2026</span>
+            <span class="hero-meta-chip"><strong>Metodología</strong> Global Internal Audit Standards (IIA)</span>
+          </div>
+        </div>
+
+        <div class="hero-tags" data-aos="fade-up" data-aos-delay="320">
+          <span class="hero-tag">Informe Final · v5 · 28 de julio de 2026</span>
+          <span class="hero-tag">Borrador — no emitido</span>
+          <span class="hero-tag confidential">Uso Interno y Confidencial</span>
+        </div>
+        <div class="presenter" data-aos="fade-up" data-aos-delay="380">
+          <div class="presenter-avatar">
+            <span class="avatar-initial">C</span>
+          </div>
+          <div class="presenter-meta">
+            <span class="presenter-name">Dirección de Auditoría: Constanza Aguirre</span>
+            <span class="presenter-role">Sponsor Ejecutivo: Jorge Nazer · CEO ALTO</span>
+          </div>
+        </div>
+      </div>
+      <a href="#incidente" class="scroll-hint" aria-label="Bajar">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===================== EL PROBLEMA ===================== -->
+    <section class="section" id="incidente">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="kicker">El origen del encargo</span>
+          <h2>El problema ocurrido con Walmart</h2>
+          <p class="lead">En marzo de 2026 el cliente pidió el listado de sus causas vigentes para dimensionar una reducción de carga. La cifra entregada tuvo que corregirse dos veces, y la diferencia entre entregas motivó un reclamo formal y este encargo.</p>
+        </div>
+
+        <!-- Serie de cifras del incidente -->
+        <div class="inc-flow" data-aos="fade-up">
+          <div class="inc-step">
+            <span class="inc-num">8.004</span>
+            <span class="inc-date">8 de mayo</span>
+            <p>Primera entrega: registros reportados como causas vigentes, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida.</p>
+          </div>
+          <span class="inc-arrow" aria-hidden="true">→</span>
+          <div class="inc-step">
+            <span class="inc-num">4.322</span>
+            <span class="inc-date">12 de junio</span>
+            <p>Segunda entrega, veintiún días después de la advertencia del cliente, sin que consten cambios en el procedimiento.</p>
+          </div>
+          <span class="inc-arrow" aria-hidden="true">→</span>
+          <div class="inc-step final">
+            <span class="inc-num">2.839</span>
+            <span class="inc-date">23 de julio</span>
+            <p>Base reconstruida y depurada durante la auditoría: 2.839 causas vigentes, informando separadamente 3.401 imputados.</p>
+          </div>
+        </div>
+        <p class="inc-note" data-aos="fade-up">El 46% del universo reportado el 8 de mayo no correspondía: <strong>3.833 causas y 4.075 imputados</strong>. El 23 de mayo el cliente identificó el defecto con precisión y lo calificó como <strong>«falla grave de control»</strong>.</p>
+
+        <!-- Las dos lecturas del problema -->
+        <div class="grid grid-2 problema-grid">
+          <article class="problema-card" data-aos="fade-right">
+            <span class="problema-num">1</span>
+            <span class="problema-kicker">Causa raíz</span>
+            <h3>Mala gestión</h3>
+            <p>El descuadre no fue un accidente técnico puntual: la información que el servicio entrega se produce <strong>sin control sobre su propia elaboración</strong>. No hay quien defina qué mide cada indicador, ni dueño de los datos críticos, ni verificación de las obligaciones contractuales vigentes, ni confirmación en las cadenas que dependen de terceros.</p>
+            <p>La consecuencia estructural: <strong>la detección de las fallas está externalizada</strong>. Quien advierte que algo salió mal es el cliente o una revisión extraordinaria, no el proceso.</p>
+          </article>
+          <article class="problema-card rep" data-aos="fade-left">
+            <span class="problema-num">2</span>
+            <span class="problema-kicker">Problema reputacional</span>
+            <h3>Se atribuyó a la migración, sin validar nada</h3>
+            <p>Al cliente se le explicó la diferencia como un problema de migración de datos, <strong>sin haber validado esa explicación</strong>. La base se había construido a partir de lo abierto en el sistema de origen, sin contrastarla con el Poder Judicial, y se remitió con la revisión de fondo expresamente diferida.</p>
+            <p>El cliente identificó el defecto antes que la operación y con precisión. Responder con una causa no verificada frente a una advertencia exacta <strong>convirtió un error de datos en un problema de confianza</strong>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== RESULTADOS ===================== -->
+    <section class="section section-dark" id="resultados">
+      <div class="container">
+        <div class="section-head section-head-light" data-aos="fade-up">
+          <span class="kicker">Resultados de la auditoría</span>
+          <h2>29 observaciones, 15 hallazgos</h2>
+          <p class="lead">Todas las observaciones del Registro Maestro quedaron con dictamen: veinticinco produjeron hallazgo y cuatro tuvieron tratamiento motivado distinto. Ninguna queda sin resolver.</p>
+        </div>
+        <div class="grid grid-4 stats">
+          <div class="stat" data-aos="zoom-in"><span class="stat-value"><span class="stat-num" data-count="29">0</span></span><span class="stat-label">Observaciones del Registro Maestro</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="100"><span class="stat-value"><span class="stat-num" data-count="15">0</span></span><span class="stat-label">Hallazgos emitidos</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="200"><span class="stat-value"><span class="stat-num" data-count="46">0</span><span class="stat-suffix">%</span></span><span class="stat-label">Del universo reportado no correspondía</span></div>
+          <div class="stat" data-aos="zoom-in" data-aos-delay="300"><span class="stat-value"><span class="stat-num" data-count="13">0</span></span><span class="stat-label">Acciones del plan consolidado</span></div>
+        </div>
+
+        <div class="cifras-blocks">
+          <!-- Severidad y clasificación -->
+          <div class="cifra-row" data-aos="fade-up">
+            <span class="cifra-label">Los quince hallazgos, por severidad</span>
+            <div class="trans-grid">
+              <div class="trans-card sev-critica">
+                <span class="trans-pct">2</span>
+                <span class="trans-count">Críticos</span>
+                <h4>HAL-002 · HAL-015</h4>
+                <p>El universo mal reportado al cliente y la inexistencia de una capa de control sobre la ejecución de los procesos.</p>
+              </div>
+              <div class="trans-card sev-alta">
+                <span class="trans-pct">10</span>
+                <span class="trans-count">Altos</span>
+                <h4>Del contrato al testigo</h4>
+                <p>Gobierno del contrato, continuidad del universo de eventos, vigencia de las causas, datos personales, entregables manuales, equipo legal, cartera antigua y criminalidad interna.</p>
+              </div>
+              <div class="trans-card sev-media">
+                <span class="trans-pct">3</span>
+                <span class="trans-count">Medios</span>
+                <h4>Indicadores y tienda</h4>
+                <p>Denominaciones que no corresponden a lo medido, cobertura ACD que recorta su universo y procesos de seguridad en tienda sin estándar.</p>
+              </div>
+            </div>
+            <p class="cifra-note">Por clasificación: <strong>4 incumplimientos contractuales</strong>, <strong>2 deficiencias de diseño</strong> y <strong>9 ausencias de diseño de control</strong>. Las severidades son propuestas de la Dirección de Auditoría y no han sido ratificadas.</p>
+          </div>
+
+          <!-- Resultado general -->
+          <div class="cifra-row" data-aos="fade-up">
+            <span class="cifra-label">Resultado general</span>
+            <blockquote class="resultado-quote">
+              El servicio funciona. Produce querellas, comparece a audiencias, gestiona testigos y entrega reportes. <strong>Lo que no tiene es un mecanismo que le avise cuando algo se desvía.</strong> Por eso el incidente que originó el encargo no lo detectó la operación.
+            </blockquote>
+            <div class="cifra-notes fd-grid">
+              <div class="cnote ok">
+                <span class="cnote-tag">Fortalezas verificadas</span>
+                <p><strong>Capacidad de reacción:</strong> la base se reconstruyó en menos de tres meses y el panel rediseñado se liberó a producción. <strong>Revisión intensiva</strong>, aunque tardía. <strong>Más control del registrado:</strong> 74 elementos declarados frente a 11 documentados. <strong>Cifras correctas donde hay fórmula documentada.</strong></p>
+              </div>
+              <div class="cnote bad">
+                <span class="cnote-tag">Debilidades verificadas</span>
+                <p><strong>La verificación ocurre al entregar, no al ejecutar.</strong> Los datos críticos <strong>no tienen dueño</strong>. Los indicadores <strong>no declaran lo que miden</strong>. Las obligaciones contractuales vigentes <strong>no se verifican</strong>.</p>
+              </div>
+              <div class="cnote warn">
+                <span class="cnote-tag">Limitación principal</span>
+                <p>Catorce de los quince hallazgos <strong>no tienen validador independiente asignado</strong>. Ningún hallazgo debe presentarse al cliente como cerrado mientras esa validación no se produzca.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Urgencias -->
+        <div class="urgent-band" data-aos="zoom-in">
+          <span class="urgent-tag">Dos acciones no admiten espera</span>
+          <div class="urgent-grid">
+            <div class="urgent-item">
+              <h4>HAL-013 · Prescripción</h4>
+              <p>Una acción penal se encontraría prescrita por inactividad desde 2021 y otra causa tiene audiencia sobre prescripción fijada para el 28 de julio de 2026: corresponde comparecer y comunicar la prescripción al Ministerio Público.</p>
+            </div>
+            <div class="urgent-item">
+              <h4>HAL-008 · Credenciales</h4>
+              <p>Se verificaron credenciales vigentes en texto plano dentro de un documento distribuido. Su rotación es inmediata, con independencia del curso del informe.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PATRONES ===================== -->
+    <section class="section section-alt" id="patrones">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="kicker">Análisis transversal</span>
+          <h2>No son quince problemas independientes</h2>
+          <p class="lead">Los hallazgos se agrupan en <strong>cuatro patrones por causa raíz</strong>, y cada patrón se corrige con una sola decisión de gobierno. Atacar el patrón previene además los hallazgos que el registro aún no ha levantado.</p>
+        </div>
+        <div class="grid grid-2" id="patronesGrid"></div>
+        <p class="seq-closer" data-aos="fade-up">Ocho hallazgos sugieren ocho remediaciones; cuatro patrones sugieren <strong>cuatro decisiones de gobierno</strong>. El valor del informe no está en las quince correcciones que propone, sino en las decisiones que las hacen innecesarias.</p>
+      </div>
+    </section>
+
+    <!-- ===================== HALLAZGOS ===================== -->
+    <section class="section" id="hallazgos">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="kicker">Las observaciones de la auditoría</span>
+          <h2>Los quince hallazgos, uno a uno</h2>
+          <p class="lead">En orden de severidad descendente, con la misma estructura del informe: clasificación, severidad propuesta, observación de origen y criterio. El desarrollo completo de cada uno consta en su documento propio.</p>
+        </div>
+
+        <div class="mp-legend" data-aos="fade-up">
+          <span class="mp-legend-title">Cómo leer cada ficha</span>
+          <ul class="mp-legend-items">
+            <li><span class="sev-chip critica">Crítica</span> severidad propuesta del hallazgo</li>
+            <li><span class="fc-tag sub">OBS-0XX</span> observación del Registro Maestro de la que deriva</li>
+            <li><span class="fc-tag cfg">Nivel 2 · 4</span> criterio primario: contrato o buenas prácticas</li>
+            <li><span class="fc-tag tx">Acción A–M</span> acción del plan consolidado que lo ataca</li>
+          </ul>
+        </div>
+
+        <div class="mp-accordion" id="halAccordion"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PLAN ===================== -->
+    <section class="section section-alt" id="plan">
+      <div class="container">
+        <div class="section-head" data-aos="fade-up">
+          <span class="kicker">Plan consolidado de remediación</span>
+          <h2>Trece acciones para quince hallazgos</h2>
+          <p class="lead">Las acciones A, B y E consolidan hallazgos de causa raíz común. Ningún responsable ni plazo ha sido asignado por la Dirección: <strong>la asignación es la primera decisión que corresponde adoptar.</strong></p>
+        </div>
+        <div class="plan-table-wrap" data-aos="fade-up">
+          <table class="plan-table" id="planTable">
+            <thead><tr><th>#</th><th>Acción</th><th>Cubre</th><th>Responsable propuesto</th><th>Prioridad</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="cifra-note plan-note" data-aos="fade-up">Regla de cierre: ninguna acción se cierra por declaración. Cada cierre exige entregable definido, evidencia fechada, criterios de aceptación verificables y <strong>validación por una instancia distinta del responsable ejecutor</strong>.</p>
+      </div>
+    </section>
+
+    <!-- ===================== CIERRE ===================== -->
+    <section class="thesis-section" id="cierre">
+      <div class="container">
+        <div class="thesis" data-aos="fade-up">
+          <span class="thesis-rule" aria-hidden="true"></span>
+          <p class="thesis-text">Las correcciones ejecutadas durante el encargo son reales, pero corrigen <span class="t-soft">el resultado</span>, no <span class="t-strong">el mecanismo</span>. Sin dueño del dato ni gobernanza de definiciones, el universo vuelve a degradarse — y el próximo descuadre <span class="t-strong">lo detectará otra vez el cliente</span>.</p>
+          <span class="thesis-tag">La conclusión del informe</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo" src="assets/alto-logo-white.svg" alt="ALTO" />
+        <p>Auditoría Interna Especial — Servicio Walmart Chile. Informe Final v5: quince hallazgos, cuatro patrones y plan consolidado de remediación.</p>
+      </div>
+      <div class="footer-meta">
+        <span>Control Interno y Gobernanza</span>
+        <span>·</span>
+        <span>Julio 2026</span>
+        <span>·</span>
+        <span class="confidential-text">Uso Interno y Confidencial</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
+
+  <!-- Modal del glosario -->
+  <div class="modal-overlay" id="glosarioModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="glosarioTitle">
+      <button class="modal-close" id="glosarioClose" aria-label="Cerrar">&times;</button>
+      <div class="modal-body">
+        <div class="modal-head">
+          <span class="modal-code">Glosario</span>
+          <span class="modal-country">Para leer los hallazgos</span>
+        </div>
+        <h3 id="glosarioTitle">Glosario del informe</h3>
+        <div class="glossary glossary-modal">
+          <div class="gl"><dt>Causa</dt><dd>Procedimiento judicial único, identificado por su rol ante el tribunal.</dd></div>
+          <div class="gl"><dt>Imputado</dt><dd>Persona formalizada en una causa. Una causa puede tener varios; una persona puede estar en varias.</dd></div>
+          <div class="gl"><dt>Registro imputado-causa</dt><dd>Fila que relaciona a un imputado con una causa. Es la unidad en que se construyeron las bases entregadas.</dd></div>
+          <div class="gl"><dt>Vigente</dt><dd>Causa en tramitación, sin resolución que le ponga término.</dd></div>
+          <div class="gl"><dt>Nivel de servicio</dt><dd>Compromiso de entrega pactado en el anexo respectivo, con multa asociada.</dd></div>
+          <div class="gl"><dt>Punto de control</dt><dd>Mecanismo que reúne umbral, alerta, responsable y frecuencia. Si falta uno, no cumple función de control.</dd></div>
+          <div class="gl"><dt>Snapshot fechado</dt><dd>Copia congelada y fechada de una fuente, que permite reproducir una cifra.</dd></div>
+          <div class="gl"><dt>Pase adversarial</dt><dd>Revisión que intenta refutar un hallazgo antes de emitirlo.</dd></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="hallazgos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
