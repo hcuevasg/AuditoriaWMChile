@@ -310,16 +310,18 @@ if (ejesGrid && window.EJES) {
 
 function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
 
-// Tablero de seguimiento del plan: una tarjeta por remediación con su línea de
-// etapas, estado documental y de remediación, plazo, validador y efectividad.
-// El expediente documental (modal) es secundario y se abre desde la tarjeta.
+// El archivo de la remediación (estilo cajón de expedientes): una carpeta de
+// color por remediación, apiladas de borde a borde. La banda se despliega y
+// muestra el seguimiento sobre el color de la carpeta; la pestaña abre el
+// expediente documental completo.
 const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
-const IC_FOLDER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+const REM_COLORS = ['#4073B8', '#B3452F', '#2E7D68', '#6C4F9C', '#C8973A', '#E74243', '#546A7B', '#1A3350'];
+const remColor = (n) => REM_COLORS[(n - 1) % REM_COLORS.length];
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
   const TOTAL_REMS = Math.max(8, window.REMS.length);
   const cnt = { doc: 0, diseno: 0, impl: 0, valid: 0, cerradas: 0, fecha: 0 };
-  let cards = '';
+  let drawer = '';
 
   for (let n = 1; n <= TOTAL_REMS; n++) {
     const r = window.REMS.find((x) => x.n === n);
@@ -339,38 +341,58 @@ if (planList && window.REMS) {
 
     const stages = ETAPAS_REM.map((et, i) => {
       const st = i + 1 <= done ? ' done' : i + 1 === cur ? ' cur' : '';
-      return '<span class="rc-stage' + st + '"><i></i><em>' + et + '</em></span>';
+      return '<span class="df-stage' + st + '"><i></i><em>' + et + '</em></span>';
     }).join('');
 
-    cards += '<article class="rseg-card' + (r ? '' : ' pending') + '" data-aos="fade-up" data-aos-delay="' + ((n - 1) % 2) * 80 + '">'
-      + '<header class="rc-head">'
-      + '<span class="rc-n">R' + n + '</span>'
-      + '<div class="rc-headb">'
-      + '<h3 class="rc-tit">' + (r ? esc(r.corto || r.tit) : 'Remediación N.° ' + n + ' — alcance por definir') + '</h3>'
+    const tabLeft = [4, 28, 52, 70][(n - 1) % 4];
+    drawer += '<div class="dfolder' + (r ? '' : ' pending') + '" style="--fc:' + remColor(n) + ';z-index:' + n + '" data-n="' + n + '">'
+      + '<button class="df-tab" type="button" style="left:' + tabLeft + '%"'
+      + (r ? ' aria-haspopup="dialog" title="Abrir el expediente"' : ' title="Desplegar la carpeta"') + '>'
+      + '<strong>R' + n + '</strong> ' + (r ? esc(r.corto || r.tit) : 'Por definir')
+      + '</button>'
+      + '<button class="df-band" type="button" aria-expanded="false">'
+      + '<span class="df-label">' + esc(docEstado) + ' <i class="df-chev" aria-hidden="true">‹</i></span>'
+      + '</button>'
+      + '<div class="df-body"><div class="df-inner">'
+      + '<div class="df-chips">'
+      + '<span class="df-chip">' + esc(docEstado) + '</span>'
+      + '<span class="df-chip">' + esc(remEstado) + '</span>'
+      + '<span class="df-chip ' + plazoCls + '">' + esc(plazo) + '</span>'
       + '</div>'
-      + '</header>'
-      + '<div class="rc-chips">'
-      + '<span class="rc-chip doc' + (r ? '' : ' prep') + '">' + esc(docEstado) + '</span>'
-      + '<span class="rc-chip rem">' + esc(remEstado) + '</span>'
-      + '<span class="rc-chip plazo ' + plazoCls + '">' + esc(plazo) + '</span>'
-      + '</div>'
-      + '<div class="rc-stages" role="img" aria-label="Etapa actual: ' + esc(ETAPAS_REM[cur - 1]) + ' (' + done + ' de ' + ETAPAS_REM.length + ' etapas completadas)">' + stages + '</div>'
-      + '<dl class="rc-meta">'
+      + '<div class="df-stages" role="img" aria-label="Etapa actual: ' + esc(ETAPAS_REM[cur - 1]) + ' (' + done + ' de ' + ETAPAS_REM.length + ' etapas completadas)">' + stages + '</div>'
+      + '<dl class="df-meta">'
       + '<div><dt>Responsable</dt><dd>' + (r ? esc(r.resp) : 'Por asignar') + '</dd></div>'
       + '<div><dt>Validador independiente</dt><dd>' + (r ? esc(r.valid) : 'Por designar') + '</dd></div>'
       + '<div><dt>Fecha objetivo</dt><dd>' + esc(seg.fechaObjetivo || 'Por definir') + '</dd></div>'
       + '<div><dt>Efectividad</dt><dd>' + esc(seg.efectividad || 'Se define en el documento') + '</dd></div>'
       + '</dl>'
-      + '<div class="rc-foot">'
       + (r
-        ? '<button class="rc-open" type="button" data-n="' + n + '" aria-haspopup="dialog">' + IC_FOLDER + 'Ver expediente →</button>'
-        : '<span class="rc-open prep">' + IC_FOLDER + 'Expediente en preparación</span>')
-      + '</div>'
-      + '</article>';
+        ? '<button class="df-open" type="button" data-n="' + n + '" aria-haspopup="dialog">Abrir el expediente →</button>'
+        : '<span class="df-open prep">Expediente en preparación</span>')
+      + '</div></div>'
+      + '</div>';
   }
-  planList.innerHTML = cards;
+  planList.innerHTML = drawer;
 
-  planList.querySelectorAll('button.rc-open').forEach((btn) => {
+  // Acordeón del cajón: una carpeta desplegada a la vez.
+  const folders = [...planList.querySelectorAll('.dfolder')];
+  function toggleFolder(f, force) {
+    const open = force !== undefined ? force : !f.classList.contains('open');
+    folders.forEach((o) => {
+      const isThis = o === f && open;
+      o.classList.toggle('open', isThis);
+      o.querySelector('.df-band').setAttribute('aria-expanded', String(isThis));
+      o.querySelector('.df-body').style.maxHeight = isThis ? o.querySelector('.df-inner').scrollHeight + 'px' : '0px';
+    });
+  }
+  folders.forEach((f) => {
+    f.querySelector('.df-band').addEventListener('click', () => toggleFolder(f));
+    f.querySelector('.df-tab').addEventListener('click', () => {
+      const r = window.REMS.find((x) => x.n === +f.dataset.n);
+      if (r) openRemModal(r); else toggleFolder(f);
+    });
+  });
+  planList.querySelectorAll('button.df-open').forEach((btn) => {
     btn.addEventListener('click', () => {
       const r = window.REMS.find((x) => x.n === +btn.dataset.n);
       if (r) openRemModal(r);
@@ -392,38 +414,47 @@ if (planList && window.REMS) {
   }
 }
 
+// El expediente: carpeta abierta con el documento sobre papel, metadatos
+// mecanografiados, fichas de color y timbre — estilo archivo de auditoría.
 function openRemModal(r) {
   const body = document.getElementById('planModalBody');
+  const overlay = document.getElementById('planModal');
   if (!body || !planModal) return;
-  let h = '<div class="modal-head">'
-    + '<span class="modal-code">Remediación N.° ' + r.n + '</span>'
-    + '<span class="modal-country">' + esc(r.period) + '</span>'
-    + '</div>'
-    + '<h3 id="planModalTitle">' + esc(r.tit) + '</h3>'
-    + '<p class="pm-desc">' + esc(r.resumen) + '</p>';
-  h += '<div class="qm-block"><h4>Proceso de conciliación</h4>'
+  overlay.classList.add('exp');
+  const seg = r.seg || {};
+  let h = '<div class="exp-folder" style="--fc:' + remColor(r.n) + '">'
+    + '<span class="exp-tab"><strong>R' + r.n + '</strong> Expediente de remediación</span>'
+    + '<div class="exp-paper">'
+    + '<span class="exp-dots" aria-hidden="true"></span>'
+    + '<span class="exp-stamp">' + esc(seg.docEstado || 'Documento emitido') + '</span>'
+    + '<div class="exp-mono-head"><span>Remediación N.° ' + r.n + '</span><span>' + esc(r.period) + '</span></div>'
+    + '<h3 id="planModalTitle" class="exp-title">' + esc(r.tit) + '</h3>'
+    + '<p class="exp-resumen">' + esc(r.resumen) + '</p>'
+    + '<dl class="exp-ficha">'
+    + '<div><dt>Responsable</dt><dd>' + esc(r.resp) + '</dd></div>'
+    + '<div><dt>Validador</dt><dd>' + esc(r.valid) + '</dd></div>'
+    + '<div><dt>Fecha de implementación</dt><dd>' + esc(r.fecha) + '</dd></div>'
+    + '<div><dt>Periodicidad</dt><dd>' + esc(r.period) + '</dd></div>'
+    + '</dl>';
+  h += '<h4 class="exp-sec">Proceso de conciliación</h4>'
     + r.pasos.map((p, i) =>
-      '<div class="rm-step"><span class="rm-step-n">' + (i + 1) + '</span><div class="rm-step-b"><strong>' + esc(p.t) + '</strong><p>' + esc(p.d) + '</p>'
-      + (p.formula ? '<p class="rm-formula">' + esc(p.formula) + '</p>' : '') + '</div></div>'
-    ).join('')
+      '<div class="exp-step"><span class="exp-step-n">' + String(i + 1).padStart(2, '0') + '</span><div class="exp-step-b"><strong>' + esc(p.t) + '</strong><p>' + esc(p.d) + '</p>'
+      + (p.formula ? '<p class="exp-formula">' + esc(p.formula) + '</p>' : '') + '</div></div>'
+    ).join('');
+  h += '<h4 class="exp-sec">Reportería a Walmart</h4><div class="exp-cards">'
+    + r.reporteria.map((b, i) => '<div class="exp-card c' + (i % 2) + '"><h5>' + esc(b.t) + '</h5><p>' + esc(b.d) + '</p></div>').join('')
     + '</div>';
-  h += '<div class="qm-block"><h4>Reportería a Walmart</h4><div class="pm-meta rm-rep">'
-    + r.reporteria.map((b) => '<div class="pm-meta-item"><h4>' + esc(b.t) + '</h4><p>' + esc(b.d) + '</p></div>').join('')
-    + '</div></div>';
-  h += '<div class="pm-meta">'
-    + '<div class="pm-meta-item"><h4>Responsable</h4><p>' + esc(r.resp) + '</p></div>'
-    + '<div class="pm-meta-item"><h4>Validador</h4><p>' + esc(r.valid) + '</p></div>'
-    + '<div class="pm-meta-item"><h4>Fecha de implementación</h4><p>' + esc(r.fecha) + '</p></div>'
-    + '<div class="pm-meta-item"><h4>Periodicidad</h4><p>' + esc(r.period) + '</p></div>'
-    + '</div>';
-  h += '<div class="qm-block"><h4>Indicadores de efectividad</h4>'
+  h += '<h4 class="exp-sec">Indicadores de efectividad</h4>'
     + r.indicadores.map((x) =>
-      '<div class="rm-ind"><div class="rm-ind-b"><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div><span class="rm-meta">Meta ' + esc(x.meta) + '</span></div>'
-    ).join('')
+      '<div class="exp-ind"><div class="exp-ind-b"><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div><span class="exp-goal">Meta ' + esc(x.meta) + '</span></div>'
+    ).join('');
+  h += '<h4 class="exp-sec">Evidencia del expediente</h4><ul class="exp-ev">'
+    + r.evidencia.map((e2) => '<li>' + esc(e2) + '</li>').join('') + '</ul>';
+  h += '<div class="exp-cards exp-cards-foot">'
+    + '<div class="exp-card gold"><h5>Criterio de cierre</h5><p>' + esc(r.cierre) + '</p></div>'
+    + '<div class="exp-card red"><h5>Control permanente</h5><p>' + esc(r.control) + '</p></div>'
     + '</div>';
-  h += '<div class="qm-block"><h4>Evidencia</h4><ul class="rm-ev">' + r.evidencia.map((e2) => '<li>' + esc(e2) + '</li>').join('') + '</ul></div>';
-  h += '<div class="modal-extra modal-gap"><h4>Criterio de cierre</h4><p>' + esc(r.cierre) + '</p></div>';
-  h += '<div class="modal-extra modal-sug"><h4>Control permanente</h4><p>' + esc(r.control) + '</p></div>';
+  h += '</div></div>';
   body.innerHTML = h;
   planModal.open();
 }
