@@ -205,22 +205,22 @@
 .qt-go { margin-top: 14px; font-size: 0.78rem; font-weight: 700; color: #8fb2da; transition: color 0.2s ease, transform 0.2s ease; }
 .quant-tile:hover .qt-go { color: var(--white); transform: translateX(3px); }
 
-/* Cronología del desplome (gráfico SVG) */
+/* Cronología del desplome (gráfico SVG, fondo claro corporativo) */
 .quant-chart {
   max-width: 1000px; margin: 0 auto 26px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+  background: var(--white); border: 1px solid rgba(26,51,80,0.07);
   border-radius: var(--radius-card); padding: 20px 22px 8px;
+  box-shadow: var(--shadow-sm);
 }
 .quant-chart svg { width: 100%; height: auto; display: block; }
 .quant-legend { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-bottom: 8px; }
 .ql-item {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 0.74rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
-  color: rgba(255,255,255,0.72);
+  color: var(--text-secondary);
 }
-.ql-hint { margin-left: auto; font-size: 0.78rem; font-weight: 600; color: #8fb2da; }
 .qpt { cursor: pointer; }
-.qpt:hover circle { stroke: rgba(255,255,255,0.85); }
+.qpt:hover circle { stroke: rgba(26,51,80,0.5); }
 
 /* Scrollytelling: gráfico fijo a la izquierda, hitos apareciendo a la derecha */
 .scrolly {
@@ -231,8 +231,14 @@
 .scrolly-sticky { position: sticky; top: 100px; z-index: 1; }
 .scrolly-sticky .quant-chart { margin-bottom: 0; }
 .scrolly-sticky svg { max-height: 62vh; }
-.scrolly-sticky .quant-delta { margin: 12px auto 0; padding: 12px 18px; gap: 8px 16px; }
-.scrolly-sticky .qd-item { font-size: 0.88rem; }
+.scrolly-sticky .quant-delta {
+  margin: 12px auto 0; padding: 12px 18px; gap: 8px 16px;
+  background: rgba(231,66,67,0.06); border: 1px solid rgba(231,66,67,0.25);
+}
+.scrolly-sticky .qd-tag { color: var(--secondary); }
+.scrolly-sticky .qd-item { font-size: 0.88rem; color: var(--text-secondary); }
+.scrolly-sticky .qd-item strong { color: var(--text); }
+.scrolly-sticky .qd-item em { color: var(--secondary); }
 
 .qs { opacity: 0; transition: opacity 0.7s ease 0.1s; }
 .qs.on { opacity: 1; }
@@ -244,26 +250,26 @@
 .sstep:first-child { min-height: 56vh; }
 .sstep-card {
   max-width: 460px; width: 100%;
-  background: rgba(21,26,36,0.94); border: 1px solid rgba(255,255,255,0.14);
-  border-left: 3px solid rgba(91,143,212,0.55);
-  border-radius: 16px; padding: 20px 24px; box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-  opacity: 0.35; transform: translateY(14px);
+  background: var(--white); border: 1px solid rgba(26,51,80,0.08);
+  border-left: 4px solid var(--primary);
+  border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow-md);
+  opacity: 0.45; transform: translateY(14px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .sstep.active .sstep-card { opacity: 1; transform: none; }
-.ss-date { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #8fb2da; margin-bottom: 7px; }
-.ss-date.bad { color: #f08a8b; }
-.ss-date.ok { color: #6bbd90; }
-.sstep-card h4 { color: var(--white); font-size: 1.18rem; margin-bottom: 8px; }
-.sstep-card p { color: rgba(255,255,255,0.78); font-size: 0.95rem; line-height: 1.6; margin: 0; }
-.sstep-card strong { color: var(--white); }
+.ss-date { display: block; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); margin-bottom: 7px; }
+.ss-date.bad { color: var(--secondary); }
+.ss-date.ok { color: #1f7a4d; }
+.sstep-card h4 { color: var(--text); font-size: 1.18rem; margin-bottom: 8px; }
+.sstep-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.sstep-card strong { color: var(--text); }
 .ss-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .ss-link {
   font-family: var(--font); cursor: pointer; font-size: 0.78rem; font-weight: 800;
-  color: #8fb2da; background: rgba(91,143,212,0.12); border: 1px solid rgba(91,143,212,0.35);
+  color: var(--primary); background: rgba(64,115,184,0.08); border: 1px solid rgba(64,115,184,0.3);
   border-radius: 20px; padding: 6px 14px; transition: background 0.2s ease, color 0.2s ease;
 }
-.ss-link:hover { background: #5b8fd4; color: var(--white); }
+.ss-link:hover { background: var(--primary); color: var(--white); }
 
 @media (prefers-reduced-motion: reduce) {
   .qs { opacity: 1; transition: none; }
