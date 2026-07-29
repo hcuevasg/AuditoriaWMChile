@@ -310,23 +310,79 @@ if (ejesGrid && window.EJES) {
 
 function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
 
+// Las ocho remediaciones como expedientes de archivo: la carpeta emitida se
+// entreabre al pasar el cursor y se abre al hacer clic; las restantes quedan
+// selladas hasta que su documento se emite.
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
-  planList.innerHTML = window.REMS.map((r, i) =>
-    '<button class="plan-item" type="button" data-i="' + i + '">'
-    + '<span class="plan-item-n">' + r.n + '</span>'
-    + '<span class="plan-item-body">'
-    + '<span class="plan-item-eje">Remediación N.° ' + r.n + ' · ' + esc(r.resp) + '</span>'
-    + '<span class="plan-item-tit">' + esc(r.tit) + '</span>'
-    + '</span>'
-    + '<span class="estado-chip encurso">Definitiva</span>'
-    + '<span class="plan-item-go" aria-hidden="true">→</span>'
-    + '</button>'
-  ).join('')
-  + '<div class="plan-item pending"><span class="plan-item-n">…</span><span class="plan-item-body"><span class="plan-item-tit">Remediaciones 2 a 8 — documentos en preparación</span></span><span class="estado-chip pendiente">Próximamente</span></div>';
-  planList.querySelectorAll('button.plan-item').forEach((item) => {
-    item.addEventListener('click', () => openRemModal(window.REMS[+item.dataset.i]));
+  const TOTAL_REMS = Math.max(8, window.REMS.length);
+  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let shelf = '';
+  for (let n = 1; n <= TOTAL_REMS; n++) {
+    const r = window.REMS.find((x) => x.n === n);
+    const delay = ((n - 1) % 4) * 70;
+    if (r) {
+      shelf += '<button class="rem-folder ready" type="button" data-n="' + n + '" data-aos="zoom-in-up" data-aos-delay="' + delay + '" aria-haspopup="dialog" aria-label="Abrir Remediación N.° ' + n + ': ' + esc(r.corto || r.tit) + '">'
+        + '<span class="rf-tab">R' + n + '</span>'
+        + '<span class="rf-back"></span>'
+        + '<span class="rf-paper p2" aria-hidden="true"></span>'
+        + '<span class="rf-paper p1" aria-hidden="true"><i></i><i></i><i></i><i></i></span>'
+        + '<span class="rf-front">'
+        + '<span class="rf-stamp">Definitiva</span>'
+        + '<span class="rf-kicker">Remediación N.° ' + n + '</span>'
+        + '<span class="rf-tit">' + esc(r.corto || r.tit) + '</span>'
+        + '<span class="rf-resp">' + esc(r.resp) + '</span>'
+        + '<span class="rf-open">Abrir el expediente →</span>'
+        + '</span>'
+        + '</button>';
+    } else {
+      shelf += '<div class="rem-folder pending" data-aos="zoom-in-up" data-aos-delay="' + delay + '" title="Documento en preparación">'
+        + '<span class="rf-tab">R' + n + '</span>'
+        + '<span class="rf-back"></span>'
+        + '<span class="rf-paper p1" aria-hidden="true"></span>'
+        + '<span class="rf-front">'
+        + '<span class="rf-stamp">En preparación</span>'
+        + '<span class="rf-kicker">Remediación N.° ' + n + '</span>'
+        + '<span class="rf-tit">Documento en preparación</span>'
+        + '<span class="rf-resp">Se archiva aquí al quedar emitido</span>'
+        + '</span>'
+        + '</div>';
+    }
+  }
+  planList.innerHTML = shelf;
+
+  planList.querySelectorAll('.rem-folder.ready').forEach((folder) => {
+    folder.addEventListener('click', () => {
+      const r = window.REMS.find((x) => x.n === +folder.dataset.n);
+      if (!r) return;
+      if (noMotion) { openRemModal(r); return; }
+      if (folder.classList.contains('opening')) return;
+      folder.classList.add('opening');
+      setTimeout(() => {
+        openRemModal(r);
+        setTimeout(() => folder.classList.remove('opening'), 400);
+      }, 480);
+    });
   });
+
+  // Un expediente sellado se sacude: aún no hay documento que abrir.
+  planList.querySelectorAll('.rem-folder.pending').forEach((folder) => {
+    folder.addEventListener('click', () => {
+      folder.classList.remove('shake');
+      void folder.offsetWidth;
+      folder.classList.add('shake');
+    });
+    folder.addEventListener('animationend', () => folder.classList.remove('shake'));
+  });
+
+  const remProgress = document.getElementById('remProgress');
+  if (remProgress) {
+    const done = window.REMS.length;
+    let segs = '';
+    for (let i = 0; i < TOTAL_REMS; i++) segs += '<span class="rp-seg' + (i < done ? ' on' : '') + '"></span>';
+    remProgress.innerHTML = '<span class="rp-segs" aria-hidden="true">' + segs + '</span>'
+      + '<span class="rp-label">' + done + ' de ' + TOTAL_REMS + ' expedientes emitidos</span>';
+  }
 }
 
 function openRemModal(r) {
