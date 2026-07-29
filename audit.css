@@ -332,6 +332,20 @@
   .pb-counters { gap: 8px; }
   .pbc { padding: 12px 8px; }
 }
+
+/* Remediación sin parallax: revelado AOS, todo queda fijo y legible */
+.pb-counters.static { max-width: 720px; margin: 0 auto 44px; }
+.rem-grid { max-width: 1000px; margin: 0 auto; }
+.rem-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+  border-top: 3px solid #5b8fd4; border-radius: var(--radius-card); padding: 26px 26px 24px;
+}
+.rem-eje { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #8fb2da; margin-bottom: 12px; }
+.rem-eje em { font-style: normal; color: rgba(255,255,255,0.5); }
+.rem-card h3 { color: var(--white); font-size: 1.25rem; margin-bottom: 10px; line-height: 1.3; }
+.rem-card p { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.6; }
+.rem-card strong { color: var(--white); }
+.rem-band { margin-top: 46px; }
 .quant-concl p { max-width: 660px; margin: 0 auto 12px; color: var(--text-secondary); font-size: 1.06rem; line-height: 1.65; }
 .quant-concl p strong { color: var(--text); }
 .qc-note { margin-top: 16px !important; padding-top: 16px; border-top: 1px solid rgba(26,51,80,0.08); }
