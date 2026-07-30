@@ -286,9 +286,12 @@ function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En cur
 // al pasar el cursor el cuadro cambia de color y al hacer clic se abre el
 // expediente en una modal.
 const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
+// Remediaciones que el documento define solo por su título (sin cuerpo aún):
+// se muestran como cuadros "en preparación" con su tema, no como fichas abribles.
+const REM_PENDIENTES = { 9: 'WEOP', 10: 'Criminalidad interna' };
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
-  const TOTAL_REMS = window.REMS.length;
+  const TOTAL_REMS = Math.max(window.REMS.length, ...Object.keys(REM_PENDIENTES).map(Number));
   const cnt = { doc: 0, diseno: 0, impl: 0, valid: 0, cerradas: 0, fecha: 0 };
   let tiles = '';
 
@@ -315,7 +318,7 @@ if (planList && window.REMS) {
       tiles += '<div class="rem-tile pending" data-aos="fade-up" data-aos-delay="' + delay + '">'
         + '<span class="rt-num">' + n + '</span>'
         + '<span class="rt-word">Remediación</span>'
-        + '<span class="rt-tit">Documento en preparación</span>'
+        + '<span class="rt-tit">' + esc(REM_PENDIENTES[n] || 'Documento en preparación') + '</span>'
         + '<span class="rt-state">En preparación</span>'
         + '</div>';
     }
