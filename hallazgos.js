@@ -12,7 +12,7 @@ window.HALLAZGOS = [
     sev: 'Crítica',
     deriva: 'OBS-002',
     criterio: 'Nivel 2 · Contrato',
-    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El 46% del universo no correspondía: 3.833 causas y 4.075 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
+    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. El 46% del universo no correspondía: 3.833 causas y 4.075 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
     acciones: ['B', 'C', 'G'],
   },
   {
@@ -132,7 +132,7 @@ window.HALLAZGOS = [
     sev: 'Media',
     deriva: 'OBS-001',
     criterio: 'Nivel 4 · Buenas prácticas',
-    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene cuatro magnitudes: 8.003 filas reales, 8.004 comunicadas —por conteo de la cabecera—, 7.140 causas por identificador judicial y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
+    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene tres magnitudes: 8.003 filas reales, 7.140 causas por identificador judicial y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
     acciones: ['A'],
   },
   {
@@ -381,7 +381,7 @@ window.PLAN_IMPL = [
 window.BASES = [
   {
     id: 'may', fecha: '8 de mayo', tag: 'Primera entrega', imputados: 8003, causas: 7227,
-    resumen: 'Base construida a partir de lo abierto en el sistema de origen, sin validación contra el Poder Judicial y con la revisión de fondo expresamente diferida. El número real de registros es 8.003; el 8.004 que circuló provino de contar la cabecera del archivo.',
+    resumen: 'Base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. El universo entregado contenía 8.003 registros.',
     bloques: [
       {
         tipo: 'status', tit: 'Lo que no correspondía', hal: 'HAL-002',
@@ -399,11 +399,10 @@ window.BASES = [
         ],
       },
       {
-        tipo: 'mags', tit: 'Cuatro magnitudes en el mismo archivo', hal: 'HAL-001',
-        nota: 'El mismo archivo sostenía cuatro cifras a la vez, porque nunca se declaró qué unidad se estaba contando: filas de imputado-causa o causas. Esa confusión explica solo una fracción menor de la caída del universo — entre el 5,9% y el 7,6% — y no el descuadre de fondo.',
+        tipo: 'mags', tit: 'Tres magnitudes en el mismo archivo', hal: 'HAL-001',
+        nota: 'El mismo archivo sostenía tres cifras a la vez, porque nunca se declaró qué unidad se estaba contando: filas de imputado-causa o causas. Esa confusión explica solo una fracción menor de la caída del universo — entre el 5,9% y el 7,6% — y no el descuadre de fondo.',
         items: [
           ['8.003', 'registros reales del archivo'],
-          ['8.004', 'cifra que circuló — contaba la cabecera del archivo'],
           ['7.227', 'causas identificables'],
           ['7.140', 'causas por identificador judicial'],
         ],
