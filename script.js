@@ -286,10 +286,10 @@ function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En cur
 // al pasar el cursor el cuadro cambia de color y al hacer clic se abre el
 // expediente en una modal.
 const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
-// Remediaciones que el documento define solo por su título (sin cuerpo aún):
-// se muestran como cuadros "en preparación" con su tema, no como fichas abribles.
-// (07-30: WEOP ya tiene documento (REM N.° 9), no queda ninguna en preparación.)
-const REM_PENDIENTES = {};
+// Remediaciones definidas solo por su título (sin cuerpo/validación aún):
+// se muestran como cuadros con estado "Pendiente de validación", no como fichas
+// abribles con expediente. Cuando llegue su documento, pasan a window.REMS.
+const REM_PENDIENTES = { 12: 'KPI de ACD' };
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
   const TOTAL_REMS = Math.max(window.REMS.length, ...Object.keys(REM_PENDIENTES).map(Number));
@@ -320,7 +320,7 @@ if (planList && window.REMS) {
         + '<span class="rt-num">' + n + '</span>'
         + '<span class="rt-word">Remediación</span>'
         + '<span class="rt-tit">' + esc(REM_PENDIENTES[n] || 'Documento en preparación') + '</span>'
-        + '<span class="rt-state">En preparación</span>'
+        + '<span class="rt-state">Pendiente de validación</span>'
         + '</div>';
     }
   }
@@ -340,7 +340,7 @@ if (planList && window.REMS) {
       '<span class="rr-chip' + (val === 0 ? ' zero' : '') + (cls ? ' ' + cls : '') + '"><strong>' + val + '</strong> ' + label + '</span>';
     remResumen.innerHTML = '<span class="rr-total">' + TOTAL_REMS + ' remediaciones</span>'
       + chip(cnt.doc, 'con documento emitido', 'doc')
-      + chip(cnt.diseno, 'en diseño')
+      + chip(cnt.diseno, 'pendiente de validación')
       + chip(cnt.impl, 'implementadas')
       + chip(cnt.valid, 'validadas')
       + chip(cnt.cerradas, 'cerradas')
