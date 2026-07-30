@@ -265,7 +265,7 @@ window.PLAN_IMPL = [
   {
     n: 5, eje: 2, estado: 'Ejecutado',
     tit: 'Disponibilizar a Walmart la base estructurada por causa y el nuevo panel de reportería',
-    desc: 'ALTO reconstruyó y depuró la base de causas vigentes y la estructuró tomando la causa como unidad de registro, en reemplazo del imputado. La base fue remitida a Walmart el 23 de julio de 2026 —2.839 causas vigentes, informando separadamente 3.401 imputados— y el nuevo panel de reportería fue liberado a producción ese mismo día con las definiciones validadas.',
+    desc: 'ALTO reconstruyó y depuró la base de causas vigentes y la estructuró tomando la causa como unidad de registro, en reemplazo del imputado. La base fue remitida a Walmart el 23 de julio de 2026 —2.838 causas vigentes, informando separadamente 3.023 imputados— y el nuevo panel de reportería fue liberado a producción ese mismo día con las definiciones validadas.',
     obtiene: 'Ya obtenido. Walmart recibió el 23 de julio la base estructurada por causa y el panel de reportería con las definiciones validadas. La cifra deja de mezclar causas con registros de imputado. La actualización periódica la asegura la acción 8.',
     resp: 'Dirección Legal y Compliance · Dirección de Mejora Continua',
     dep: null,
@@ -435,23 +435,23 @@ window.BASES = [
     ],
   },
   {
-    id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3401, causas: 2839, final: true,
-    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.839 causas vigentes, informando separadamente 3.401 imputados. En la depuración participó además un auditor externo independiente que revisó las bases — parte de la baja proviene de esa revisión. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
+    id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3023, causas: 2838, final: true,
+    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.838 causas vigentes, informando separadamente 3.023 imputados. En la depuración participó además un auditor externo independiente que revisó las bases — parte de la baja proviene de esa revisión. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
     bloques: [
       {
         tipo: 'delta', tit: 'La caída frente al 12 de junio',
         nota: 'Corresponde a la depuración practicada durante el encargo, con verificación del estado procesal y revisión de un auditor externo independiente. Una tercera revisión interna (7 de julio) ya había situado la base en torno a 3.500.',
         rows: [
-          { label: 'Imputados tramitados', from: '4.321', to: '3.401', delta: '−920', pct: '−21,3%' },
-          { label: 'Causas', from: '3.741', to: '2.839', delta: '−902', pct: '−24,1%' },
+          { label: 'Imputados tramitados', from: '4.321', to: '3.023', delta: '−1.298', pct: '−30,0%' },
+          { label: 'Causas', from: '3.741', to: '2.838', delta: '−903', pct: '−24,1%' },
         ],
       },
       {
         tipo: 'delta', tit: 'Cuánto bajamos entre la 1.ª y la 3.ª entrega',
         nota: 'Es la magnitud total del descuadre: más de la mitad del universo originalmente reportado no se sostuvo.',
         rows: [
-          { label: 'Imputados tramitados', from: '8.003', to: '3.401', delta: '−4.602', pct: '−57,5%' },
-          { label: 'Causas', from: '7.227', to: '2.839', delta: '−4.388', pct: '−60,7%' },
+          { label: 'Imputados tramitados', from: '8.003', to: '3.023', delta: '−4.980', pct: '−62,2%' },
+          { label: 'Causas', from: '7.227', to: '2.838', delta: '−4.389', pct: '−60,7%' },
         ],
       },
       {
