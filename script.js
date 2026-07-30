@@ -282,13 +282,13 @@ if (ejesGrid && window.EJES) {
 
 function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En curso' ? 'encurso' : 'pendiente'; }
 
-// Las ocho remediaciones como cuadros sobrios en una grilla: número y título;
+// Las remediaciones como cuadros sobrios en una grilla: número y título;
 // al pasar el cursor el cuadro cambia de color y al hacer clic se abre el
 // expediente en una modal.
 const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
-  const TOTAL_REMS = Math.max(8, window.REMS.length);
+  const TOTAL_REMS = window.REMS.length;
   const cnt = { doc: 0, diseno: 0, impl: 0, valid: 0, cerradas: 0, fecha: 0 };
   let tiles = '';
 
