@@ -784,15 +784,27 @@
 .obs-exec-in h5 { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--primary); margin: 0 0 7px; }
 .obs-exec-in p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
 .obs-doc {
-  display: inline-flex; align-items: center; gap: 7px; margin-top: 13px;
-  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; cursor: pointer;
+  font-family: var(--font); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.02em; text-decoration: none;
   color: var(--primary); background: rgba(64,115,184,0.08);
   border: 1px solid rgba(64,115,184,0.3); border-radius: 20px; padding: 6px 13px;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 .obs-doc:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
 .obs-doc svg { flex-shrink: 0; }
-.obs-doc svg:last-child { opacity: 0.7; }
+
+/* Detalle de una observación (dentro del mismo modal) */
+.obs-back {
+  display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+  font-family: var(--font); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.02em;
+  color: var(--primary); background: none; border: 0; padding: 4px 0; margin-bottom: 14px;
+  transition: color 0.2s ease;
+}
+.obs-back:hover { color: var(--text); text-decoration: underline; }
+.obs-hal-head { margin-left: auto; }
+.obs-doc-body { margin-top: 4px; }
+.obs-doc-body h5 { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--primary); margin: 0 0 9px; }
+.obs-doc-body > p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.72; margin: 0; }
 /* Desglose visual dentro del detalle de una observación (hoy OBS-002, PRELIMINAR) */
 .obs-row.has-brk.open .obs-exec { max-height: 1300px; }
 .obs-brk { margin-top: 16px; padding-top: 15px; border-top: 1px dashed rgba(26,51,80,0.18); }

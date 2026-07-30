@@ -497,16 +497,18 @@ function desgloseHtml(d) {
 var obsModal = wireModal(document.getElementById('obsModal'), document.getElementById('obsModalClose'));
 const obsBtn = document.getElementById('obsBtn');
 if (obsBtn && window.OBSERVACIONES) {
-  obsBtn.addEventListener('click', () => {
-    const body = document.getElementById('obsModalBody');
-    if (!body || !obsModal) return;
+  const obsBox = () => document.querySelector('#obsModal .modal-box');
+  let obsListScroll = 0;
+
+  // Lista de las 29 observaciones (una línea + acordeón con su resumen ejecutivo).
+  function renderObsList(body) {
     body.innerHTML = '<div class="modal-head">'
       + '<span class="modal-code">Registro Maestro</span>'
       + '<span class="modal-country">29 observaciones · resumen de una línea</span>'
       + '</div>'
       + '<h3 id="obsModalTitle">Las observaciones, una a una</h3>'
-      + '<p class="pm-desc">La observación consigna hechos y evidencia; el juicio técnico corresponde al hallazgo. Cada línea indica a qué hallazgo derivó — el desarrollo completo consta en el Registro Maestro y en el documento propio de cada observación.</p>'
-      + '<p class="obs-hint">Haz clic en cada observación para ver su resumen ejecutivo.</p>'
+      + '<p class="pm-desc">La observación consigna hechos y evidencia; el juicio técnico corresponde al hallazgo. Cada línea indica a qué hallazgo derivó — el desarrollo completo se consigna en el Registro Maestro.</p>'
+      + '<p class="obs-hint">Haz clic en cada observación para desplegar su resumen ejecutivo, o en «Ver observación completa» para abrir su detalle.</p>'
       + '<div class="obs-list">'
       + window.OBSERVACIONES.map((o) =>
         '<div class="obs-row' + (o.desglose ? ' has-brk' : '') + '" data-code="' + esc(o.code) + '">'
@@ -520,13 +522,10 @@ if (obsBtn && window.OBSERVACIONES) {
         + '</div>'
         + '<div class="obs-exec"><div class="obs-exec-in"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p>'
         + desgloseHtml(o.desglose)
-        + (o.doc
-          ? '<a class="obs-doc" href="https://drive.google.com/file/d/' + esc(o.doc) + '/view" target="_blank" rel="noopener" onclick="event.stopPropagation()">'
-            + '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
-            + '<span>Ver observación completa</span>'
-            + '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>'
-            + '</a>'
-          : '')
+        + '<button class="obs-doc" type="button" data-code="' + esc(o.code) + '">'
+        + '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+        + '<span>Ver observación completa</span>'
+        + '</button>'
         + '</div></div>'
         + '</div>'
       ).join('')
@@ -539,6 +538,48 @@ if (obsBtn && window.OBSERVACIONES) {
     body.querySelectorAll('.obs-hal').forEach((b) =>
       b.addEventListener('click', (e) => { e.stopPropagation(); gotoHallazgo(b.dataset.hal); })
     );
+    // Chip: abre el detalle de la observación DENTRO del mismo modal (sin Drive).
+    body.querySelectorAll('.obs-doc').forEach((b) =>
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const o = window.OBSERVACIONES.find((x) => x.code === b.dataset.code);
+        if (!o) return;
+        const box = obsBox();
+        obsListScroll = box ? box.scrollTop : 0;
+        renderObsDetail(body, o);
+      })
+    );
+  }
+
+  // Detalle completo de una observación (todo lo que el sitio consigna de ella).
+  function renderObsDetail(body, o) {
+    body.innerHTML = '<button class="obs-back" type="button">‹ Volver a las 29 observaciones</button>'
+      + '<div class="modal-head">'
+      + '<span class="modal-code">' + esc(o.code) + '</span>'
+      + (o.hal
+        ? '<button class="obs-hal obs-hal-head" type="button" data-hal="' + esc(o.hal) + '" title="Ir al hallazgo">Deriva a ' + esc(o.hal) + ' →</button>'
+        : '<span class="obs-trat">' + esc(o.trat || '') + '</span>')
+      + '</div>'
+      + '<h3 id="obsModalTitle">' + esc(o.tit) + '</h3>'
+      + '<p class="pm-desc">' + esc(o.resumen) + '</p>'
+      + '<div class="obs-doc-body"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p>'
+      + desgloseHtml(o.desglose)
+      + '</div>';
+    body.querySelector('.obs-back').addEventListener('click', () => {
+      renderObsList(body);
+      const box = obsBox();
+      if (box) box.scrollTop = obsListScroll;
+    });
+    const halHead = body.querySelector('.obs-hal-head');
+    if (halHead) halHead.addEventListener('click', () => gotoHallazgo(halHead.dataset.hal));
+    const box = obsBox();
+    if (box) box.scrollTop = 0;
+  }
+
+  obsBtn.addEventListener('click', () => {
+    const body = document.getElementById('obsModalBody');
+    if (!body || !obsModal) return;
+    renderObsList(body);
     obsModal.open();
   });
 }
