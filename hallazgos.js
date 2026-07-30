@@ -519,7 +519,7 @@ window.PLAN_GOB = [
 // ============================================================
 window.REMS = [
   {
-    n: 1,
+    n: 2,
     corto: 'Conciliación preventiva de las causas vigentes reportadas a Walmart',
     // Seguimiento: etapas completadas (etapaDone) y etapa en curso (etapa) sobre
     // la secuencia Diseño → Aprobación → Implementación → Evidencia → Validación → Cierre.
@@ -568,7 +568,7 @@ window.REMS = [
     control: 'Después del cierre, el proceso continúa ejecutándose antes de cada reporte a Walmart. Toda causa omitida, causa terminada no actualizada, revisión sin respaldo o discrepancia no justificada genera una acción correctiva con responsable y plazo definidos.',
   },
   {
-    n: 2,
+    n: 1,
     corto: 'Saneamiento y entrega de la base consolidada por causa',
     seg: {
       etapaDone: 3,
