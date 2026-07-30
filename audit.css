@@ -724,4 +724,4 @@
 .gl-src { display: block; margin-top: 3px; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); }
 
 /* Conclusión del análisis: rótulo del tramo (1.ª a 3.ª entrega) */
-.qc-span { margin: -14px 0 26px !important; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); }
+.qc-span { max-width: none !important; margin: -14px auto 26px !important; text-align: center; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); }
