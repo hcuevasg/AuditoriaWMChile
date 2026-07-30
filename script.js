@@ -403,10 +403,14 @@ function openRemModal(r) {
     + '<div class="rx-panel" id="rxPanel" role="tabpanel">' + rxStepPanel(r.pasos[0], 0) + '</div>'
     + '</div>';
 
-  h += '<div class="rx-block"><h4 class="rx-h">Indicadores de efectividad <em>los tres con meta obligatoria</em></h4><div class="rx-inds">'
-    + r.indicadores.map((x) =>
-      '<div class="rx-ind"><span class="rx-ind-meta">' + esc(x.meta) + '</span><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div>'
-    ).join('')
+  h += '<div class="rx-block"><h4 class="rx-h">Indicadores de efectividad <em>cada uno con su fórmula y meta</em></h4><div class="rx-inds">'
+    + r.indicadores.map((x) => {
+      // El "meta" se muestra grande solo cuando es un porcentaje (p. ej. "100%").
+      // Si es una meta descriptiva ("En definición", "Por definir", etc.) se
+      // muestra en tamaño normal para que no salga en fuente gigante.
+      const isPct = /^\d{1,3}(?:[.,]\d+)?\s*%$/.test((x.meta || '').trim());
+      return '<div class="rx-ind"><span class="rx-ind-meta' + (isPct ? '' : ' txt') + '">' + esc(x.meta) + '</span><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div>';
+    }).join('')
     + '</div></div>';
 
   h += '<div class="rx-block"><h4 class="rx-h">Qué recibe Walmart</h4><div class="rx-reps">'

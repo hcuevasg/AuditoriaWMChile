@@ -792,7 +792,7 @@ window.REMS = [
       { t: 'Cumplimiento de rondas presenciales', f: 'Rondas presenciales ejecutadas y documentadas ÷ rondas programadas para el período × 100', meta: '100%' },
       { t: 'Cobertura de revisión de audios', f: 'Audiencias revisadas mediante audio ÷ total de audiencias del universo mensual definido × 100', meta: 'Según el muestreo aprobado' },
       { t: 'Retroalimentación individual oportuna', f: 'Evaluaciones con brechas que cuentan con reunión individual y acción documentada dentro de plazo ÷ total de evaluaciones con brechas detectadas × 100', meta: '100%' },
-      { t: 'Cobertura de abogados evaluados', f: 'Abogados internos y externos evaluados durante el período ÷ total de abogados que litigan para Walmart × 100', meta: '100% dentro del ciclo de evaluación definido' },
+      { t: 'Cobertura de abogados evaluados', f: 'Abogados internos y externos evaluados durante el período ÷ total de abogados que litigan para Walmart × 100, dentro del ciclo de evaluación definido', meta: '100%' },
     ],
     evidencia: [
       'Protocolo y pauta de evaluación',
@@ -838,7 +838,7 @@ window.REMS = [
       { t: 'Cobertura de la segmentación', f: 'Causas vigentes con segmento de impulso identificado ÷ total de causas vigentes × 100', meta: '100%' },
       { t: 'Cumplimiento del seguimiento', f: 'Causas dependientes del Ministerio Público con gestión registrada dentro de la frecuencia definida ÷ total de causas que debían gestionarse durante el período × 100', meta: '100%' },
       { t: 'Gestión de alertas de inactividad', f: 'Alertas de inactividad revisadas, asignadas y gestionadas dentro de plazo ÷ total de alertas generadas durante el período × 100', meta: '100%' },
-      { t: 'Tasa de movimiento del segmento', f: 'Causas dependientes del Ministerio Público con avance procesal relevante durante el período ÷ total de causas del segmento al inicio del período × 100', meta: 'Línea base y meta por definir tras la primera medición' },
+      { t: 'Tasa de movimiento del segmento', f: 'Causas dependientes del Ministerio Público con avance procesal relevante durante el período ÷ total de causas del segmento al inicio del período × 100. Línea base y meta por definir tras la primera medición.', meta: 'Por definir' },
     ],
     evidencia: [
       'Base segmentada de causas vigentes y reporte de antigüedad',
