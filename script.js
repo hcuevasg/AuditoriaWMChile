@@ -482,7 +482,6 @@ if (obsBtn && window.OBSERVACIONES) {
       + '</div>'
       + '<h3 id="obsModalTitle">Las observaciones, una a una</h3>'
       + '<p class="pm-desc">La observación consigna hechos y evidencia; el juicio técnico corresponde al hallazgo. Cada línea indica a qué hallazgo derivó — el desarrollo completo consta en el Registro Maestro y en el documento propio de cada observación.</p>'
-      + '<a class="obs-dl" href="' + esc(window.REGISTRO_URL || '#') + '" target="_blank" rel="noopener">' + IC_SHEET + 'Abrir el Registro Maestro en Drive ↗</a>'
       + '<div class="obs-list">'
       + window.OBSERVACIONES.map((o) =>
         '<div class="obs-row">'
