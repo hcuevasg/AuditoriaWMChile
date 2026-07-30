@@ -12,7 +12,7 @@ window.HALLAZGOS = [
     sev: 'Crítica',
     deriva: 'OBS-002',
     criterio: 'Nivel 2 · Contrato',
-    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. El 46% del universo no correspondía: 3.833 causas y 4.075 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
+    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. Más de la mitad del universo no correspondía: 4.389 causas y 4.980 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
     acciones: ['B', 'C', 'G'],
   },
   {
@@ -132,7 +132,7 @@ window.HALLAZGOS = [
     sev: 'Media',
     deriva: 'OBS-001',
     criterio: 'Nivel 4 · Buenas prácticas',
-    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene tres magnitudes: 8.003 filas reales, 7.140 causas por identificador judicial y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
+    desc: 'El modelo de reportería empleaba denominaciones jurídicas para nombrar entidades distintas de las que esos términos designan, sin definición documentada ni declaración de la unidad contada. El archivo del 8 de mayo sostiene dos magnitudes: 8.003 filas reales y 7.227 causas identificables. Explica entre el 5,9% y el 7,6% de la reducción del universo: no explica el descuadre que originó el encargo.',
     acciones: ['A'],
   },
   {
@@ -385,10 +385,10 @@ window.BASES = [
     bloques: [
       {
         tipo: 'status', tit: 'Lo que no correspondía', hal: 'HAL-002',
-        nota: 'Casi la mitad del universo reportado eran causas ya terminadas que seguían informadas como vigentes, porque el estado procesal no se actualizaba en la plataforma. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
+        nota: 'Más de la mitad del universo reportado eran causas ya terminadas que seguían informadas como vigentes, porque el estado procesal no se actualizaba en la plataforma. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
         bars: [
-          { label: 'Causas que no correspondían', val: 3833, total: 7227, txt: '3.833 de 7.227' },
-          { label: 'Imputados que no correspondían', val: 4075, total: 8003, txt: '4.075 de 8.003' },
+          { label: 'Causas que no correspondían', val: 4389, total: 7227, txt: '4.389 de 7.227' },
+          { label: 'Imputados que no correspondían', val: 4980, total: 8003, txt: '4.980 de 8.003' },
         ],
       },
       {
@@ -399,12 +399,11 @@ window.BASES = [
         ],
       },
       {
-        tipo: 'mags', tit: 'Tres magnitudes en el mismo archivo', hal: 'HAL-001',
-        nota: 'El mismo archivo sostenía tres cifras a la vez, porque nunca se declaró qué unidad se estaba contando: filas de imputado-causa o causas. Esa confusión explica solo una fracción menor de la caída del universo — entre el 5,9% y el 7,6% — y no el descuadre de fondo.',
+        tipo: 'mags', tit: 'Dos magnitudes en el mismo archivo', hal: 'HAL-001',
+        nota: '',
         items: [
           ['8.003', 'registros reales del archivo'],
           ['7.227', 'causas identificables'],
-          ['7.140', 'causas por identificador judicial'],
         ],
       },
     ],
