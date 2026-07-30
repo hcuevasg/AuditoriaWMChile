@@ -100,21 +100,6 @@ counters.forEach((c) => countObserver.observe(c));
 function esc(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
 function sevClass(sev) { return sev === 'Crítica' ? 'critica' : sev === 'Alta' ? 'alta' : 'media'; }
 
-// --- Los cuatro patrones ---
-const patronesGrid = document.getElementById('patronesGrid');
-if (patronesGrid && window.PATRONES) {
-  patronesGrid.innerHTML = window.PATRONES.map((p, i) =>
-    '<article class="strat patron" data-aos="' + (i % 2 ? 'fade-left' : 'fade-right') + '">'
-    + '<span class="strat-num">' + esc(p.id.replace('P', '')) + '</span>'
-    + '<h3>' + esc(p.tit) + '</h3>'
-    + '<div class="patron-hals">' + p.hallazgos.map((h) => '<span>' + esc(h) + '</span>').join('') + '</div>'
-    + '<p>' + esc(p.comun) + '</p>'
-    + '<p class="patron-riesgo"><strong>Riesgo agregado:</strong> ' + esc(p.riesgo) + '</p>'
-    + '<div class="patron-accion"><h4>La decisión que lo ataca</h4><p>' + esc(p.accion) + '</p></div>'
-    + '</article>'
-  ).join('');
-}
-
 // --- Modal de los quince hallazgos ---
 const halModal = wireModal(document.getElementById('halModal'), document.getElementById('halModalClose'));
 const halBtnEl = document.getElementById('halBtn');
