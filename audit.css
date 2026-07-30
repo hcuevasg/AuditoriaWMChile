@@ -693,8 +693,19 @@
 .obs-dl svg { width: 15px; height: 15px; }
 .obs-dl:hover { background: var(--primary); color: var(--white); transform: translateY(-1px); }
 
+.obs-hint { font-size: 0.8rem; color: var(--text-secondary); font-style: italic; margin: -6px 0 14px; }
 .obs-list { border-top: 1px solid rgba(26,51,80,0.1); }
-.obs-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 16px; align-items: start; padding: 13px 0; border-bottom: 1px solid rgba(26,51,80,0.08); }
+.obs-row { border-bottom: 1px solid rgba(26,51,80,0.08); }
+.obs-head { display: grid; grid-template-columns: auto 1fr auto auto; gap: 8px 16px; align-items: start; padding: 13px 6px; cursor: pointer; border-radius: 8px; }
+.obs-head:hover { background: rgba(64,115,184,0.05); }
+.obs-head:focus-visible { outline: 2px solid rgba(64,115,184,0.5); outline-offset: -2px; }
+.obs-chev { align-self: center; color: var(--text-secondary); font-size: 1.3rem; line-height: 1; transition: transform 0.25s ease, color 0.25s ease; }
+.obs-row.open .obs-chev { transform: rotate(90deg); color: var(--primary); }
+.obs-exec { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.obs-row.open .obs-exec { max-height: 700px; }
+.obs-exec-in { padding: 4px 16px 18px 90px; }
+.obs-exec-in h5 { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--primary); margin: 0 0 7px; }
+.obs-exec-in p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
 .obs-code {
   font-size: 0.7rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-secondary);
   background: var(--bg-secondary); border: 1px solid rgba(26,51,80,0.1);
@@ -716,8 +727,9 @@
   border-radius: 20px; padding: 5px 12px; white-space: nowrap; margin-top: 2px;
 }
 @media (max-width: 640px) {
-  .obs-row { grid-template-columns: auto 1fr; }
-  .obs-row .obs-hal, .obs-row .obs-trat { grid-column: 2; justify-self: start; }
+  .obs-head { grid-template-columns: auto 1fr auto; }
+  .obs-head .obs-hal, .obs-head .obs-trat { grid-column: 2; justify-self: start; }
+  .obs-exec-in { padding-left: 16px; }
 }
 
 /* Glosario: etiqueta de procedencia (nuevo panel / vista interna) */

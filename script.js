@@ -482,19 +482,29 @@ if (obsBtn && window.OBSERVACIONES) {
       + '</div>'
       + '<h3 id="obsModalTitle">Las observaciones, una a una</h3>'
       + '<p class="pm-desc">La observación consigna hechos y evidencia; el juicio técnico corresponde al hallazgo. Cada línea indica a qué hallazgo derivó — el desarrollo completo consta en el Registro Maestro y en el documento propio de cada observación.</p>'
+      + '<p class="obs-hint">Haz clic en cada observación para ver su resumen ejecutivo.</p>'
       + '<div class="obs-list">'
       + window.OBSERVACIONES.map((o) =>
-        '<div class="obs-row">'
+        '<div class="obs-row" data-code="' + esc(o.code) + '">'
+        + '<div class="obs-head" role="button" tabindex="0" aria-expanded="false">'
         + '<span class="obs-code">' + esc(o.code) + '</span>'
         + '<div class="obs-b"><strong>' + esc(o.tit) + '</strong><p>' + esc(o.resumen) + '</p></div>'
         + (o.hal
           ? '<button class="obs-hal" type="button" data-hal="' + esc(o.hal) + '" title="Ir al hallazgo">→ ' + esc(o.hal) + '</button>'
           : '<span class="obs-trat">' + esc(o.trat) + '</span>')
+        + '<span class="obs-chev" aria-hidden="true">›</span>'
+        + '</div>'
+        + '<div class="obs-exec"><div class="obs-exec-in"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p></div></div>'
         + '</div>'
       ).join('')
       + '</div>';
+    body.querySelectorAll('.obs-head').forEach((h) => {
+      const toggle = () => { const row = h.closest('.obs-row'); h.setAttribute('aria-expanded', String(row.classList.toggle('open'))); };
+      h.addEventListener('click', toggle);
+      h.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+    });
     body.querySelectorAll('.obs-hal').forEach((b) =>
-      b.addEventListener('click', () => gotoHallazgo(b.dataset.hal))
+      b.addEventListener('click', (e) => { e.stopPropagation(); gotoHallazgo(b.dataset.hal); })
     );
     obsModal.open();
   });
