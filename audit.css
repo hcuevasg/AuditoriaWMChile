@@ -716,3 +716,6 @@
   .obs-row { grid-template-columns: auto 1fr; }
   .obs-row .obs-hal, .obs-row .obs-trat { grid-column: 2; justify-self: start; }
 }
+
+/* Glosario: etiqueta de procedencia (nuevo panel / vista interna) */
+.gl-src { display: block; margin-top: 3px; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); }
