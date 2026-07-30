@@ -553,6 +553,14 @@ if (obsBtn && window.OBSERVACIONES) {
 
   // Detalle completo de una observación (todo lo que el sitio consigna de ella).
   function renderObsDetail(body, o) {
+    // Documento completo de la observación (embebido en obs_docs.js). Si no está,
+    // se cae al resumen ejecutivo que ya vive en window.OBSERVACIONES.
+    const full = (window.OBS_DOCS && window.OBS_DOCS[o.code]) || '';
+    const content = full
+      ? '<div class="obs-docfull">' + full + '</div>'
+      : '<h3 id="obsModalTitle">' + esc(o.tit) + '</h3>'
+        + '<p class="pm-desc">' + esc(o.resumen) + '</p>'
+        + '<div class="obs-doc-body"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p></div>';
     body.innerHTML = '<button class="obs-back" type="button">‹ Volver a las 29 observaciones</button>'
       + '<div class="modal-head">'
       + '<span class="modal-code">' + esc(o.code) + '</span>'
@@ -560,11 +568,8 @@ if (obsBtn && window.OBSERVACIONES) {
         ? '<button class="obs-hal obs-hal-head" type="button" data-hal="' + esc(o.hal) + '" title="Ir al hallazgo">Deriva a ' + esc(o.hal) + ' →</button>'
         : '<span class="obs-trat">' + esc(o.trat || '') + '</span>')
       + '</div>'
-      + '<h3 id="obsModalTitle">' + esc(o.tit) + '</h3>'
-      + '<p class="pm-desc">' + esc(o.resumen) + '</p>'
-      + '<div class="obs-doc-body"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p>'
-      + desgloseHtml(o.desglose)
-      + '</div>';
+      + content
+      + desgloseHtml(o.desglose);
     body.querySelector('.obs-back').addEventListener('click', () => {
       renderObsList(body);
       const box = obsBox();
