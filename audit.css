@@ -653,3 +653,52 @@
   .fd-grid { grid-template-columns: 1fr; }
   .problema-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ============================================================
+   Registro Maestro: botón y listado de las 29 observaciones
+   ============================================================ */
+.obs-cta { text-align: center; margin: 38px 0 10px; }
+.obs-open {
+  cursor: pointer; font-family: var(--font); font-size: 0.9rem; font-weight: 700;
+  color: var(--white); background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.32); border-radius: 30px; padding: 12px 28px;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.obs-open:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-2px); }
+
+.obs-dl {
+  display: inline-flex; align-items: center; gap: 9px; margin-bottom: 18px;
+  font-size: 0.82rem; font-weight: 800; color: var(--primary);
+  background: rgba(64,115,184,0.08); border: 1px solid rgba(64,115,184,0.3);
+  border-radius: 20px; padding: 8px 18px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.obs-dl svg { width: 15px; height: 15px; }
+.obs-dl:hover { background: var(--primary); color: var(--white); transform: translateY(-1px); }
+
+.obs-list { border-top: 1px solid rgba(26,51,80,0.1); }
+.obs-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px 16px; align-items: start; padding: 13px 0; border-bottom: 1px solid rgba(26,51,80,0.08); }
+.obs-code {
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.04em; color: var(--text-secondary);
+  background: var(--bg-secondary); border: 1px solid rgba(26,51,80,0.1);
+  border-radius: 7px; padding: 4px 9px; white-space: nowrap; margin-top: 1px;
+}
+.obs-b strong { display: block; font-size: 0.9rem; color: var(--text); margin-bottom: 2px; }
+.obs-b p { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+.obs-hal {
+  cursor: pointer; font-family: var(--font); font-size: 0.72rem; font-weight: 800;
+  color: var(--primary); background: rgba(64,115,184,0.08);
+  border: 1px solid rgba(64,115,184,0.3); border-radius: 20px; padding: 5px 12px;
+  white-space: nowrap; margin-top: 2px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.obs-hal:hover { background: var(--primary); color: var(--white); }
+.obs-trat {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text-secondary); background: var(--bg); border: 1px dashed rgba(26,51,80,0.25);
+  border-radius: 20px; padding: 5px 12px; white-space: nowrap; margin-top: 2px;
+}
+@media (max-width: 640px) {
+  .obs-row { grid-template-columns: auto 1fr; }
+  .obs-row .obs-hal, .obs-row .obs-trat { grid-column: 2; justify-self: start; }
+}

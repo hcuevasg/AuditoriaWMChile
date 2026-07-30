@@ -468,6 +468,45 @@ window.BASES = [
   },
 ];
 
+// ============================================================
+//  Registro Maestro: las 29 observaciones en una línea.
+//  Fuente: hoja "Dia 1 - Auditoria: Observaciones" (col. Descripción
+//  corregida, fuente canónica) + Informe Final v5 (§8 deriva).
+//  hal = hallazgo al que derivó; trat = tratamiento motivado distinto.
+// ============================================================
+window.REGISTRO_URL = 'https://docs.google.com/spreadsheets/d/1ZoItHoF_W16Ip-sH_1qs-9mYrl3XVHKKepAzgiJ8Z8E/edit';
+window.OBSERVACIONES = [
+  { code: 'OBS-001', tit: 'Reporte de causas vigentes WM', resumen: 'Ante la solicitud del listado de causas vigentes, se entregó un archivo construido por imputados y un panel cuyas denominaciones no correspondían a lo que contaban.', hal: 'HAL-001' },
+  { code: 'OBS-002', tit: 'Estado procesal de las causas', resumen: 'Parte de las causas informadas como vigentes ya estaba terminada; el cliente lo detectó al contrastar el listado contra el Poder Judicial.', hal: 'HAL-002' },
+  { code: 'OBS-003', tit: 'Cobertura ACD (% de asistencia)', resumen: 'Casos reportados «sin información» que sí contaban con la información completa para ir a la audiencia; error de reporte, no de cobertura.', hal: 'HAL-010' },
+  { code: 'OBS-004', tit: 'Identificación de detenidos', resumen: 'La identidad del detenido no queda establecida en la captura del evento, y el evento con datos incompletos queda fuera del sistema de registro.', hal: 'HAL-010' },
+  { code: 'OBS-005', tit: 'Qué significa 100% de cobertura ACD', resumen: 'Qué significa y cómo se sustenta el «100% de cobertura ACD»; se constató un problema en la marca del sistema y no en la entrega de la información.', hal: 'HAL-003' },
+  { code: 'OBS-006', tit: 'Pérdida de información WEOP', resumen: 'El cliente reemplazó Alliance por WEOP sin aviso ni plan de migración; los eventos carecen de identificador único y la correspondencia se reconstruye a diario.', hal: 'HAL-006' },
+  { code: 'OBS-007', tit: 'Pasa o no a control de detención', resumen: 'El campo que registra si el detenido pasó a control se completa al final de la jornada, y la ausencia de dato no se distingue de una derivación negativa.', trat: 'Tratamiento motivado distinto' },
+  { code: 'OBS-008', tit: 'Preparación de testigos', resumen: 'El control «Gestión previa de testigos» está suspendido —«no aplicar hasta aviso»— sin protocolo de reemplazo; su columna registra 0%.', hal: 'HAL-009' },
+  { code: 'OBS-009', tit: 'Cobertura de audiencias programadas', resumen: 'La asistencia a audiencias programadas no se estaba informando correctamente en la data; defecto advertido por el cliente.', hal: 'HAL-010' },
+  { code: 'OBS-010', tit: 'Comparecencia de testigos', resumen: 'La base consolidada de comparecencia no es trazable a su fuente: completa 433 vacíos y contradice 46 registros sin regla documentada.', hal: 'HAL-009' },
+  { code: 'OBS-011', tit: 'Base de asistencia y programación futura', resumen: 'El panel de testigos y las audiencias programadas estaban incompletos; defecto advertido por el cliente.', hal: 'HAL-004' },
+  { code: 'OBS-012', tit: 'Reporte diario de detenidos', resumen: 'El reporte al cliente se cuadra mediante depuración manual diaria, sin control sistémico que garantice su integridad ni mapeo documentado.', hal: 'HAL-010' },
+  { code: 'OBS-013', tit: 'SLA de información preliminar', resumen: 'El plazo de doce horas que el cliente espera para la información preliminar no está pactado en el instrumento contractual.', hal: 'HAL-005' },
+  { code: 'OBS-014', tit: 'Litigación', resumen: 'Reclamo del cliente por desempeño deficiente de abogados en audiencias a las que asistió (nula participación, bajo nivel de alegatos).', trat: 'Tratamiento motivado distinto' },
+  { code: 'OBS-015', tit: 'Código de vestimenta', resumen: 'Reclamo del cliente por un estándar de vestimenta inadecuado para el contexto judicial en audiencias a las que asistió.', trat: 'Tratamiento motivado distinto' },
+  { code: 'OBS-016', tit: 'Conformación del equipo legal', resumen: 'Inconsistencia entre la respuesta entregada al cliente —todos los abogados internos— y los registros, que identifican prestadores externos.', hal: 'HAL-011' },
+  { code: 'OBS-017', tit: 'Entrevistas con fiscales', resumen: 'Preocupación del cliente por el bajo nivel de interacción y relacionamiento con los fiscales a cargo de las causas.', trat: 'Tratamiento motivado distinto' },
+  { code: 'OBS-018', tit: 'Cambio de estrategia penal', resumen: 'Los cambios del modelo de intervención se adoptaron sin disposición transitoria alguna sobre las causas ya judicializadas al momento del cambio.', hal: 'HAL-012' },
+  { code: 'OBS-019', tit: 'Vinculación de bandas por CCTV', resumen: 'La vinculación de bandas mediante circuito cerrado opera sin proceso estandarizado ni los controles esperables.', hal: 'HAL-014' },
+  { code: 'OBS-020', tit: 'Protocolo de descargas CCTV', resumen: 'No existe protocolo de resguardo probatorio del video: la retención más corta vence antes del momento procesal en que la prueba debe ofrecerse.', hal: 'HAL-014' },
+  { code: 'OBS-021', tit: 'Contraparte legal fija', resumen: 'No existe una contraparte legal única establecida para la relación con el cliente.', hal: 'HAL-005' },
+  { code: 'OBS-022', tit: 'Contrapartes y entregables por frente', resumen: 'Los reportes al cliente se distribuyen a un conjunto disperso de destinatarios registrado únicamente en una planilla interna.', hal: 'HAL-005' },
+  { code: 'OBS-023', tit: 'Eventos de mesa de ayuda (tiendas piloto)', resumen: 'Las tiendas piloto dejaron de reportar en Alliance y los eventos de actividad criminal sin detenido perdieron trazabilidad y gestión.', hal: 'HAL-006' },
+  { code: 'OBS-024', tit: 'Vinculación de testigos en Alliance', resumen: 'La lista de testigos no es verificable contra la causa: el vínculo se reconstruye a mano y el testigo carece de identificador único.', hal: 'HAL-009' },
+  { code: 'OBS-025', tit: 'Personas relacionadas (sin BBDD)', resumen: 'No existe base maestra de personas relacionadas; el efecto es de eficiencia operativa y no afecta la información entregada al cliente.', trat: 'Oportunidad de mejora' },
+  { code: 'OBS-026', tit: 'Citación de testigos', resumen: 'La citación se dirige al encargado de la tienda y no al testigo, y falla justo en el supuesto que concentra más inasistencias.', hal: 'HAL-009' },
+  { code: 'OBS-027', tit: 'Actualización de causas', resumen: 'No existe un proceso de actualización y control de vigencia de las causas: las funciones están distribuidas sin coordinación ni capacidad dimensionada.', hal: 'HAL-007' },
+  { code: 'OBS-028', tit: 'Puntos de control', resumen: 'La operación ejecuta sus procesos sin umbrales, alertas ni responsables que detecten desviaciones durante la ejecución.', hal: 'HAL-015' },
+  { code: 'OBS-029', tit: 'Criminalidad interna', resumen: 'Consulta del cliente por la antigüedad de una causa de criminalidad interna que continuaría en tramitación.', hal: 'HAL-013' },
+];
+
 // Gobernanza del plan (§4).
 window.PLAN_GOB = [
   { tit: 'Dueño único', desc: 'La ejecución integral queda radicada en la Gerencia General, que responde por su avance ante el comité corporativo. La coordinación y el reporte consolidado no se delegan.' },

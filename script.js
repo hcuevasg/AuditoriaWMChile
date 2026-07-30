@@ -271,6 +271,7 @@ function gotoHallazgo(code) {
   const item = document.querySelector('.mp-item[data-code="' + code + '"]');
   if (!item) return;
   quantModal?.close();
+  obsModal?.close();
   setTimeout(() => {
     if (!item.classList.contains('active')) item.querySelector('.mp-row')?.click();
     const y = item.getBoundingClientRect().top + window.scrollY - 110;
@@ -493,4 +494,38 @@ if (planGob && window.PLAN_GOB) {
   planGob.innerHTML = window.PLAN_GOB.map((g) =>
     '<article class="gob-card"><h4>' + esc(g.tit) + '</h4><p>' + esc(g.desc) + '</p></article>'
   ).join('');
+}
+
+// ============================================================
+//  Registro Maestro: las 29 observaciones en una línea
+// ============================================================
+var obsModal = wireModal(document.getElementById('obsModal'), document.getElementById('obsModalClose'));
+const obsBtn = document.getElementById('obsBtn');
+if (obsBtn && window.OBSERVACIONES) {
+  obsBtn.addEventListener('click', () => {
+    const body = document.getElementById('obsModalBody');
+    if (!body || !obsModal) return;
+    body.innerHTML = '<div class="modal-head">'
+      + '<span class="modal-code">Registro Maestro</span>'
+      + '<span class="modal-country">29 observaciones · resumen de una línea</span>'
+      + '</div>'
+      + '<h3 id="obsModalTitle">Las observaciones, una a una</h3>'
+      + '<p class="pm-desc">La observación consigna hechos y evidencia; el juicio técnico corresponde al hallazgo. Cada línea indica a qué hallazgo derivó — el desarrollo completo consta en el Registro Maestro y en el documento propio de cada observación.</p>'
+      + '<a class="obs-dl" href="' + esc(window.REGISTRO_URL || '#') + '" target="_blank" rel="noopener">' + IC_SHEET + 'Abrir el Registro Maestro en Drive ↗</a>'
+      + '<div class="obs-list">'
+      + window.OBSERVACIONES.map((o) =>
+        '<div class="obs-row">'
+        + '<span class="obs-code">' + esc(o.code) + '</span>'
+        + '<div class="obs-b"><strong>' + esc(o.tit) + '</strong><p>' + esc(o.resumen) + '</p></div>'
+        + (o.hal
+          ? '<button class="obs-hal" type="button" data-hal="' + esc(o.hal) + '" title="Ir al hallazgo">→ ' + esc(o.hal) + '</button>'
+          : '<span class="obs-trat">' + esc(o.trat) + '</span>')
+        + '</div>'
+      ).join('')
+      + '</div>';
+    body.querySelectorAll('.obs-hal').forEach((b) =>
+      b.addEventListener('click', () => gotoHallazgo(b.dataset.hal))
+    );
+    obsModal.open();
+  });
 }

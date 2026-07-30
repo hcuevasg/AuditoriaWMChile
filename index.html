@@ -441,6 +441,10 @@
           <div class="stat" data-aos="zoom-in" data-aos-delay="300"><span class="stat-value"><span class="stat-num" data-count="13">0</span></span><span class="stat-label">Acciones del plan consolidado</span></div>
         </div>
 
+        <div class="obs-cta" data-aos="fade-up">
+          <button class="obs-open" type="button" id="obsBtn" aria-haspopup="dialog">Ver las 29 observaciones del Registro Maestro →</button>
+        </div>
+
         <div class="cifras-blocks">
           <!-- Severidad y clasificación -->
           <div class="cifra-row" data-aos="fade-up">
@@ -605,6 +609,14 @@
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
       <button class="modal-close" id="planModalClose" aria-label="Cerrar">&times;</button>
       <div class="modal-body" id="planModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal del Registro Maestro de observaciones -->
+  <div class="modal-overlay" id="obsModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="obsModalTitle">
+      <button class="modal-close" id="obsModalClose" aria-label="Cerrar">&times;</button>
+      <div class="modal-body" id="obsModalBody"></div>
     </div>
   </div>
 
