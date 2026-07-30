@@ -33,7 +33,7 @@
         <a href="#incidente">El Problema</a>
         <a href="#cuantitativo">Análisis</a>
         <a href="#remediacion">Remediación</a>
-        <a href="#hallazgos">Hallazgos</a>
+        <a href="#resultados">Hallazgos</a>
         <a href="#plan">Plan</a>
       </nav>
       <div class="nav-actions">
@@ -440,7 +440,8 @@
         </div>
 
         <div class="obs-cta" data-aos="fade-up">
-          <button class="obs-open" type="button" id="obsBtn" aria-haspopup="dialog">Ver las 29 observaciones del Registro Maestro →</button>
+          <button class="obs-open" type="button" id="halBtn" aria-haspopup="dialog">Ver los 15 hallazgos emitidos →</button>
+          <button class="obs-open ghost" type="button" id="obsBtn" aria-haspopup="dialog">Ver las 29 observaciones del Registro Maestro →</button>
         </div>
 
         <div class="cifras-blocks">
@@ -509,29 +510,6 @@
       </div>
     </section>
 
-    <!-- ===================== HALLAZGOS ===================== -->
-    <section class="section" id="hallazgos">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="kicker">Las observaciones de la auditoría</span>
-          <h2>Los quince hallazgos, uno a uno</h2>
-          <p class="lead">En orden de severidad descendente, con la misma estructura del informe: clasificación, severidad propuesta, observación de origen y criterio. El desarrollo completo de cada uno consta en su documento propio.</p>
-        </div>
-
-        <div class="mp-legend" data-aos="fade-up">
-          <span class="mp-legend-title">Cómo leer cada ficha</span>
-          <ul class="mp-legend-items">
-            <li><span class="sev-chip critica">Crítica</span> severidad propuesta del hallazgo</li>
-            <li><span class="fc-tag sub">OBS-0XX</span> observación del Registro Maestro de la que deriva</li>
-            <li><span class="fc-tag cfg">Nivel 2 · 4</span> criterio primario: contrato o buenas prácticas</li>
-            <li><span class="fc-tag tx">Acción A–M</span> acción del plan consolidado que lo ataca</li>
-          </ul>
-        </div>
-
-        <div class="mp-accordion" id="halAccordion"></div>
-      </div>
-    </section>
-
     <!-- ===================== CIERRE ===================== -->
     <section class="thesis-section" id="cierre">
       <div class="container">
@@ -593,6 +571,14 @@
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
       <button class="modal-close" id="planModalClose" aria-label="Cerrar">&times;</button>
       <div class="modal-body" id="planModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal de los quince hallazgos -->
+  <div class="modal-overlay" id="halModal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="halModalTitle">
+      <button class="modal-close" id="halModalClose" aria-label="Cerrar">&times;</button>
+      <div class="modal-body" id="halModalBody"></div>
     </div>
   </div>
 

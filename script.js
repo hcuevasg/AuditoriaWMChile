@@ -115,56 +115,38 @@ if (patronesGrid && window.PATRONES) {
   ).join('');
 }
 
-// --- Acordeón de hallazgos ---
-const halAccordion = document.getElementById('halAccordion');
-if (halAccordion && window.HALLAZGOS) {
-  halAccordion.innerHTML = window.HALLAZGOS.map((h) => {
-    const acciones = (h.acciones || []).map((a) => {
-      const plan = (window.PLAN || []).find((p) => p.id === a);
-      return '<div class="hal-accion"><span class="hal-accion-id">Acción ' + esc(a) + '</span><p>' + esc(plan ? plan.txt : '') + '</p></div>';
-    }).join('');
-    return '<div class="mp-item" data-code="' + esc(h.code) + '">'
-      + '<button class="mp-row" type="button" aria-expanded="false">'
-      + '<span class="mp-row-id">' + esc(h.code.replace('HAL-0', 'H')) + '</span>'
-      + '<span class="mp-row-title">' + esc(h.tit) + '</span>'
+// --- Modal de los quince hallazgos ---
+const halModal = wireModal(document.getElementById('halModal'), document.getElementById('halModalClose'));
+const halBtnEl = document.getElementById('halBtn');
+function renderHalModal() {
+  const body = document.getElementById('halModalBody');
+  if (!body || !window.HALLAZGOS) return;
+  body.innerHTML = '<div class="modal-head">'
+    + '<span class="modal-code">Hallazgos</span>'
+    + '<span class="modal-country">15 emitidos · orden de severidad</span>'
+    + '</div>'
+    + '<h3 id="halModalTitle">Los quince hallazgos, uno a uno</h3>'
+    + '<p class="pm-desc">En orden de severidad descendente, con la estructura del informe: clasificación, severidad propuesta, observación de origen y criterio. El desarrollo completo de cada uno consta en su documento propio.</p>'
+    + '<div class="hl-list">'
+    + window.HALLAZGOS.map((h) =>
+      '<div class="hl-row" data-code="' + esc(h.code) + '">'
+      + '<div class="hl-top">'
+      + '<span class="hl-code">' + esc(h.code) + '</span>'
       + '<span class="sev-chip ' + sevClass(h.sev) + '">' + esc(h.sev) + '</span>'
-      + '<span class="mp-row-ic" aria-hidden="true"></span>'
-      + '</button>'
-      + '<div class="mp-detail"><div class="mp-detail-inner">'
-      + '<div class="mp-panel-foot hal-meta">'
-      + '<span class="mp-id">' + esc(h.code) + '</span>'
-      + '<span class="sev-chip ' + sevClass(h.sev) + '">' + esc(h.sev) + '</span>'
+      + '<strong class="hl-tit">' + esc(h.tit) + '</strong>'
+      + '</div>'
+      + '<p class="hl-desc">' + esc(h.desc) + '</p>'
+      + '<div class="hl-tags">'
       + '<span class="mp-tag key">' + esc(h.cls) + '</span>'
       + '<span class="mp-tag trans">Deriva de: ' + esc(h.deriva) + '</span>'
       + '<span class="mp-tag">' + esc(h.criterio) + '</span>'
       + '</div>'
-      + '<p class="mp-what">' + esc(h.desc) + '</p>'
-      + '<div class="hal-acciones"><h4>En el plan de remediación</h4>' + acciones + '</div>'
-      + '</div></div>'
-      + '</div>';
-  }).join('');
-
-  halAccordion.querySelectorAll('.mp-row').forEach((row) => {
-    row.addEventListener('click', () => {
-      const item = row.closest('.mp-item');
-      const detail = item.querySelector('.mp-detail');
-      const isOpen = item.classList.contains('active');
-      if (isOpen) {
-        detail.style.maxHeight = detail.scrollHeight + 'px';
-        requestAnimationFrame(() => { detail.style.maxHeight = '0px'; });
-        item.classList.remove('active');
-        row.setAttribute('aria-expanded', 'false');
-      } else {
-        item.classList.add('active');
-        detail.style.maxHeight = detail.scrollHeight + 'px';
-        row.setAttribute('aria-expanded', 'true');
-        detail.addEventListener('transitionend', function te(e) {
-          if (e.propertyName === 'max-height' && item.classList.contains('active')) detail.style.maxHeight = 'none';
-          detail.removeEventListener('transitionend', te);
-        });
-      }
-    });
-  });
+      + '</div>'
+    ).join('')
+    + '</div>';
+}
+if (halBtnEl && window.HALLAZGOS) {
+  halBtnEl.addEventListener('click', () => { renderHalModal(); halModal.open(); });
 }
 
 // ============================================================
@@ -268,14 +250,18 @@ function quantBlockHtml(bl) {
 
 // Cierra el modal cuantitativo y lleva a la ficha del hallazgo, abriéndola.
 function gotoHallazgo(code) {
-  const item = document.querySelector('.mp-item[data-code="' + code + '"]');
-  if (!item) return;
   quantModal?.close();
   obsModal?.close();
   setTimeout(() => {
-    if (!item.classList.contains('active')) item.querySelector('.mp-row')?.click();
-    const y = item.getBoundingClientRect().top + window.scrollY - 110;
-    window.scrollTo({ top: y, behavior: 'smooth' });
+    renderHalModal();
+    halModal?.open();
+    setTimeout(() => {
+      const row = document.querySelector('.hl-row[data-code="' + code + '"]');
+      if (!row) return;
+      row.classList.add('flash');
+      row.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      setTimeout(() => row.classList.remove('flash'), 1600);
+    }, 140);
   }, 360);
 }
 
