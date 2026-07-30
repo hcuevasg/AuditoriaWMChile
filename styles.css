@@ -650,8 +650,8 @@ h3 { font-size: 1.4rem; font-weight: 600; }
 .modal-extra { border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; }
 .modal-extra h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 800; margin-bottom: 8px; }
 .modal-extra p { font-size: 0.92rem; color: var(--text); line-height: 1.55; }
-.modal-gap { background: rgba(31,122,77,0.06); border: 1px solid rgba(31,122,77,0.18); }
-.modal-gap h4 { color: #1f7a4d; }
+.modal-gap { background: rgba(26,51,80,0.06); border: 1px solid rgba(26,51,80,0.18); }
+.modal-gap h4 { color: #1A3350; }
 .modal-sug { background: rgba(64,115,184,0.06); border: 1px solid rgba(64,115,184,0.16); }
 .modal-sug h4 { color: var(--primary); }
 
@@ -750,9 +750,9 @@ h3 { font-size: 1.4rem; font-weight: 600; }
 .mp-id { font-weight: 800; font-size: 1rem; color: var(--white); background: var(--secondary); padding: 5px 14px; border-radius: 8px; letter-spacing: 0.03em; }
 .mp-pct { font-weight: 800; font-size: 1.7rem; color: var(--primary); }
 .mp-tag { font-size: 0.76rem; font-weight: 600; color: var(--text); background: var(--bg); border: 1px solid rgba(26,51,80,0.1); padding: 5px 11px; border-radius: 14px; }
-.mp-tag.warn { color: #b9591a; background: rgba(231,131,26,0.1); border-color: rgba(231,131,26,0.2); }
+.mp-tag.warn { color: #1A3350; background: rgba(26,51,80,0.1); border-color: rgba(26,51,80,0.2); }
 .mp-tag.trans { color: var(--primary); background: rgba(64,115,184,0.1); border-color: rgba(64,115,184,0.2); }
-.mp-tag.ok { color: #1f7a4d; background: rgba(31,122,77,0.1); border-color: rgba(31,122,77,0.2); }
+.mp-tag.ok { color: #1A3350; background: rgba(26,51,80,0.1); border-color: rgba(26,51,80,0.2); }
 .mp-tag.key, .mp-tag.big { color: var(--secondary); background: rgba(231,66,67,0.08); border-color: rgba(231,66,67,0.25); }
 .countries { display: flex; gap: 6px; margin-left: auto; align-items: center; flex-wrap: wrap; }
 .countries-label { font-size: 0.74rem; font-weight: 700; color: var(--text-secondary); margin-right: 2px; }
@@ -876,9 +876,9 @@ h3 { font-size: 1.4rem; font-weight: 600; }
 
 /* Etiquetas de brecha */
 .fc-tag { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.02em; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-.fc-tag.sub  { color: #6d4bb3; background: rgba(124,77,196,0.12); border: 1px solid rgba(124,77,196,0.28); }
-.fc-tag.dol2 { color: #b9591a; background: rgba(231,131,26,0.12); border: 1px solid rgba(231,131,26,0.28); }
-.fc-tag.cfg  { color: #1f7a4d; background: rgba(31,122,77,0.12); border: 1px solid rgba(31,122,77,0.28); }
+.fc-tag.sub  { color: #1A3350; background: rgba(26,51,80,0.12); border: 1px solid rgba(26,51,80,0.28); }
+.fc-tag.dol2 { color: #1A3350; background: rgba(26,51,80,0.12); border: 1px solid rgba(26,51,80,0.28); }
+.fc-tag.cfg  { color: #1A3350; background: rgba(26,51,80,0.12); border: 1px solid rgba(26,51,80,0.28); }
 .fc-tag.tx   { color: var(--primary); background: rgba(64,115,184,0.12); border: 1px solid rgba(64,115,184,0.3); }
 .fc-tag.note { color: var(--text-secondary); background: var(--bg); border: 1px solid rgba(26,51,80,0.16); }
 

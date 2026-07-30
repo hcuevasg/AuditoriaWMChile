@@ -288,7 +288,8 @@ function estadoClass(e) { return e === 'Ejecutado' ? 'ejecutado' : e === 'En cur
 const ETAPAS_REM = ['Diseño', 'Aprobación', 'Implementación', 'Evidencia', 'Validación', 'Cierre'];
 // Remediaciones que el documento define solo por su título (sin cuerpo aún):
 // se muestran como cuadros "en preparación" con su tema, no como fichas abribles.
-const REM_PENDIENTES = { 9: 'WEOP', 10: 'Criminalidad interna' };
+// (07-30: WEOP ya tiene documento (REM N.° 9), no queda ninguna en preparación.)
+const REM_PENDIENTES = {};
 const planList = document.getElementById('planList');
 if (planList && window.REMS) {
   const TOTAL_REMS = Math.max(window.REMS.length, ...Object.keys(REM_PENDIENTES).map(Number));
@@ -470,6 +471,29 @@ if (planGob && window.PLAN_GOB) {
 // ============================================================
 //  Registro Maestro: las 29 observaciones en una línea
 // ============================================================
+// Desglose visual opcional dentro del detalle de una observación (hoy solo
+// OBS-002): dos barras (origen / estado) + la conclusión de la migración.
+// Cifras PRELIMINARES (deck CEO), sin reconciliar — badge visible. El campo
+// `desglose` vive en window.OBSERVACIONES; el punch admite <strong> (no se escapa).
+function desgloseHtml(d) {
+  if (!d) return '';
+  const bar = (arr) =>
+    '<div class="brk-stack">' + arr.map((s) =>
+      '<span class="brk-seg ' + s.sw + '" style="width:' + s.w + '%"><b>' + esc(s.val) + '</b><small>' + s.pct + '%</small></span>'
+    ).join('') + '</div>'
+    + '<div class="brk-key">' + arr.map((s) =>
+      '<span><i class="k-sw ' + s.sw + '"></i>' + esc(s.lbl) + '</span>'
+    ).join('') + '</div>';
+  return '<div class="obs-brk">'
+    + '<span class="brk-prelim">Cifras preliminares · sujetas a validación</span>'
+    + '<div class="obs-brk-bars">'
+    + '<div class="brk-block"><span class="brk-block-tit">Por origen del sistema</span>' + bar(d.origen) + '</div>'
+    + '<div class="brk-block"><span class="brk-block-tit">Por estado real</span>' + bar(d.estado) + '</div>'
+    + '</div>'
+    + '<p class="brk-punch">' + d.punch + '</p>'
+    + '</div>';
+}
+
 var obsModal = wireModal(document.getElementById('obsModal'), document.getElementById('obsModalClose'));
 const obsBtn = document.getElementById('obsBtn');
 if (obsBtn && window.OBSERVACIONES) {
@@ -485,7 +509,7 @@ if (obsBtn && window.OBSERVACIONES) {
       + '<p class="obs-hint">Haz clic en cada observación para ver su resumen ejecutivo.</p>'
       + '<div class="obs-list">'
       + window.OBSERVACIONES.map((o) =>
-        '<div class="obs-row" data-code="' + esc(o.code) + '">'
+        '<div class="obs-row' + (o.desglose ? ' has-brk' : '') + '" data-code="' + esc(o.code) + '">'
         + '<div class="obs-head" role="button" tabindex="0" aria-expanded="false">'
         + '<span class="obs-code">' + esc(o.code) + '</span>'
         + '<div class="obs-b"><strong>' + esc(o.tit) + '</strong><p>' + esc(o.resumen) + '</p></div>'
@@ -494,7 +518,16 @@ if (obsBtn && window.OBSERVACIONES) {
           : '<span class="obs-trat">' + esc(o.trat) + '</span>')
         + '<span class="obs-chev" aria-hidden="true">›</span>'
         + '</div>'
-        + '<div class="obs-exec"><div class="obs-exec-in"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p></div></div>'
+        + '<div class="obs-exec"><div class="obs-exec-in"><h5>Resumen ejecutivo</h5><p>' + esc(o.ejecutivo || 'Resumen ejecutivo en preparación.') + '</p>'
+        + desgloseHtml(o.desglose)
+        + (o.doc
+          ? '<a class="obs-doc" href="https://drive.google.com/file/d/' + esc(o.doc) + '/view" target="_blank" rel="noopener" onclick="event.stopPropagation()">'
+            + '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'
+            + '<span>Ver observación completa</span>'
+            + '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>'
+            + '</a>'
+          : '')
+        + '</div></div>'
         + '</div>'
       ).join('')
       + '</div>';

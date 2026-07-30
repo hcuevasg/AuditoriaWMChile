@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auditoría Interna Especial · Servicio Walmart Chile — Grupo ALTO</title>
-  <meta name="description" content="Auditoría Interna Especial sobre el Servicio Walmart Chile. Veintinueve observaciones, quince hallazgos y un plan de diez remediaciones." />
+  <meta name="description" content="Auditoría Interna Especial sobre el Servicio Walmart Chile. Veintinueve observaciones, quince hallazgos y un plan de nueve remediaciones." />
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- Fonts: Raleway (ALTO brand font) -->
@@ -56,7 +56,7 @@
         <p class="eyebrow" data-aos="fade-down">Control Interno y Gobernanza · Grupo ALTO Chile</p>
         <h1 class="hero-title" data-aos="fade-up">Auditoría Interna<br />Especial</h1>
         <p class="hero-legal" data-aos="fade-up" data-aos-delay="80">Servicio <span class="accent">Walmart Chile</span></p>
-        <p class="hero-sub" data-aos="fade-up" data-aos-delay="140">De una diferencia material en la base de causas vigentes reportada al cliente, a veintinueve observaciones, quince hallazgos y un plan de diez remediaciones.</p>
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="140">De una diferencia material en la base de causas vigentes reportada al cliente, a veintinueve observaciones, quince hallazgos y un plan de nueve remediaciones.</p>
 
         <div class="hero-flags" data-aos="fade-up" data-aos-delay="200">
           <span class="flags-label">El encargo</span>
@@ -351,6 +351,104 @@
           <p data-aos="fade-up" data-aos-delay="500">Durante años, los reportes, las estadísticas y las decisiones del cliente se construyeron sobre una base que no era real. Por eso el reclamo no fue por una cifra: fue por la confianza — <strong>«falla grave de control»</strong>, con el contrato en riesgo.</p>
           <p class="qc-note" data-aos="fade-up" data-aos-delay="600">El error de fondo no fue el descuadre: fue <strong>entregar información sin verificarla</strong>. Ese es el tamaño de lo que este plan corrige.</p>
         </div>
+
+        <!-- ============================================================
+             DESGLOSE POR ORIGEN Y ESTADO — PRELIMINAR (07-30)
+             Cifras tomadas del deck "Presentación CEO Auditoría" (Constanza),
+             AÚN NO reconciliadas con las cifras canónicas del sitio.
+             Para actualizar: cambiar los números en los 4 data-s del board
+             (brk-seg width+valor, brk-node) y en las tarjetas .sstep.
+             Etiquetas "Alto Sistema" / "Alliance" pendientes de fijar (ver
+             discusión ALTO sistema vs legacy). NO PUBLICAR hasta validar.
+        ============================================================ -->
+        <div class="brk-head" data-aos="fade-up">
+          <span class="kicker">Segunda lectura de la base</span>
+          <h3>La misma base, por origen y por estado</h3>
+          <p class="lead">Las <strong>8.003</strong> causas reportadas como vigentes, abiertas por su <strong>sistema de origen</strong> y por su <strong>estado real</strong> — para poner a prueba la explicación que se dio al cliente: ¿fue la migración?</p>
+          <span class="brk-prelim" title="Cifras del deck CEO, aún no reconciliadas con las cifras canónicas del sitio">Cifras preliminares · sujetas a validación</span>
+        </div>
+
+        <div class="scrolly brk-scrolly" id="breakdownScrolly">
+          <div class="scrolly-sticky">
+            <div class="brk-board">
+              <div class="brk-base">
+                <span class="brk-base-tot">8.003</span>
+                <span class="brk-base-lbl">causas reportadas al cliente como vigentes</span>
+              </div>
+
+              <div class="brk-bars">
+                <!-- ORIGEN -->
+                <div class="brk-block qs" data-s="0">
+                  <span class="brk-block-tit">Por origen del sistema</span>
+                  <div class="brk-stack" role="img" aria-label="De 8.003 causas, 3.003 con origen en Alto Sistema y 5.000 solo en Alliance">
+                    <span class="brk-seg s-navy" style="width:37.5%"><b>3.003</b><small>38%</small></span>
+                    <span class="brk-seg s-blue" style="width:62.5%"><b>5.000</b><small>62%</small></span>
+                  </div>
+                  <div class="brk-key">
+                    <span><i class="k-sw s-navy"></i>Con origen en Alto Sistema</span>
+                    <span><i class="k-sw s-blue"></i>Existen solo en Alliance</span>
+                  </div>
+                </div>
+                <!-- ESTADO -->
+                <div class="brk-block qs" data-s="1">
+                  <span class="brk-block-tit">Por estado real</span>
+                  <div class="brk-stack" role="img" aria-label="De 8.003 causas, 4.645 encontradas cerradas por Legal y 3.358 aún vigentes">
+                    <span class="brk-seg s-red" style="width:58%"><b>4.645</b><small>58%</small></span>
+                    <span class="brk-seg s-blue" style="width:42%"><b>3.358</b><small>42%</small></span>
+                  </div>
+                  <div class="brk-key">
+                    <span><i class="k-sw s-red"></i>Encontradas cerradas por Legal</span>
+                    <span><i class="k-sw s-blue"></i>Reportadas y aún vigentes</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="brk-read qs" data-s="1">Solo el <strong>38%</strong> tiene origen en Alto Sistema, y el <strong>58%</strong> de lo reportado como vigente <strong>ya estaba cerrado</strong>.</p>
+
+              <!-- ÁRBOL — hipótesis de la migración -->
+              <div class="brk-tree qs" data-s="2">
+                <div class="brk-node n-root"><b>4.645</b><span>cerradas por Legal · 100%</span></div>
+                <div class="brk-split">
+                  <div class="brk-node n-blue"><b>2.882</b><span>En Alto Sistema · 62%</span></div>
+                  <div class="brk-node n-mute"><b>1.763</b><span>Solo en Alliance · 38% — no atribuible a migración</span></div>
+                </div>
+              </div>
+
+              <div class="brk-tail qs" data-s="3">
+                <div class="brk-mini">
+                  <div class="brk-node n-red sm"><b>68</b><span>cerradas en Alto Sistema · 2,4% de 2.882</span></div>
+                  <span class="brk-arrow" aria-hidden="true">→</span>
+                  <div class="brk-node n-blue xs"><b>5</b><span>migradas OK</span></div>
+                  <div class="brk-node n-red xs"><b>63</b><span>falla de traspaso</span></div>
+                </div>
+                <p class="brk-punch"><strong>La migración explica a lo más 68 causas — el 2,4%.</strong> El error de fondo no es de migración: es de <strong>gestión y actualización</strong> — causas que nunca se cerraron en Alliance.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="scrolly-steps">
+            <div class="sstep" data-step="0"><div class="sstep-card">
+              <span class="ss-date">Por origen</span>
+              <h4>El 38% viene del sistema antiguo</h4>
+              <p>De las 8.003, <strong>3.003 (38%)</strong> tienen origen en Alto Sistema; las <strong>5.000 (62%)</strong> restantes nacieron directamente en Alliance y <strong>no son atribuibles a la migración</strong>.</p>
+            </div></div>
+            <div class="sstep" data-step="1"><div class="sstep-card">
+              <span class="ss-date bad">Por estado</span>
+              <h4>Más de la mitad ya estaba cerrada</h4>
+              <p><strong>4.645 (58%)</strong> de lo reportado como vigente ya estaba <strong>cerrado</strong>; solo <strong>3.358</strong> seguían realmente vigentes. El reporte no reflejaba el estado real de las causas.</p>
+            </div></div>
+            <div class="sstep" data-step="2"><div class="sstep-card">
+              <span class="ss-date">La hipótesis</span>
+              <h4>¿Fue la migración?</h4>
+              <p>De las 4.645 cerradas, <strong>2.882</strong> tienen origen en Alto Sistema y <strong>1.763</strong> solo existen en Alliance — estas últimas, imposibles de atribuir a una migración desde el sistema antiguo.</p>
+            </div></div>
+            <div class="sstep" data-step="3"><div class="sstep-card">
+              <span class="ss-date bad">La respuesta</span>
+              <h4>La migración explica el 2,4%</h4>
+              <p>Solo <strong>68</strong> estaban cerradas en Alto Sistema — y de esas, <strong>5</strong> migraron bien. La causa que se comunicó al cliente explica a lo sumo el <strong>2,4%</strong>: el problema real es de <strong>gestión</strong>, no de sistema.</p>
+            </div></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -407,7 +505,7 @@
         <div class="section-head" data-aos="fade-up">
           <span class="kicker">El detalle del plan</span>
           <h2>Plan de remediación: avance y estado</h2>
-          <p class="lead">El plan contempla <strong>diez remediaciones</strong>: ocho ya con documento definitivo y dos por desarrollar. Emitir el documento no remedia: cada una recorre seis etapas —<strong>diseño, aprobación, implementación, evidencia, validación y cierre</strong>— y solo se cierra con evidencia validada por una instancia independiente. <strong>Haz clic en cada remediación</strong> para abrir su expediente completo.</p>
+          <p class="lead">El plan contempla <strong>nueve remediaciones</strong>, las nueve ya con documento definitivo. Emitir el documento no remedia: cada una recorre seis etapas —<strong>diseño, aprobación, implementación, evidencia, validación y cierre</strong>— y solo se cierra con evidencia validada por una instancia independiente. <strong>Haz clic en cada remediación</strong> para abrir su expediente completo.</p>
         </div>
 
         <div class="rem-resumen" id="remResumen" data-aos="fade-up"></div>
@@ -510,7 +608,7 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <img class="footer-logo" src="assets/alto-logo-white.svg" alt="ALTO" />
-        <p>Auditoría Interna Especial — Servicio Walmart Chile. Veintinueve observaciones, quince hallazgos y un plan de diez remediaciones.</p>
+        <p>Auditoría Interna Especial — Servicio Walmart Chile. Veintinueve observaciones, quince hallazgos y un plan de nueve remediaciones.</p>
       </div>
       <div class="footer-meta">
         <span>Control Interno y Gobernanza</span>
