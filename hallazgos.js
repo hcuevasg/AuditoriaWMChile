@@ -12,7 +12,7 @@ window.HALLAZGOS = [
     sev: 'Crítica',
     deriva: 'OBS-002',
     criterio: 'Nivel 2 · Contrato',
-    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. Más de la mitad del universo no correspondía: 4.389 causas y 4.980 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
+    desc: 'Se reportaron al cliente 8.003 registros como causas vigentes al 8 de mayo de 2026, sobre una base construida a partir de lo abierto en el sistema de origen y sin contrastarla contra el Poder Judicial para confirmar cuáles causas seguían realmente vigentes. Más de la mitad del universo no correspondía: 4.388 causas y 4.980 imputados. El 23 de mayo el cliente identificó el defecto con precisión, y la segunda entrega se produjo veintiún días después, ya con el contraste contra el Poder Judicial en marcha. El destinatario calificó el hecho como «falla grave de control». La causa técnica del defecto de origen permanece abierta.',
     acciones: ['B', 'C', 'G'],
   },
   {
@@ -265,7 +265,7 @@ window.PLAN_IMPL = [
   {
     n: 5, eje: 2, estado: 'Ejecutado',
     tit: 'Disponibilizar a Walmart la base estructurada por causa y el nuevo panel de reportería',
-    desc: 'ALTO reconstruyó y depuró la base de causas vigentes y la estructuró tomando la causa como unidad de registro, en reemplazo del imputado. La base fue remitida a Walmart el 23 de julio de 2026 —2.838 causas vigentes, informando separadamente 3.023 imputados— y el nuevo panel de reportería fue liberado a producción ese mismo día con las definiciones validadas.',
+    desc: 'ALTO reconstruyó y depuró la base de causas vigentes y la estructuró tomando la causa como unidad de registro, en reemplazo del imputado. La base fue remitida a Walmart el 23 de julio de 2026 —2.839 causas vigentes, informando separadamente los imputados asociados (cifra provisoria, en depuración)— y el nuevo panel de reportería fue liberado a producción ese mismo día con las definiciones validadas.',
     obtiene: 'Ya obtenido. Walmart recibió el 23 de julio la base estructurada por causa y el panel de reportería con las definiciones validadas. La cifra deja de mezclar causas con registros de imputado. La actualización periódica la asegura la acción 8.',
     resp: 'Dirección Legal y Compliance · Dirección de Mejora Continua',
     dep: null,
@@ -387,7 +387,7 @@ window.BASES = [
         tipo: 'status', tit: 'Lo que no correspondía', hal: 'HAL-002',
         nota: 'Más de la mitad del universo reportado eran causas ya terminadas que seguían informadas como vigentes, porque el estado procesal no se actualizaba en la plataforma. El 20 de mayo el analista de Walmart revisó 15 causas y encontró 13 concluidas en el Poder Judicial; el 23 de mayo llegó el reclamo formal del cliente.',
         bars: [
-          { label: 'Causas que no correspondían', val: 4389, total: 7227, txt: '4.389 de 7.227' },
+          { label: 'Causas que no correspondían', val: 4388, total: 7227, txt: '4.388 de 7.227' },
           { label: 'Imputados que no correspondían', val: 4980, total: 8003, txt: '4.980 de 8.003' },
         ],
       },
@@ -433,15 +433,15 @@ window.BASES = [
     ],
   },
   {
-    id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3023, causas: 2838, final: true,
-    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.838 causas vigentes, informando separadamente 3.023 imputados. En la depuración participó además un auditor externo independiente que revisó las bases — parte de la baja proviene de esa revisión. El panel de reportería se liberó a producción el mismo día con las definiciones validadas.',
+    id: 'jul', fecha: '23 de julio', tag: 'Base reconstruida', imputados: 3023, causas: 2839, final: true,
+    resumen: 'Base reconstruida y depurada durante la auditoría, ya estructurada por causa como unidad de registro: 2.839 causas vigentes (cifra validada de la entrega del 23 de julio), informando separadamente los imputados. En la depuración participó además un auditor externo independiente que revisó las bases — parte de la baja proviene de esa revisión. El panel de reportería se liberó a producción el mismo día con las definiciones validadas. La cifra de imputados (3.023, corte 29 de julio de 2026) es provisoria: la base de imputados sigue en depuración y su valor variará.',
     bloques: [
       {
         tipo: 'delta', tit: 'La caída frente al 12 de junio',
         nota: 'Corresponde a la depuración practicada durante el encargo, con verificación del estado procesal y revisión de un auditor externo independiente. Una tercera revisión interna (7 de julio) ya había situado la base en torno a 3.500.',
         rows: [
           { label: 'Imputados tramitados', from: '4.321', to: '3.023', delta: '−1.298', pct: '−30,0%' },
-          { label: 'Causas', from: '3.741', to: '2.838', delta: '−903', pct: '−24,1%' },
+          { label: 'Causas', from: '3.741', to: '2.839', delta: '−902', pct: '−24,1%' },
         ],
       },
       {
@@ -449,7 +449,7 @@ window.BASES = [
         nota: 'Es la magnitud total del descuadre: más de la mitad del universo originalmente reportado no se sostuvo.',
         rows: [
           { label: 'Imputados tramitados', from: '8.003', to: '3.023', delta: '−4.980', pct: '−62,2%' },
-          { label: 'Causas', from: '7.227', to: '2.838', delta: '−4.389', pct: '−60,7%' },
+          { label: 'Causas', from: '7.227', to: '2.839', delta: '−4.388', pct: '−60,7%' },
         ],
       },
       {
@@ -579,9 +579,9 @@ window.REMS = [
       efectividad: 'Dos indicadores con meta 100%; resta explicar la diferencia de una causa',
     },
     tit: 'Sanear y entregar la base consolidada de causas vigentes',
-    resumen: 'ALTO ejecutó el saneamiento y la reconstrucción del universo histórico de causas vigentes del servicio Walmart para corregir las inconsistencias de las entregas anteriores y responder al requerimiento de contar con una base estructurada por causa judicial y no por imputado. El alcance se limitó a determinar el número correcto de causas vigentes, consolidar cada causa en un único registro con el RUC como llave, excluir las causas no vigentes, incorporar las omitidas y regularizar los estados procesales. La base entregada el 23 de julio contiene 2.838 causas vigentes; entre esa entrega y la actualización del 29 de julio subsiste una diferencia de una causa (2.839 → 2.838) pendiente de aclaración.',
+    resumen: 'ALTO ejecutó el saneamiento y la reconstrucción del universo histórico de causas vigentes del servicio Walmart para corregir las inconsistencias de las entregas anteriores y responder al requerimiento de contar con una base estructurada por causa judicial y no por imputado. El alcance se limitó a determinar el número correcto de causas vigentes, consolidar cada causa en un único registro con el RUC como llave, excluir las causas no vigentes, incorporar las omitidas y regularizar los estados procesales. La base entregada el 23 de julio contiene 2.839 causas vigentes; entre esa entrega y la actualización del 29 de julio subsiste una diferencia de una causa (2.839 → 2.838) pendiente de aclaración.',
     pasos: [
-      { t: 'Consolidación por causa con el RUC como llave', tc: 'Consolidación por causa', d: 'La base se estructura tomando la causa judicial como unidad de registro y el RUC como llave única: cada RUC se registra una sola vez, cada fila corresponde a una causa y el número de imputados pasa a ser un atributo complementario. La planilla contiene 2.838 registros y 2.838 RUC distintos, sin duplicidades.' },
+      { t: 'Consolidación por causa con el RUC como llave', tc: 'Consolidación por causa', d: 'La base se estructura tomando la causa judicial como unidad de registro y el RUC como llave única: cada RUC se registra una sola vez, cada fila corresponde a una causa y el número de imputados pasa a ser un atributo complementario. La planilla entregada el 23 de julio contiene 2.839 registros y 2.839 RUC distintos, sin duplicidades.' },
       { t: 'Depuración del universo vigente', tc: 'Depuración del universo', d: 'Se excluyen las causas que no correspondían al universo vigente, se incorporan las causas vigentes omitidas y se corrigen los estados procesales que correspondía regularizar, dejando registro de las inclusiones, exclusiones y correcciones.' },
       { t: 'Entrega a Walmart de la base reconstruida', tc: 'Entrega a Walmart', d: 'El 23 de julio de 2026 se entregó a Walmart la base reconstruida —2.839 causas vigentes y 3.401 imputados asociados—, aclarando expresamente que el reporte se presenta por causa vigente y ya no por imputado.' },
       { t: 'Actualización del conteo de imputados y diferencia pendiente', tc: 'Actualización y diferencia', d: 'El 29 de julio de 2026 se actualizó la planilla con una nueva definición de conteo de imputados (2.838 causas y 3.023 imputados), mejora de reportería definida por ALTO y no solicitada por Walmart. La disminución de 2.839 a 2.838 causas no debería derivar de esa definición y queda pendiente de identificación, trazabilidad y aclaración a Walmart.' },
@@ -607,7 +607,7 @@ window.REMS = [
       'Registro de inclusiones, exclusiones y correcciones',
       'Conciliación efectuada para determinar las causas vigentes',
       'Comunicación que documenta la nueva definición de imputados',
-      'Identificación de los 2.838 RUC únicos',
+      'Identificación de los 2.839 RUC únicos',
       'Explicación de la diferencia de una causa',
       'Acta de validación del cierre',
     ],
