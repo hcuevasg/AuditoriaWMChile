@@ -448,7 +448,9 @@ function openRemModal(r) {
       const isPct = /^\d{1,3}(?:[.,]\d+)?\s*%$/.test((x.meta || '').trim());
       return '<div class="rx-ind"><span class="rx-ind-meta' + (isPct ? '' : ' txt') + '">' + esc(x.meta) + '</span><strong>' + esc(x.t) + '</strong><p>' + esc(x.f) + '</p></div>';
     }).join('')
-    + '</div></div>';
+    + '</div>'
+    + (r.indNota ? '<p class="rx-ind-nota">' + esc(r.indNota) + '</p>' : '')
+    + '</div>';
 
   h += '<div class="rx-block"><h4 class="rx-h">Qué recibe Walmart</h4><div class="rx-reps">'
     + r.reporteria.map((b, i) =>
