@@ -240,6 +240,21 @@
 .scrolly-sticky { position: sticky; top: 100px; z-index: 1; }
 .scrolly-sticky .quant-chart { margin-bottom: 0; }
 .scrolly-sticky svg { max-height: 62vh; }
+
+/* Toggle 23/07 ↔ 29/07 de las cifras de imputados en el gráfico */
+.quant-cut { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 2px 0 10px; }
+.quant-cut-lbl { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+.quant-cut-btn {
+  font-family: var(--font); cursor: pointer; font-size: 0.74rem; font-weight: 800;
+  color: var(--primary); background: rgba(64,115,184,0.08);
+  border: 1px solid rgba(64,115,184,0.3); border-radius: 20px; padding: 5px 13px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.quant-cut-btn:hover { background: rgba(64,115,184,0.16); }
+.quant-cut-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+.quant-transit { font-size: 0.78rem; font-style: italic; color: var(--secondary); line-height: 1.55; margin: 6px 0 0; }
+.quant-transit strong { font-style: normal; }
+.quant-transit em { font-style: normal; font-weight: 700; }
 .scrolly-sticky .quant-delta {
   margin: 12px auto 0; padding: 12px 18px; gap: 8px 16px;
   background: rgba(231,66,67,0.06); border: 1px solid rgba(231,66,67,0.25);

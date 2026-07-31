@@ -202,6 +202,43 @@ document.querySelectorAll('.scrolly').forEach((sc) => {
   steps.forEach((s) => stepObserver.observe(s));
 });
 
+// Toggle de cifras de imputados en el gráfico del desplome: 23/07 (3.401,
+// cifra de la entrega) vs 29/07 (3.023, recuento posterior). La base de
+// offenders es transitoria, así que el usuario elige qué corte ver.
+(function () {
+  const CUTS = {
+    '23': { dotY: 313, lblY: 308, imp: '3.401', cau: '2.839', pct: '−57,5%',
+      title: '23 de julio · 3.401 imputados (provisorio) / 2.839 causas — clic para desmembrar' },
+    '29': { dotY: 333, lblY: 328, imp: '3.023', cau: '2.838', pct: '−62,2%',
+      title: '29 de julio · 3.023 imputados (provisorio) / 2.838 causas — clic para desmembrar' },
+  };
+  const dot = document.getElementById('julImpDot');
+  const seg = document.getElementById('julImpSeg');
+  const impLbl = document.getElementById('julImpLbl');
+  const cauLbl = document.getElementById('julCauLbl');
+  const ppPct = document.getElementById('ppImpPct');
+  const title = document.getElementById('julTitle');
+  const btns = [...document.querySelectorAll('.quant-cut-btn')];
+  if (!dot || !btns.length) return;
+  function apply(cut) {
+    const c = CUTS[cut];
+    if (!c) return;
+    dot.setAttribute('cy', c.dotY);
+    if (seg) seg.setAttribute('y2', c.dotY);
+    if (impLbl) { impLbl.setAttribute('y', c.lblY); impLbl.textContent = c.imp; }
+    if (cauLbl) cauLbl.textContent = c.cau;
+    if (ppPct) ppPct.textContent = c.pct;
+    if (title) title.textContent = c.title;
+    btns.forEach((b) => {
+      const on = b.dataset.cut === cut;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+  }
+  btns.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cut)));
+  apply('23');
+})();
+
 function halBtn(bl) {
   if (!bl.hal) return '';
   return '<button type="button" class="qm-hal" data-hal="' + esc(bl.hal) + '">Ver hallazgo ' + esc(bl.hal) + ' →</button>';

@@ -182,6 +182,11 @@
             <span class="ql-item"><span class="fig-chip imp sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Imputados tramitados</span>
             <span class="ql-item"><span class="fig-chip cau sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span> Causas</span>
           </div>
+          <div class="quant-cut" role="group" aria-label="Cifras del 23 de julio según fecha de corte">
+            <span class="quant-cut-lbl">Cifras al:</span>
+            <button type="button" class="quant-cut-btn active" data-cut="23" aria-pressed="true">23 jul</button>
+            <button type="button" class="quant-cut-btn" data-cut="29" aria-pressed="false">29 jul</button>
+          </div>
           <svg viewBox="0 0 1000 560" role="img" aria-label="Evolución de la base reportada a Walmart entre el 8 de mayo y el 23 de julio de 2026: las causas caen de 7.227 a 2.839 (cifra validada), y los imputados de 8.003 a un valor provisorio que evolucionó de 3.401 el 23 de julio a 3.023 el 29 de julio y sigue en depuración, con los hitos del incidente anotados.">
             <!-- Grilla -->
             <g stroke="rgba(26,51,80,0.09)" stroke-width="1">
@@ -210,7 +215,7 @@
             <g fill="none" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
               <line class="seg" data-s="3" pathLength="1" x1="70" y1="57" x2="480" y2="261" stroke="#4073B8"/>
               <line class="seg" data-s="3" pathLength="1" x1="70" y1="100" x2="480" y2="293" stroke="#E74243"/>
-              <line class="seg" data-s="6" pathLength="1" x1="480" y1="261" x2="960" y2="333" stroke="#4073B8"/>
+              <line id="julImpSeg" class="seg" data-s="6" pathLength="1" x1="480" y1="261" x2="960" y2="313" stroke="#4073B8"/>
               <line class="seg" data-s="6" pathLength="1" x1="480" y1="293" x2="960" y2="343" stroke="#E74243"/>
             </g>
 
@@ -237,8 +242,7 @@
               <line x1="920" y1="100" x2="920" y2="325" stroke="#E74243" stroke-width="2"/>
               <polygon points="920,337 914,325 926,325" fill="#E74243"/>
               <g font-family="Raleway, sans-serif" font-weight="800" text-anchor="end">
-                <text x="985" y="188" font-size="15" fill="#4073B8">−57,5% a</text>
-                <text x="985" y="206" font-size="15" fill="#4073B8">−62,2%</text>
+                <text id="ppImpPct" x="976" y="200" font-size="21" fill="#4073B8">−57,5%</text>
                 <text x="911" y="252" font-size="21" fill="#E74243">−60,7%</text>
               </g>
             </g>
@@ -258,16 +262,12 @@
               <text x="480" y="316" text-anchor="middle">3.741</text>
               <rect x="462" y="243" width="36" height="70" fill="transparent"><title>12 de junio · 4.321 imputados / 3.741 causas — clic para desmembrar</title></rect>
             </g>
-            <g class="qpt qs" data-i="2" data-s="6" font-family="Raleway, sans-serif" font-size="15" font-weight="800" fill="#1A3350">
-              <!-- imputados provisorio: 3.401 (23/7) → 3.023 (29/7, base en depuración) -->
-              <line x1="960" y1="313" x2="960" y2="333" stroke="#4073B8" stroke-width="2"/>
-              <circle cx="960" cy="313" r="5" fill="#ffffff" stroke="#4073B8" stroke-width="2.5"/>
-              <circle cx="960" cy="333" r="7" fill="#4073B8" stroke="#ffffff" stroke-width="2.5"/>
+            <g class="qpt qs" data-i="2" data-s="6" font-family="Raleway, sans-serif" font-size="17" font-weight="800" fill="#1A3350">
+              <circle id="julImpDot" cx="960" cy="313" r="7" fill="#4073B8" stroke="#ffffff" stroke-width="2.5"/>
               <circle cx="960" cy="343" r="7" fill="#E74243" stroke="#ffffff" stroke-width="2.5"/>
-              <text x="944" y="309" text-anchor="end">3.401</text>
-              <text x="944" y="331" text-anchor="end" fill="#4073B8">→ 3.023</text>
-              <text x="944" y="367" text-anchor="end" font-size="17">2.839</text>
-              <rect x="900" y="302" width="94" height="72" fill="transparent"><title>23 de julio · imputados 3.401 (23/7) → 3.023 (29/7, provisorio, base en depuración) / 2.839 causas — clic para desmembrar</title></rect>
+              <text id="julImpLbl" x="944" y="308" text-anchor="end">3.401</text>
+              <text id="julCauLbl" x="944" y="366" text-anchor="end">2.839</text>
+              <rect x="905" y="300" width="89" height="72" fill="transparent"><title id="julTitle">23 de julio · 3.401 imputados (provisorio) / 2.839 causas — clic para desmembrar</title></rect>
             </g>
 
             <!-- Eje de fechas -->
@@ -282,6 +282,7 @@
               <text x="960" y="532">23 jul</text>
             </g>
           </svg>
+          <p class="quant-transit">Las cifras de imputados son <strong>transitorias</strong>: la base de <em>offenders</em> aún no está depurada y se están estableciendo nuevas reglas de negocio, por lo que el valor seguirá cambiando. Las causas (2.839) son la cifra validada del 23/07.</p>
         </div>
         </div><!-- /scrolly-sticky -->
 
