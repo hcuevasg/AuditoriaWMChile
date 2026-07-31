@@ -932,7 +932,7 @@ window.REMS = [
     indicadores: [
       { t: 'Integridad del registro de eventos', f: 'Eventos WEOP correctamente registrados en Alliance ÷ total de eventos WEOP recibidos × 100', meta: '100%' },
       { t: 'Control de duplicidad WEOP', f: 'Alertas WEOP procesadas sin duplicidad producto de actualizaciones de una misma alerta ÷ total de alertas WEOP recibidas × 100', meta: '100%' },
-      { t: 'Regularización de diferencias', f: 'Diferencias WEOP–Alliance regularizadas dentro del plazo definido ÷ total de diferencias detectadas × 100', meta: 'Por definir' },
+      { t: 'Regularización de diferencias', f: 'Diferencias WEOP–Alliance regularizadas dentro del plazo definido ÷ total de diferencias detectadas × 100', meta: 'esto no se puede.... acá hay que definir que hacer' },
     ],
     indNota: 'Este cumplimiento del 100% está anclado a que se elimine el ingreso de eventos por Alliance y estos se registren únicamente por WEOP.',
     evidencia: [
