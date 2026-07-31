@@ -209,8 +209,8 @@ document.querySelectorAll('.scrolly').forEach((sc) => {
   const CUTS = {
     '23': { dotY: 313, lblY: 308, imp: '3.401', cau: '2.839', pct: '−57,5%',
       title: '23 de julio · 3.401 imputados (provisorio) / 2.839 causas — clic para desmembrar' },
-    '29': { dotY: 333, lblY: 328, imp: '3.023', cau: '2.838', pct: '−62,2%',
-      title: '29 de julio · 3.023 imputados (provisorio) / 2.838 causas — clic para desmembrar' },
+    '29': { dotY: 333, lblY: 328, imp: '3.023', cau: '2.839', pct: '−62,2%',
+      title: '29 de julio · 3.023 imputados (provisorio) / 2.839 causas — clic para desmembrar' },
   };
   const dot = document.getElementById('julImpDot');
   const seg = document.getElementById('julImpSeg');
